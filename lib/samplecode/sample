@@ -1,0 +1,147 @@
+// Widget _buildhomebody() {
+//     return Container(
+//       //color: Colors.red,
+//       decoration: const BoxDecoration(
+//           gradient: LinearGradient(
+//             colors: [
+//               Color.fromRGBO(69, 25, 108, 1),
+//               Color.fromARGB(255, 0, 0, 0),
+//             ],
+//             begin: Alignment.bottomCenter,
+//             end: Alignment.topCenter,
+//             stops: [
+//               0.0,
+//               0.1,
+//             ],
+//           ),
+//         ),
+//       height:  800,
+//       width: double.infinity,
+//       child: SingleChildScrollView(
+//         child: Column(
+         
+//           children: [
+      
+//             //appbar 
+            
+//             Container(
+//               margin: const EdgeInsets.only(top: 23),
+//               width: double.infinity,
+//               height: 90,
+//               color: Colors.black,
+//               // color: Colors.red,
+//               child: Row(
+//                 mainAxisAlignment: MainAxisAlignment.spaceAround,
+//                 children: [
+//                   GestureDetector(
+//                     onTap: () {
+                      
+//                       //todo sidebar
+//                       print("menu");
+//                     },
+//                     child:
+//                     SizedBox(
+//                       height: 18,
+//                       width: 18,
+//                       child: Image.asset("assets/menu.png",
+//                       color: Colors.white,),
+//                     ),
+//                     //  const Icon(
+//                     //   Icons.menu,
+//                     //   color: Colors.white,
+//                     // ),
+//                   ),
+//                   GestureDetector(
+//                     onTap: () {
+//                       //todo navigation to home
+//                       print("home");
+//                     },
+//                     child:  SizedBox(
+//                       height: 18,
+//                       width: 18,
+//                       child: Image.asset("assets/home.png",
+//                       color: Colors.white,),
+//                     )
+//                   ),
+//                   const Text(
+//                     AppStrings.appName,
+//                     style: TextStyle(color: Colors.white, fontSize: 16),
+//                   ),
+//                   GestureDetector(
+//                     onTap: () {
+//                       //todo search
+//                       print("search");
+//                     },
+//                     child: const Icon(
+//                       Icons.search,
+//                       color: Colors.white,
+//                     ),
+//                   ),
+//                   GestureDetector(
+//                     onTap: () {
+//                       //todo navigation to calender
+//                       print(" calendar");
+//                     },
+//                     child: const Icon(
+//                       Icons.calendar_month,
+//                       color: Colors.white,
+//                     ),
+//                   ),
+//                 ],
+//               ),
+//             ),
+//             const Divider(
+//               color: Colors.white,
+//               thickness: 0.8,
+//             ),
+      
+//             //Tasks
+//             SizedBox(
+//               width: double.infinity,
+//               height: 600,
+//               child: testin.isNotEmpty? ListView.builder(
+//                 itemCount: testin.length,
+//                 itemBuilder: (context, index) {
+//                   return
+//                    Slidable(
+//                     startActionPane: ActionPane(
+//                       motion: ScrollMotion(),
+//                       extentRatio: 0.15,
+                      
+//                        children: [
+//                         SlidableAction(
+//                           onPressed: (context)=>{
+//                             _remove(index)
+//                           },
+                          
+//                           icon: CupertinoIcons.delete,
+                          
+                           
+//                           )
+//                        ]),
+//                     child: const Taskwidget());
+//                     // Dismissible(
+//                     // key: Key(index.toString()),
+//                     // direction: DismissDirection.horizontal,
+//                     // onDismissed: (_){
+                       
+//                     //   //wil remove task from the 
+//                     // },
+//                     // child: const Taskwidget(),
+//                     // );
+//                 },
+//               ):const Center(
+//                 child: Text("NO TASK YET",style: TextStyle(color: Colors.white),),
+//               )
+//             )
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+
+
+
+
+
+ 

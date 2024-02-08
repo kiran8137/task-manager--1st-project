@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:manage_your/model/task.dart';
 import 'package:manage_your/views/home/homeview.dart';
+//import 'package:manage_your/views/taskdetail.dart';
 import 'package:manage_your/views/onboardscreens/onboardingScreensmain.dart';
 import 'package:manage_your/views/onboardscreens/onboardscreen1.dart';
 import 'package:manage_your/views/profiecreation/profilescreen1.dart';
@@ -11,6 +12,7 @@ import 'package:manage_your/views/settings/AboutUs/aboutus.dart';
 import 'package:manage_your/views/settings/privacy_policy/privacy_policy.dart';
 import 'package:manage_your/views/settings/settings.dart';
 import 'package:manage_your/views/splashscreen/splashscreen.dart';
+import 'package:manage_your/views/taskdetail/taskdetail.dart';
 import 'package:manage_your/views/tasks/Addtaskview.dart';
 import 'package:manage_your/views/tasks/updatetaskview.dart';
 //import 'package:manage_your/views/tasks/Addtask.dart';
@@ -46,6 +48,7 @@ class MyApp extends StatelessWidget {
      //aboutUs()
      //Addtaskview(),
      //UpdateTaskView()
+     //taskDetailview()
       
        
     );

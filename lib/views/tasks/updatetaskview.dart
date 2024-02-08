@@ -1,14 +1,27 @@
  import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:manage_your/model/task.dart';
 import 'package:manage_your/utils/apps_str.dart';
 
 class UpdateTaskView extends StatefulWidget {
-  const UpdateTaskView({super.key});
+  const UpdateTaskView({super.key, required this.task });
+
+final Tasks task;
+  
+
+  
 
   @override
   State<UpdateTaskView> createState() => _UpdateTaskViewState();
 }
 
 class _UpdateTaskViewState extends State<UpdateTaskView> {
+
+  late TextEditingController titleController;
+  late TextEditingController descriptionController;
+
+  
+
   String dropdownvalue = "No Category";
   bool status = true;
 
@@ -24,6 +37,31 @@ String subtitle = "5 minutes before ";
 
 
   var items = ['No Category', 'Work', 'personal', 'Wishlist', 'Birthday'];
+
+
+   @override
+   void initState() {
+    titleController = TextEditingController(text: widget.task.tasktitle);
+    descriptionController = TextEditingController(text: widget.task.taskdescription);
+    
+    // TODO: implement initState
+    super.initState();
+  }
+
+
+
+  void updateTask() {
+     
+    widget.task.tasktitle = titleController.text;
+    widget.task.taskdescription = descriptionController.text;
+     
+    // Save the updated task to the Hive database
+    // final box = Hive.box<Tasks>('tasks');
+    // box.put(widget.task.id, widget.task);
+
+     
+  }
+   
 
   @override
   Widget build(BuildContext context) {
@@ -87,6 +125,7 @@ String subtitle = "5 minutes before ";
               child: Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: TextFormField(
+                  controller: titleController,
                   decoration: const InputDecoration(
                       border: InputBorder.none, 
                       //hintText: "Add Task Name..."
@@ -101,6 +140,7 @@ String subtitle = "5 minutes before ";
               //////
               margin: const EdgeInsets.only(left: 0, right: 260),
               child: const Text(
+                
                 AppStrings.descriptioninput,
                 style: TextStyle(
                     color: Colors.white,
@@ -121,6 +161,7 @@ String subtitle = "5 minutes before ";
                 color: Colors.white,
               ),
               child: TextFormField(
+                controller: descriptionController,
                 decoration: const InputDecoration(
                     border: InputBorder.none,
                     // hintText: 'Add description...'
@@ -328,6 +369,7 @@ String subtitle = "5 minutes before ";
                   GestureDetector(
                     onTap: () {
                      // print("create");
+                     updateTask();
                     },
                     child: Container(
                       height: 40,

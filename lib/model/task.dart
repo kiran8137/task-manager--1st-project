@@ -2,20 +2,28 @@ import 'package:hive/hive.dart';
 
 part 'task.g.dart';
 
-
 @HiveType(typeId: 1)
-class Tasks{
+class Tasks {
 
+
+   
+   
   @HiveField(0)
-  final String tasktitle;
+   String tasktitle;
 
   @HiveField(1)
-  final String taskdescription;
+  String taskdescription;
 
-  @HiveField(2)
-  final DateTime? date;
+   
 
-  
-
-
-  Tasks({this.date,required this.tasktitle, required this.taskdescription});}
+  Tasks( 
+      {
+       
+      required this.tasktitle,
+      required this.taskdescription,
+      
+      
+      }){
+      
+      }
+}

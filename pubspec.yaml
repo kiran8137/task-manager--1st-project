@@ -42,7 +42,7 @@ dependencies:
   hive_flutter: ^1.1.0
 
   #generate uuid
-  uuid: ^4.2.2
+  uuid: ^4.3.2
 
   #animation
   animate_do: ^3.1.2

@@ -16,7 +16,8 @@
 import 'package:flutter/material.dart';
 import 'package:manage_your/utils/apps_str.dart';
 
-PreferredSize appbar(key){
+PreferredSize appbar(GlobalKey<ScaffoldState>key){
+  bool isSearchvVisible = false;
   return PreferredSize(
     preferredSize: const Size.fromHeight(80),
      child: Container(
@@ -29,6 +30,14 @@ PreferredSize appbar(key){
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             //Text("data"),
+
+
+            // Visibility(
+            //   visible: isSearchvVisible,
+            //   child: TextField(
+            //     onChanged: (value){},
+            //   )
+            //   ),
 
             //menu
              GestureDetector(
@@ -70,6 +79,8 @@ PreferredSize appbar(key){
               //search
                GestureDetector(
                 onTap: () {
+
+                  isSearchvVisible = !isSearchvVisible;
                   //todo search
                   //print("search");
                 },

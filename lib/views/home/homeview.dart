@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:hive/hive.dart';
 import 'package:manage_your/data/functions.dart';
 import 'package:manage_your/model/task.dart';
 import 'package:manage_your/views/home/components/appbar.dart';
@@ -23,32 +24,26 @@ final GlobalKey<ScaffoldState> _key = GlobalKey();
 //TextEditingController searchController = TextEditingController();
 TextEditingController titleEditingController = TextEditingController();
 TextEditingController descriptionEditingController = TextEditingController();
+
  
 
-// void _remove(int index)
-// {
-//   setState(() {
-//     testin.removeAt(index);
-//   });
-// }
-//   // List testin = [
-//   //   ["home", "cleaning"],
-//   //   ["offic", "project"]
-//   //   ];
-  
-
-//   void getTaskName(String taskName){
-//     setState(() {
-//       testin.add(taskName);
-//     });
+// @override
+//   void didChangeDependencies() {
+//     // TODO: implement didChangeDependencies
+//     myInteritedWidget = context.dependOnInheritedWidgetOfExactType();
+//     super.didChangeDependencies();
 //   }
+ 
 
-//   void getdescription(String description){
-//     setState(() {
-//       testin.add(description);
-//     });
-//   }
+// method to remove task from the list
+ void _remove(index)async{
+   final box = await Hive.openBox<Tasks>('task_db');
+   box.deleteAt(index);
+  tasklistNotifier.value = box.values.toList();
+ }
 
+ 
+ 
   @override
   Widget build(BuildContext context) {
      getAllTasks();
@@ -59,7 +54,7 @@ TextEditingController descriptionEditingController = TextEditingController();
       floatingActionButton:  GestureDetector(
       onTap: (){
        // displaybottomsheet(context);
-       Navigator.push(context,MaterialPageRoute(builder: (context) =>   Addtaskview()));
+       Navigator.push(context,MaterialPageRoute(builder: (context) =>   const Addtaskview()));
        // print("fab tapped");
 
        //Navigator.pop(context, MaterialPageRoute(builder: (context)=> const addtask()));
@@ -308,7 +303,30 @@ TextEditingController descriptionEditingController = TextEditingController();
                      children: [
                       SlidableAction(
                         onPressed: (context)=>{
-                        //  _remove(index)
+                          showDialog(
+                            context: context, 
+                            builder: (ctx)=>
+                             AlertDialog(
+                              title: const Text("Alert....!"),
+                              content: const Text("Sure You Want to Delete This Task"),
+                              actions: [
+                                TextButton(
+                                onPressed: (){
+                                  Navigator.of(ctx).pop();
+                                },
+                                child: const Text("Cancel")
+                                ),
+                                TextButton(
+                                  onPressed:(){
+                                    _remove(index);
+                                    //Navigator.of(context).pop();
+                                  }, 
+                                  child: const Text("Ok"),
+                                  ),
+                              ],
+                            )
+                            )
+                          //_remove(index)
                         },
                         
                         icon: CupertinoIcons.delete,
@@ -319,10 +337,11 @@ TextEditingController descriptionEditingController = TextEditingController();
                   child:  Taskwidget(
                     tasktitle: data.tasktitle,
                     taskdescription: data.taskdescription,
-                     
-                   // time: data.time,
+                    
+                  
                     
                   ),
+                  
                   );
                   
               },

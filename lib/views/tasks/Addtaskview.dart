@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:manage_your/data/functions.dart';
 import 'package:manage_your/model/task.dart';
 import 'package:manage_your/utils/apps_str.dart';
+import 'package:uuid/uuid.dart';
 
 class Addtaskview extends StatefulWidget {
  
@@ -16,19 +17,24 @@ class Addtaskview extends StatefulWidget {
 
 class _AddtaskviewState extends State<Addtaskview> {
 
-  
+  final _formKey = GlobalKey<FormState>();
+
+
+
   final TextEditingController _titlecontroller = TextEditingController();//controller for title
   final TextEditingController _descriptioncontroller = TextEditingController();//controller for description
   final TextEditingController _datecontroller = TextEditingController();//controller for date
   final TextEditingController _timecontroller = TextEditingController();//controller for time
+  final TextEditingController _categorycontroller = TextEditingController();
 
   String taskname = ""; //Task name by the user
   String description = ""; //description by the user
   DateTime? pickeddate; //date selected by the user
-  DateTime? formattedTime; //time selected by the user
+  TimeOfDay? formattedTime; //time selected by the user
   
 
   String dropdownvalue = "No Category";
+  String newCategory = '';
   bool status = true;
 
   final timings = [
@@ -42,7 +48,7 @@ class _AddtaskviewState extends State<Addtaskview> {
 String subtitle = "5 minutes before ";
 
 
-  var items = ['No Category', 'Work', 'personal', 'Wishlist', 'Birthday'];
+  var items = ['No Category', 'Work', 'personal', 'Wishlist', 'Birthday','CREATE NEW']; //catergory list
 
 
 
@@ -54,7 +60,13 @@ String subtitle = "5 minutes before ";
     } 
     print('$_tasktitle $_taskdescription');
 
-    final _task = Tasks(tasktitle: _tasktitle , taskdescription: _taskdescription,    );
+    final _task = Tasks(
+       
+      tasktitle: _tasktitle , 
+      taskdescription: _taskdescription,
+      
+          
+          );
     addtask(_task);
   }
 
@@ -62,414 +74,483 @@ String subtitle = "5 minutes before ";
   Widget build(BuildContext   context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: Container(
-        decoration: const BoxDecoration(
-          color: Color.fromARGB(255, 9, 8, 79),
-          // borderRadius: BorderRadius.only(
-          //   topLeft: Radius.circular(20),topRight: Radius.circular(20)
-          // )
-        ),
-        width: double.infinity,
-        height: MediaQuery.of(context).size.height,
-        child: Column(
-          children: [
-            Container(
-              margin: const EdgeInsets.only(top: 40),
-              width: MediaQuery.sizeOf(context).width * 80 / 100,
-              height: 50,
-              //color: Colors.red,
-              decoration: const BoxDecoration(
-                  border: Border(bottom: BorderSide(color: Colors.white))),
-              child: const Center(
-                child: Text(
-                  AppStrings.newtask,
+      body: Form(
+        key: _formKey,
+        child: Container(
+          decoration: const BoxDecoration(
+            color: Color.fromARGB(255, 9, 8, 79),
+            // borderRadius: BorderRadius.only(
+            //   topLeft: Radius.circular(20),topRight: Radius.circular(20)
+            // )
+          ),
+          width: double.infinity,
+          height: MediaQuery.of(context).size.height,
+          child: Column(
+            children: [
+              Container(
+                margin: const EdgeInsets.only(top: 40),
+                width: MediaQuery.sizeOf(context).width * 80 / 100,
+                height: 50,
+                //color: Colors.red,
+                decoration: const BoxDecoration(
+                    border: Border(bottom: BorderSide(color: Colors.white))),
+                child: const Center(
+                  child: Text(
+                    AppStrings.newtask,
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                width: double.infinity,
+                height: 50,
+              ),
+              Container(
+                ///
+                margin: const EdgeInsets.only(left: 0, right: 280),
+                child: const Text(
+                  AppStrings.tasktitle,
                   style: TextStyle(
-                      fontSize: 20,
                       color: Colors.white,
-                      fontWeight: FontWeight.bold),
+                      fontSize: 17,
+                      fontWeight: FontWeight.w400),
                 ),
               ),
-            ),
-            const SizedBox(
-              width: double.infinity,
-              height: 50,
-            ),
-            Container(
-              ///
-              margin: const EdgeInsets.only(left: 0, right: 280),
-              child: const Text(
-                AppStrings.tasktitle,
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 17,
-                    fontWeight: FontWeight.w400),
+              const SizedBox(
+                height: 7,
               ),
-            ),
-            const SizedBox(
-              height: 7,
-            ),
-            Container(
-              padding: const EdgeInsets.all(8),
-              //  margin: EdgeInsets.only(left: 10, ),
-              width: MediaQuery.of(context).size.width - 40,
-              height: 43,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.white,
-              ),
-              child:  Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: TextFormField(
-                   controller: _titlecontroller,
-                  
-                  decoration: const InputDecoration(
-                      border: InputBorder.none, hintText: "Add Task Name..."),
+              Container(
+                padding: const EdgeInsets.all(8),
+                //  margin: EdgeInsets.only(left: 10, ),
+                width: MediaQuery.of(context).size.width - 40,
+                height: 45,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.white,
                 ),
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Container(
-              //////
-              margin: const EdgeInsets.only(left: 0, right: 230),
-              child: const Text(
-                AppStrings.descriptioninput,
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 17,
-                    fontWeight: FontWeight.w400),
-              ),
-            ),
-            const SizedBox(
-              height: 7,
-            ),
-            Container(
-              padding: const EdgeInsets.all(8),
-              //margin: EdgeInsets.only(left: 0,right: 75),
-              width: MediaQuery.of(context).size.width - 40,
-              height: 68,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.white,
-              ),
-              child: TextFormField(
-                controller: _descriptioncontroller,
-                decoration: const InputDecoration(
-                    border: InputBorder.none, hintText: 'Add description...'),
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Text("data"),
-                    Container(
-                      //////
-                      margin: const EdgeInsets.only(
-                        left: 3,
-                      ),
-                      width: MediaQuery.of(context).size.width * 30 / 100,
-
-                      // color: Colors.red,
-
-
-
-                      // selecting the date
-
-                      child: const Text(
-                        AppStrings.date,
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 17,
-                            fontWeight: FontWeight.w400),
-                      ),
-                    ),
-
-                    const SizedBox(
-                      height: 7,
-                    ),
-
-                    Container(
-                     // padding: const EdgeInsets.all(8),
-                      margin: const EdgeInsets.only(left: 3),
-                      width: MediaQuery.of(context).size.width * 40 / 100,
-                      height: 43,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.white,
-                        
-                      ),
-
-                      child: TextFormField(
-                        textAlign: TextAlign.start,
-                        controller: _datecontroller,
-                        readOnly: true,
-                        
-                        decoration: const InputDecoration(
-                          contentPadding: EdgeInsets.symmetric(vertical: 10.0),
-                          // icon: Icon(Icons.calendar_month,color: Color.fromARGB(111, 158, 158, 158),
-                          // ),
-                          prefixIcon:  Icon(Icons.calendar_month,color: Color.fromARGB(111, 158, 158, 158)),
-      
-                          border: InputBorder.none,
-                          hintText: "dd/mm/yy",
-                          hintStyle: TextStyle(color: Color.fromARGB(111, 158, 158, 158),
-                          
-                        ),
-                      ),
-                      onTap: ()async{
-                        pickeddate = await showDatePicker(
-                          context: context,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime(2000), 
-                          lastDate: DateTime(2100),
-                          );
-
-                          if(pickeddate!=null){
-                            setState(() {
-                              _datecontroller.text = DateFormat('dd/MM/yyyy').format(pickeddate!);
-                            });
+                child:  Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: TextFormField(
+                     controller: _titlecontroller,
+                    validator: (value) {
+                       if (value == null || value.isEmpty) {
+                        return 'Please enter a task title';
                           }
-                          setState(() {
-                            _datecontroller.text = DateTime.now().toString();
-                          });
-                      },
-                    ),
-                    )
-                  ]
+                        return null;
+                    },
+                    
+                    decoration: const InputDecoration(
+                        border: InputBorder.none, hintText: "Add Task Name..."),
+                  ),
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Text("data"),
-                    Container(
-                      //////
-                      margin: const EdgeInsets.only(
-                        left: 0,
-                      ),
-                      width: MediaQuery.of(context).size.width * 30 / 100,
-
-                      // color: Colors.red,
-
-
-                      //selecting the time
-
-                      child: const Text(
-                        AppStrings.time,
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 17,
-                            fontWeight: FontWeight.w400),
-                      ),
-                    ),
-
-                    const SizedBox(
-                      height: 7,
-                    ),
-
-                    Container(
-                      //padding: const EdgeInsets.all(8),
-                      margin: const EdgeInsets.only(left: 0),
-                      width: MediaQuery.of(context).size.width * 40 / 100,
-                      height: 43,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.white,
-                      ),
-
-                      child: TextFormField(
-                        textAlign: TextAlign.start,
-                        controller: _timecontroller,
-                        readOnly: true,
-                        
-                        decoration: const InputDecoration(
-                          contentPadding: EdgeInsets.symmetric(vertical: 10.0),
-                          // icon: Icon(Icons.calendar_month,color: Color.fromARGB(111, 158, 158, 158),
-                          // ),
-                          prefixIcon:  Icon(Icons.access_time_outlined,color: Color.fromARGB(111, 158, 158, 158)),
-      
-                          border: InputBorder.none,
-                          hintText: "hh:mm",
-                          hintStyle: TextStyle(color: Color.fromARGB(111, 158, 158, 158),
-                          
-                        ),
-                      ),
-                      onTap: ()async{
-                       TimeOfDay? pickedtime = await showTimePicker(
-                          context: context,
-                           initialTime: TimeOfDay.now()
-                           );
-                           if(pickedtime!=null){
-                           // print(pickedtime!.format(context),
-                             DateTime parsedTime = DateFormat.jm().parse(pickedtime!.format(context).toString());
-                            
-                              print(parsedTime);
-
-                              String formattedTime = DateFormat('h:mm a').format(parsedTime);
-                              print(formattedTime);
-                            setState(() {
-                              _timecontroller.text = formattedTime;
-                            });
-
-                            //pickeddate = DateFormat.jm().parse(pickedtime!.format(context).toString());
-                           }
-                      },
-                      )
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Row(
-              children: [
-                const SizedBox(
-                  width: 24,
-                ),
-                DropdownButton(
-                    dropdownColor: const Color.fromARGB(255, 9, 8, 79),
-                    value: dropdownvalue,
-                    items: items.map((items) {
-                      return DropdownMenuItem(
-                        value: items,
-                        child: Text(
-                          items,
-                          style: const TextStyle(color: Colors.white),
-                        ),
-                      );
-                    }).toList(),
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        dropdownvalue = newValue!;
-                      });
-                    }),
-              ],
-            ),
-            // const SizedBox(
-            //   height: 15,
-            // ),
-
-
-            const SizedBox(
-              width: 24,
-            ),
-
-            
-            GestureDetector(
-              onTap: () {
-                //print("reminder");
-              },
-              child: PopupMenuButton(
-                itemBuilder: (context) => [
-                  PopupMenuItem(
-                    value: timings[0],
-                    child: Text(timings[0]),
-                  ),
-                  PopupMenuItem(
-                    value: timings[1],
-                    child: Text(timings[1]),
-                  ),
-                  PopupMenuItem(
-                    value: timings[2],
-                    child: Text(timings[2]),
-                  ),
-                  PopupMenuItem(
-                    value: timings[3],
-                    child: Text(timings[3]),
-                  ),
-                  PopupMenuItem(
-                    value: timings[4],
-                    child: Text(timings[4]),
-                  ),
-                  PopupMenuItem(
-                    value: timings[5],
-                    child: Text(timings[5]),
-                  ),
-                ],
-                onSelected: (String newvalue) {
-                  setState(() {
-                    subtitle = newvalue;
-                  });
-                },
-                child: ListTile(
-              leading: const Icon(Icons.edit_notifications_outlined,color: Colors.white,size: 30,),
-              title:  const Text("Reminder At",
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Container(
+                //////
+                margin: const EdgeInsets.only(left: 0, right: 230),
+                child: const Text(
+                  AppStrings.descriptioninput,
                   style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 17
-                  ),
-                  ),
-                  subtitle:Text(subtitle,
-                  style: const TextStyle(color: Colors.white),)
-                  ),
-              //   child: Text("Reminder At",
-              //       style: TextStyle(color: Colors.white, fontSize: 18)),
-               ),
-            ),
-            const SizedBox(
-              height: 120,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 20),
-              child: Row(
+                      color: Colors.white,
+                      fontSize: 17,
+                      fontWeight: FontWeight.w400),
+                ),
+              ),
+              const SizedBox(
+                height: 7,
+              ),
+              Container(
+                padding: const EdgeInsets.all(8),
+                //margin: EdgeInsets.only(left: 0,right: 75),
+                width: MediaQuery.of(context).size.width - 40,
+                height: 68,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.white,
+                ),
+                child: TextFormField(
+                  controller: _descriptioncontroller,
+                  validator: (value) {
+                     if (value == null || value.isEmpty) {
+                         return 'Please enter a task title';
+                        }
+                        return null;
+                  },
+                  decoration: const InputDecoration(
+                      border: InputBorder.none, hintText: 'Add description...'),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  GestureDetector(
-                    onTap: () {
-                      //print("cancel");
-                      Navigator.pop(context);
-                    },
-                    child: Container(
-                      height: 40,
-                      width: 130,
-                      decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 9, 8, 79),
-                        border: Border.all(color: Colors.blue),
-                        borderRadius: BorderRadius.circular(10),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Text("data"),
+                      Container(
+                        //////
+                        margin: const EdgeInsets.only(
+                          left: 3,
+                        ),
+                        width: MediaQuery.of(context).size.width * 30 / 100,
+        
+                        // color: Colors.red,
+        
+        
+        
+                        // selecting the date
+        
+                        child: const Text(
+                          AppStrings.date,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 17,
+                              fontWeight: FontWeight.w400),
+                        ),
                       ),
-                      child: const Center(
-                          child: Text(
-                        "Cancel",
-                        style: TextStyle(color: Colors.white),
-                      )),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                     // print("create");
-                    },
-                    child: Container(
-                      height: 40,
-                      width: 130,
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                        border: Border.all(color: Colors.blue),
-                        borderRadius: BorderRadius.circular(10),
+        
+                      const SizedBox(
+                        height: 7,
                       ),
-                      child:  Center(
-                          child: GestureDetector(
-                            onTap: (){
-                              onCreate();
-                            },
-                            child: const Text(
-                            "Create",
-                             style: TextStyle(color: Colors.white),
+        
+                      Container(
+                       // padding: const EdgeInsets.all(8),
+                        margin: const EdgeInsets.only(left: 3),
+                        width: MediaQuery.of(context).size.width * 40 / 100,
+                        height: 43,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.white,
+                          
+                        ),
+        
+                        child: TextFormField(
+                          textAlign: TextAlign.start,
+                          controller: _datecontroller,
+                          readOnly: true,
+                          
+                          decoration: const InputDecoration(
+                            contentPadding: EdgeInsets.symmetric(vertical: 10.0),
+                            // icon: Icon(Icons.calendar_month,color: Color.fromARGB(111, 158, 158, 158),
+                            // ),
+                            prefixIcon:  Icon(Icons.calendar_month,color: Color.fromARGB(111, 158, 158, 158)),
+        
+                            border: InputBorder.none,
+                            hintText: "dd/mm/yy",
+                            hintStyle: TextStyle(color: Color.fromARGB(111, 158, 158, 158),
+                            
                           ),
-                          )),
-                    ),
-                  )
+                        ),
+                        onTap: ()async{
+                          pickeddate = await showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime(2000), 
+                            lastDate: DateTime(2100),
+                            );
+                           // DateTime.fromMillisecondsSinceEpoch(millisecondsSinceEpoch)
+                            if(pickeddate!=null){
+                              setState(() {
+                                _datecontroller.text = DateFormat('dd/MM/yyyy').format(pickeddate!);
+                              });
+                            }
+                            setState(() {
+                              _datecontroller.text = DateTime.now().toString();
+                            });
+                        },
+                      ),
+                      )
+                    ]
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Text("data"),
+                      Container(
+                        //////
+                        margin: const EdgeInsets.only(
+                          left: 0,
+                        ),
+                        width: MediaQuery.of(context).size.width * 30 / 100,
+        
+                        // color: Colors.red,
+        
+        
+                        //selecting the time
+        
+                        child: const Text(
+                          AppStrings.time,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 17,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ),
+        
+                      const SizedBox(
+                        height: 7,
+                      ),
+        
+                      Container(
+                        //padding: const EdgeInsets.all(8),
+                        margin: const EdgeInsets.only(left: 0),
+                        width: MediaQuery.of(context).size.width * 40 / 100,
+                        height: 43,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.white,
+                        ),
+        
+                        child: TextFormField(
+                          textAlign: TextAlign.start,
+                          controller: _timecontroller,
+                          readOnly: true,
+                          
+                          decoration: const InputDecoration(
+                            contentPadding: EdgeInsets.symmetric(vertical: 10.0),
+                            // icon: Icon(Icons.calendar_month,color: Color.fromARGB(111, 158, 158, 158),
+                            // ),
+                            prefixIcon:  Icon(Icons.access_time_outlined,color: Color.fromARGB(111, 158, 158, 158)),
+        
+                            border: InputBorder.none,
+                            hintText: "hh:mm",
+                            hintStyle: TextStyle(color: Color.fromARGB(111, 158, 158, 158),
+                            
+                          ),
+                        ),
+                        onTap: ()async{
+                         TimeOfDay? pickedtime = await showTimePicker(
+                            context: context,
+                             initialTime: TimeOfDay.now()
+                             );
+                             if(pickedtime!=null){
+                             // print(pickedtime!.format(context),
+                               DateTime parsedTime = DateFormat.jm().parse(pickedtime!.format(context).toString());
+                              
+                                print(parsedTime);
+        
+                                String formattedTime = DateFormat('h:mm a').format(parsedTime);
+                                print(formattedTime);
+                              setState(() {
+                                _timecontroller.text = formattedTime;
+                              });
+        
+                              //pickeddate = DateFormat.jm().parse(pickedtime!.format(context).toString());
+                             }
+                        },
+                        )
+                      ),
+                    ],
+                  ),
                 ],
               ),
-            )
-          ],
+              const SizedBox(
+                height: 10,
+              ),
+              Row(
+                children: [
+                  const SizedBox(
+                    width: 24,
+                  ),
+
+
+                  // Category section
+                  DropdownButton(
+                      dropdownColor: const Color.fromARGB(255, 9, 8, 79),
+                      value: dropdownvalue,
+                      items: items.map((items) {
+                        return DropdownMenuItem(
+                          value: items,
+                          child: Text(
+                            items,
+                            style: const TextStyle(color: Colors.white),
+                          ),
+                        );
+                      }).toList(),
+                        
+                      onChanged: (newValue) {
+                        setState(() {
+                          dropdownvalue = newValue!;
+                          if(newValue=='CREATE NEW'){
+                             showDialog(
+                              context: context, 
+                              builder: (ctx)=>
+                              AlertDialog(
+                                title: Text("Create New Category"),
+                                content: TextField(
+                                  
+                                  controller: _categorycontroller,
+                                  onChanged: (value){
+                                    setState(() {
+                                       newCategory=value;
+                                    });
+                                   
+                                   
+                                  },
+                                ),
+                                actions: [
+                                  TextButton(
+                                    onPressed:(){
+                                      Navigator.of(context).pop();
+                                    }, 
+                                    child: Text("Cancel"),
+                                    ),
+                                    TextButton(
+                                    
+                                    onPressed:(){
+                                       setState(() {
+                                      items.insert(items.length-1,newCategory);
+                                    });
+                                      Navigator.of(context).pop();
+                                      _categorycontroller.clear();
+                                
+                                    }, 
+                                    child: Text("Create"),
+                                    )
+                                    
+                                ],
+                              )
+                                
+                              
+
+                              );
+                          }
+
+                        });
+                      }),
+                ],
+              ),
+              // const SizedBox(
+              //   height: 15,
+              // ),
+        
+        
+              const SizedBox(
+                width: 24,
+              ),
+        
+              
+              GestureDetector(
+                onTap: () {
+                  //print("reminder");
+                },
+                child: PopupMenuButton(
+                  itemBuilder: (context) => [
+                    PopupMenuItem(
+                      value: timings[0],
+                      child: Text(timings[0]),
+                    ),
+                    PopupMenuItem(
+                      value: timings[1],
+                      child: Text(timings[1]),
+                    ),
+                    PopupMenuItem(
+                      value: timings[2],
+                      child: Text(timings[2]),
+                    ),
+                    PopupMenuItem(
+                      value: timings[3],
+                      child: Text(timings[3]),
+                    ),
+                    PopupMenuItem(
+                      value: timings[4],
+                      child: Text(timings[4]),
+                    ),
+                    PopupMenuItem(
+                      value: timings[5],
+                      child: Text(timings[5]),
+                    ),
+                  ],
+                  onSelected: (String newvalue) {
+                    setState(() {
+                      subtitle = newvalue;
+                    });
+                  },
+                  child: ListTile(
+                leading: const Icon(Icons.edit_notifications_outlined,color: Colors.white,size: 30,),
+                title:  const Text("Reminder At",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 17
+                    ),
+                    ),
+                    subtitle:Text(subtitle,
+                    style: const TextStyle(color: Colors.white),)
+                    ),
+                //   child: Text("Reminder At",
+                //       style: TextStyle(color: Colors.white, fontSize: 18)),
+                 ),
+              ),
+              const SizedBox(
+                height: 120,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        //print("cancel");
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        height: 40,
+                        width: 130,
+                        decoration: BoxDecoration(
+                          color: const Color.fromARGB(255, 9, 8, 79),
+                          border: Border.all(color: Colors.blue),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: const Center(
+                            child: Text(
+                          "Cancel",
+                          style: TextStyle(color: Colors.white),
+                        )),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                       // print("create");
+                      },
+                      child: Container(
+                        height: 40,
+                        width: 130,
+                        decoration: BoxDecoration(
+                          color: Colors.blue,
+                          border: Border.all(color: Colors.blue),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child:  Center(
+                            child: GestureDetector(
+                              onTap: (){
+                                 if (_formKey.currentState!.validate()) {
+                // If the form is valid, proceed with form submission
+                                onCreate();
+                                Navigator.pop(context);
+                                 }
+                                 
+                              },
+                              child: const Text(
+                              "Create",
+                               style: TextStyle(color: Colors.white),
+                            ),
+                            )),
+                      ),
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

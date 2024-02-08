@@ -14,7 +14,7 @@ Future<void> addtask(Tasks value) async{
   
   //tasklistNotifier.value.add(value);
   tasklistNotifier.notifyListeners();
-  print(value.toString());
+  //print(value.toString());
 }
 
 

@@ -68,7 +68,7 @@ String subtitle = "5 minutes before ";
               
                content: GestureDetector(
                 onTap: (){
-                  Provider.of<ThemeProvider>(context , listen: false).toggleTheme() ;
+                  Provider.of<ThemeProvider>(context , listen: false).toggleTheme();
                   
                 },
                  child: Container(

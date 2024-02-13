@@ -4,6 +4,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:hive/hive.dart';
 import 'package:manage_your/data/functions.dart';
 import 'package:manage_your/model/task.dart';
+import 'package:manage_your/utils/apps_colors.dart';
 import 'package:manage_your/views/home/components/appbar.dart';
 import 'package:manage_your/views/home/widgets/taskwideget.dart';
 import 'package:manage_your/views/settings/settings.dart';
@@ -48,7 +49,10 @@ TextEditingController descriptionEditingController = TextEditingController();
   Widget build(BuildContext context) {
      getAllTasks();
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor:
+      // Colors.black,
+      Theme.of(context).colorScheme.primary,
+      
 
       //floating Action button
       floatingActionButton:  GestureDetector(
@@ -67,7 +71,7 @@ TextEditingController descriptionEditingController = TextEditingController();
           decoration: BoxDecoration(
              
             borderRadius: BorderRadius.circular(10),
-            color: const Color.fromARGB(255, 55, 105, 204),
+            color: Appcolors.secondarycolor,
           ),
           child: const Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -95,7 +99,7 @@ TextEditingController descriptionEditingController = TextEditingController();
 
 
        
-    appBar: appbar(_key ),
+    appBar: appbar(_key, context ),
 
 
     //side menu
@@ -274,8 +278,8 @@ TextEditingController descriptionEditingController = TextEditingController();
         //     ],
         //   ),
         // ),
-        const Divider(
-          color: Colors.white,
+         Divider(
+          color: Theme.of(context).colorScheme.secondary,
           thickness: 0.8,
         ),
 

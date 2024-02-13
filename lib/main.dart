@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:manage_your/model/task.dart';
+import 'package:manage_your/theme/theme.dart';
+import 'package:manage_your/theme/themeprovider.dart';
 import 'package:manage_your/views/home/homeview.dart';
 //import 'package:manage_your/views/taskdetail.dart';
 import 'package:manage_your/views/onboardscreens/onboardingScreensmain.dart';
@@ -15,6 +17,7 @@ import 'package:manage_your/views/splashscreen/splashscreen.dart';
 import 'package:manage_your/views/taskdetail/taskdetail.dart';
 import 'package:manage_your/views/tasks/Addtaskview.dart';
 import 'package:manage_your/views/tasks/updatetaskview.dart';
+import 'package:provider/provider.dart';
 //import 'package:manage_your/views/tasks/Addtask.dart';
 
 Future<void> main() async {
@@ -23,7 +26,10 @@ Future<void> main() async {
   if(!Hive.isAdapterRegistered(TasksAdapter().typeId)){
     Hive.registerAdapter(TasksAdapter());
   }
-  runApp(const MyApp());
+  runApp( ChangeNotifierProvider(
+    create: (context) => ThemeProvider(),
+    child: const MyApp(),),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -32,12 +38,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return  const MaterialApp(
-
+    return  MaterialApp(
+       darkTheme: Provider.of<ThemeProvider>(context).themeData,
+     // theme: 
       debugShowCheckedModeBanner: false,
       home: 
       Homeview(),
-      //settingspage()
       //SplashScreen()
       //OnboardingScreen1()
       //onboardingScreen2()
@@ -49,6 +55,7 @@ class MyApp extends StatelessWidget {
      //Addtaskview(),
      //UpdateTaskView()
      //taskDetailview()
+     //SettingsPage()
       
        
     );

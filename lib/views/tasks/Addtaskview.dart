@@ -489,8 +489,9 @@ String subtitle = "5 minutes before ";
                 //       style: TextStyle(color: Colors.white, fontSize: 18)),
                  ),
               ),
-              const SizedBox(
-                height: 120,
+               SizedBox(
+                height: MediaQuery.of(context).size.height * 0.15,
+                // 118,
               ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 20),

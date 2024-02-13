@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:manage_your/theme/themeprovider.dart';
+import 'package:manage_your/utils/apps_colors.dart';
 import 'package:manage_your/views/settings/AboutUs/aboutus.dart';
 import 'package:manage_your/views/settings/privacy_policy/privacy_policy.dart';
+import 'package:provider/provider.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -21,25 +24,32 @@ final timings = [
 ];
 String subtitle = "5 minutes before ";
 
+
+
+//method to save theme preference 
+
+
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: Theme.of(context).colorScheme.background,
 
         leading: GestureDetector(
           onTap: (){
             Navigator.pop(context);
           //  print("settings go back");
           },
-          child: const Icon(
-            Icons.arrow_back,color: Colors.white,),
+          child:  Icon(
+            Icons.arrow_back,
+            color:  Theme.of(context).iconTheme.color),
             ),
 
-            title: const Text("Settings",style: TextStyle(
-              color: Colors.white
-            ),
+            title:  Text("Settings",style: Theme.of(context).textTheme.headlineMedium
+            // TextStyle(
+            //   color: Theme.of(context).textTheme.bodyLarge
+            // ),
             ),
             
       ),
@@ -49,16 +59,56 @@ String subtitle = "5 minutes before ";
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
+          GestureDetector(
+            onTap: ()=>
+            showDialog(context: context, 
+            builder: (context)=>
             
-            margin: const EdgeInsets.only(top: 20,left: 10),
-            height: 35,
-            width: 100,
-            decoration: BoxDecoration(
-              borderRadius:BorderRadius.circular(20), 
-              color: Colors.white),
-            child: const Center(child: Text("Theme",
-            style: TextStyle(fontSize: 17))),
+            AlertDialog(
+              
+               content: GestureDetector(
+                onTap: (){
+                  Provider.of<ThemeProvider>(context , listen: false).toggleTheme();
+                  
+                },
+                 child: Container(
+                      decoration:BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                         color: Colors.white,
+                      ) ,
+                      height: 60,
+                      width: 90,
+                      child:  Center(
+                        child:
+                       Text("Day",
+                      style:  TextStyle(
+                        fontSize: 20,
+                        color: Colors.black
+                      )
+                      ),
+                      ),
+                     
+                       
+                    ),
+               ),
+            )
+            // Container(
+            //   // height: 100,
+            //   // width: 200,
+            //   color: Colors.red,
+            // )
+            ),
+            child: Container(
+              
+              margin: const EdgeInsets.only(top: 20,left: 10),
+              height: 35,
+              width: 100,
+              decoration: BoxDecoration(
+                borderRadius:BorderRadius.circular(20), 
+                color:Appcolors.secondarycolor),
+              child: const Center(child: Text("Theme",
+              style: TextStyle(fontSize: 17,color: Colors.black))),
+            ),
           ),
       
           const SizedBox(height: 20,),
@@ -72,15 +122,18 @@ String subtitle = "5 minutes before ";
               Navigator.push(context,MaterialPageRoute(builder: (context)=> const PrivacyPolicy()));
               //print("privacy and policy");
             },
-             child: const ListTile(
-              leading: Icon(Icons.privacy_tip_outlined,color: Colors.white,size: 30,),
+             child:  ListTile(
+              leading: Icon(Icons.privacy_tip_outlined,
+              color: Theme.of(context).iconTheme.color,
+              size: 29,),
               title: Text("Privacy and Policy",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 17
-                  ),
-                  ),
-              )
+                  style: Theme.of(context).textTheme.bodyLarge,
+                  // TextStyle(
+                  //   color: Colors.white,
+                  //   fontSize: 17
+                  // ),
+                  )
+              ),
              
            ),
       
@@ -94,13 +147,16 @@ String subtitle = "5 minutes before ";
               Navigator.push(context,MaterialPageRoute(builder: (context)=> const AboutUs()));
               ///print("About Us");
             },
-             child: const ListTile(
-              leading: Icon(Icons.info_outline,color: Colors.white,size: 30,),
+             child:  ListTile(
+              leading: Icon(Icons.info_outline,
+              color: Theme.of(context).iconTheme.color,
+              size: 29,),
               title: Text("About Us",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 17
-                  ),
+                  style: Theme.of(context).textTheme.bodyLarge,
+                  // TextStyle(
+                  //   color: Colors.white,
+                  //   fontSize: 17
+                  // ),
                   ),
             
             
@@ -136,10 +192,13 @@ String subtitle = "5 minutes before ";
             //  print("default time");
             },
              child:PopupMenuButton(
+             // initialValue: subtitle,
               itemBuilder: (context) => [
                 PopupMenuItem(
                   value: timings[0],
-                  child: Text(timings[0]),
+                  child: Text(timings[0],
+                   
+                  ),
                   ),
       
                    PopupMenuItem(
@@ -174,16 +233,23 @@ String subtitle = "5 minutes before ";
                 });
               },
                child:  ListTile(
-                leading: const Icon(Icons.edit_notifications_outlined,color: Colors.white,size: 30,),
-                title:  const Text("Task reminder default",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 17
-                    ),
+                leading:  Icon(Icons.edit_notifications_outlined,
+                color: Theme.of(context).iconTheme.color,
+                size: 29,
+                ),
+                title:   Text("Task reminder default",
+                    style: Theme.of(context).textTheme.bodyLarge
+                    //  TextStyle(
+                    //   color: Colors.white,
+                    //   fontSize: 17
+                    // ),
                     ),
                     subtitle:Text(subtitle,
-                    style: const TextStyle(color: Colors.white),)
-                    ),
+                    style: Theme.of(context).textTheme.bodyLarge
+                    // const TextStyle(
+                    //   color: Colors.white)
+                    //   ,)
+                    // ),
                ),
              )
             // Container(
@@ -204,7 +270,8 @@ String subtitle = "5 minutes before ";
             //     ]
             //     ),
             //  ),
-           ,
+             ),
+             ),
         ],
       ),
     );

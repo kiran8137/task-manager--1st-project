@@ -73,6 +73,7 @@ dependencies:
 
   #sidebarX
   sidebarx: ^0.16.3
+  provider: ^6.1.1
   
   
   

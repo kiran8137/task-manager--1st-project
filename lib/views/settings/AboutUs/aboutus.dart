@@ -7,10 +7,11 @@ class AboutUs extends StatelessWidget {
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: AppBar(
-        title: const Text("About Us",style: TextStyle(color: Colors.white),
+        title:  Text("About Us",
+        style:  Theme.of(context).textTheme.displaySmall,
         ),
         centerTitle: true,
-        backgroundColor: Colors.black,
+        backgroundColor: Theme.of(context).colorScheme.background,
 
 
         leading:
@@ -18,15 +19,16 @@ class AboutUs extends StatelessWidget {
 
           //return back to settings page
           onTap: () => Navigator.pop(context),
-          child: const Icon(Icons.arrow_back,color: Colors.white,),
+          child:  Icon(Icons.arrow_back,
+          color: Theme.of(context).iconTheme.color),
         ),
       ),
-        backgroundColor: Colors.black,
+        backgroundColor: Theme.of(context).colorScheme.background,
 
 
 
 
-        body: const SizedBox(
+        body:  SizedBox(
           height: 800,
           width: double.infinity,
           child: Padding(
@@ -34,7 +36,13 @@ class AboutUs extends StatelessWidget {
             child: Text(
                 "This is an app that is developed as part of my project and this will be one of my freatest milstone in my career.This  is an Task manager application MANAGE YOU"
                 "which is very useful to manage your day to day task  and a reminder to remind their events or tasks in future. ",
-                style: TextStyle(color: Colors.white,fontSize: 18),),
+                style: Theme.of(context).textTheme.bodyLarge,
+                
+                // TextStyle(
+                  
+                //   //color: Theme.of(context).textTheme.,
+                //   fontSize: 18),
+                 ),
           ),
         ));
   }

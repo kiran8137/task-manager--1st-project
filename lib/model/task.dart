@@ -5,11 +5,11 @@ part 'task.g.dart';
 @HiveType(typeId: 1)
 class Tasks {
 
-
+   
    
    
   @HiveField(0)
-   String tasktitle;
+  String tasktitle;
 
   @HiveField(1)
   String taskdescription;

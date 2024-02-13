@@ -13,10 +13,14 @@
 // }
 
 
+ 
+
+ 
+
 import 'package:flutter/material.dart';
 import 'package:manage_your/utils/apps_str.dart';
 
-PreferredSize appbar(GlobalKey<ScaffoldState>key){
+PreferredSize appbar(GlobalKey<ScaffoldState>key, BuildContext context){
   bool isSearchvVisible = false;
   return PreferredSize(
     preferredSize: const Size.fromHeight(80),
@@ -24,7 +28,8 @@ PreferredSize appbar(GlobalKey<ScaffoldState>key){
     
       width: double.infinity,
       height: 100,
-      color: Colors.black,
+       
+      
       child:  SafeArea(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -46,12 +51,18 @@ PreferredSize appbar(GlobalKey<ScaffoldState>key){
                  key.currentState!.openDrawer();
                // print("menu");
               },
-               child: SizedBox(
-                    height: 18,
-                    width: 18,
-                    child: Image.asset("assets/menu.png",
-                    color: Colors.white,),
-                   ),
+               child:  ImageIcon(
+                AssetImage("assets/menu.png",
+                ),
+                size: 17,
+                //color:Theme.of(context).iconTheme.color,
+               )
+              //  SizedBox(
+              //       height: 18,
+              //       width: 18,
+              //       child: Image.asset("assets/menu.png",
+              //       color: Theme.of(context).colorScheme.onSurface),
+              //      ),
              ),
 
 
@@ -61,18 +72,25 @@ PreferredSize appbar(GlobalKey<ScaffoldState>key){
                   //todo navigation to home
                   //print("home");
                 },
-                child:  SizedBox(
-                  height: 18,
-                  width: 18,
-                  child: Image.asset("assets/home.png",
-                  color: Colors.white,),
-                )
+                child:  const ImageIcon(
+                AssetImage("assets/home.png",
+                ),
+                size: 17,
+               )
+                //  SizedBox(
+                //   height: 18,
+                //   width: 18,
+                //   child: Image.asset("assets/home.png",
+                //   color: Colors.white,),
+                // )
               ),
 
 
-              const Text(
+               Text(
                 AppStrings.appName,
-                style: TextStyle(color: Colors.white, fontSize: 16),
+                style: Theme.of(context).textTheme.bodyMedium
+                // TextStyle(color: Colors.white, 
+                // fontSize: 16),
               ),
 
 
@@ -84,9 +102,9 @@ PreferredSize appbar(GlobalKey<ScaffoldState>key){
                   //todo search
                   //print("search");
                 },
-                child: const Icon(
+                child:  Icon(
                   Icons.search,
-                  color: Colors.white,
+                  color:Theme.of(context).iconTheme.color
                 ),
               ),
                
@@ -99,9 +117,9 @@ PreferredSize appbar(GlobalKey<ScaffoldState>key){
                   //todo navigation to calender
                   //print(" calendar");
                 },
-                child: const Icon(
+                child: Icon(
                   Icons.calendar_month,
-                  color: Colors.white,
+                  color:Theme.of(context).iconTheme.color
                 ),
               ),
               

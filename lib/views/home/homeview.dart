@@ -50,8 +50,8 @@ TextEditingController descriptionEditingController = TextEditingController();
      getAllTasks();
     return Scaffold(
       backgroundColor:
-      // Colors.black,
-      Theme.of(context).colorScheme.primary,
+       Colors.black,
+      //Theme.of(context).colorScheme.primary,
       
 
       //floating Action button
@@ -279,7 +279,8 @@ TextEditingController descriptionEditingController = TextEditingController();
         //   ),
         // ),
          Divider(
-          color: Theme.of(context).colorScheme.secondary,
+          
+          // Theme.of(context).colorScheme.secondary,
           thickness: 0.8,
         ),
 

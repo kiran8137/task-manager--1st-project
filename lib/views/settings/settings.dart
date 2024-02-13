@@ -46,10 +46,12 @@ String subtitle = "5 minutes before ";
             color:  Theme.of(context).iconTheme.color),
             ),
 
-            title:  Text("Settings",style: Theme.of(context).textTheme.headlineMedium
-            // TextStyle(
-            //   color: Theme.of(context).textTheme.bodyLarge
-            // ),
+            title:  Text("Settings",style:
+            // Theme.of(context).textTheme.headlineMedium
+            TextStyle(
+              color: Colors.white
+              //Theme.of(context).textTheme.bodyLarge
+            ),
             ),
             
       ),
@@ -68,7 +70,7 @@ String subtitle = "5 minutes before ";
               
                content: GestureDetector(
                 onTap: (){
-                  Provider.of<ThemeProvider>(context , listen: false).toggleTheme();
+                  //Provider.of<ThemeProvider>(context , listen: false).toggleTheme();
                   
                 },
                  child: Container(

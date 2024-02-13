@@ -26,9 +26,11 @@ Future<void> main() async {
   if(!Hive.isAdapterRegistered(TasksAdapter().typeId)){
     Hive.registerAdapter(TasksAdapter());
   }
-  runApp( ChangeNotifierProvider(
-    create: (context) => ThemeProvider(),
-    child: const MyApp(),),
+  runApp(
+    const MyApp()
+    //  ChangeNotifierProvider(
+    // create: (context) => ThemeProvider(),
+    // child: const MyApp(),),
   );
 }
 
@@ -39,7 +41,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  MaterialApp(
-       darkTheme: Provider.of<ThemeProvider>(context).themeData,
+       //darkTheme: Provider.of<ThemeProvider>(context).themeData,
      // theme: 
       debugShowCheckedModeBanner: false,
       home: 

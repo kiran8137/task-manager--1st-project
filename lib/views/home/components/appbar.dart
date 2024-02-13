@@ -51,18 +51,22 @@ PreferredSize appbar(GlobalKey<ScaffoldState>key, BuildContext context){
                  key.currentState!.openDrawer();
                // print("menu");
               },
-               child:  ImageIcon(
-                AssetImage("assets/menu.png",
-                ),
-                size: 17,
-                //color:Theme.of(context).iconTheme.color,
-               )
-              //  SizedBox(
-              //       height: 18,
-              //       width: 18,
-              //       child: Image.asset("assets/menu.png",
-              //       color: Theme.of(context).colorScheme.onSurface),
-              //      ),
+               child:
+              //  ImageIcon(
+              //   AssetImage("assets/menu.png",
+                
+              //   ),
+              //   size: 17,
+              //   //color:Theme.of(context).iconTheme.color,
+              //  )
+               SizedBox(
+                    height: 18,
+                    width: 18,
+                    child: Image.asset("assets/menu.png",
+                    color: Colors.white
+                    // Theme.of(context).colorScheme.onSurface),
+                   ),
+             ),
              ),
 
 
@@ -72,25 +76,28 @@ PreferredSize appbar(GlobalKey<ScaffoldState>key, BuildContext context){
                   //todo navigation to home
                   //print("home");
                 },
-                child:  const ImageIcon(
-                AssetImage("assets/home.png",
-                ),
-                size: 17,
-               )
-                //  SizedBox(
-                //   height: 18,
-                //   width: 18,
-                //   child: Image.asset("assets/home.png",
-                //   color: Colors.white,),
-                // )
+                child: 
+              //    const ImageIcon(
+              //   AssetImage("assets/home.png",
+              //   ),
+              //   size: 17,
+              //  )
+                 SizedBox(
+                  height: 18,
+                  width: 18,
+                  child: Image.asset("assets/home.png",
+                  color: Colors.white,),
+                )
               ),
 
 
                Text(
                 AppStrings.appName,
-                style: Theme.of(context).textTheme.bodyMedium
-                // TextStyle(color: Colors.white, 
-                // fontSize: 16),
+                style: 
+                //Theme.of(context).textTheme.bodyMedium
+                 TextStyle(color: Colors.white, 
+                 fontSize: 16
+                ),
               ),
 
 
@@ -104,7 +111,8 @@ PreferredSize appbar(GlobalKey<ScaffoldState>key, BuildContext context){
                 },
                 child:  Icon(
                   Icons.search,
-                  color:Theme.of(context).iconTheme.color
+                  color:Colors.white
+                  //Theme.of(context).iconTheme.color
                 ),
               ),
                
@@ -119,7 +127,8 @@ PreferredSize appbar(GlobalKey<ScaffoldState>key, BuildContext context){
                 },
                 child: Icon(
                   Icons.calendar_month,
-                  color:Theme.of(context).iconTheme.color
+                  color: Colors.white
+                  //Theme.of(context).iconTheme.color
                 ),
               ),
               

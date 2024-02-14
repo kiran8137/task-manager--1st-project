@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:intl/intl.dart';
 import 'package:manage_your/data/functions.dart';
 import 'package:manage_your/model/task.dart';
 import 'package:manage_your/utils/apps_colors.dart';
@@ -11,12 +12,15 @@ class Taskwidget extends StatefulWidget {
     super.key, 
     this.tasktitle, 
     this.taskdescription,
+    this.dateTime
+
           
     
   });
 
   final tasktitle;
   final taskdescription;
+  final DateTime? dateTime;
 
   @override
   State<Taskwidget> createState() => _TaskwidgetState();
@@ -24,12 +28,18 @@ class Taskwidget extends StatefulWidget {
 
 class _TaskwidgetState extends State<Taskwidget> {
 
+ 
    
 
 bool ischecked = false;
 
+
   @override
   Widget build(BuildContext context) {
+    if(widget.dateTime!=null){
+      String foramtteddate = DateFormat('dd-mm-yyyy').format(widget.dateTime!);
+    }
+    //String foramtteddate = DateFormat('dd-mm-yyyy').format(widget.dateTime!);
     return AnimatedContainer(
       height: 110,
       duration: const Duration(milliseconds: 600),
@@ -63,7 +73,7 @@ bool ischecked = false;
               child: GestureDetector(
                 onTap: () async {
                   
-                   final _dbtask= Tasks(tasktitle: widget.tasktitle, taskdescription: widget.taskdescription);
+                   final _dbtask= Tasks(tasktitle: widget.tasktitle, taskdescription: widget.taskdescription,datetime: widget.dateTime);
                    
                   Navigator.push(context, MaterialPageRoute(builder: (context)=>  UpdateTaskView( 
                      task: _dbtask,
@@ -121,14 +131,19 @@ bool ischecked = false;
                       
                    Text("time" ,
                   style: TextStyle(color: Colors.white,
-                  fontWeight: FontWeight.w500),
+                  fontWeight: FontWeight.w500,
+                  fontSize: 18
+                  ),
                   ),
                       
+                      SizedBox(width: 10),
                   //date
                       
-                    Text("date",
+                    Text("",
                   style: TextStyle(color: Colors.white,
-                  fontWeight: FontWeight.w400),
+                  fontWeight: FontWeight.w400,
+                  
+                  ),
                   ),
             
                   SizedBox(

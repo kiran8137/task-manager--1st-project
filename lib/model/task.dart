@@ -14,16 +14,17 @@ class Tasks {
   @HiveField(1)
   String taskdescription;
 
-   
+   @HiveField(2)
+   DateTime? datetime;
 
   Tasks( 
       {
        
       required this.tasktitle,
       required this.taskdescription,
-      
+      required this.datetime,
       
       }){
-      
+      print(datetime);
       }
 }

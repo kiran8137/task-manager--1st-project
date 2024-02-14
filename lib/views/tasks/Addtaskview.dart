@@ -30,7 +30,8 @@ class _AddtaskviewState extends State<Addtaskview> {
   String taskname = ""; //Task name by the user
   String description = ""; //description by the user
   DateTime? pickeddate; //date selected by the user
-  TimeOfDay? formattedTime; //time selected by the user
+  late TimeOfDay formattedTime; //time selected by the user
+  DateTime? combinedDateTime;
   
 
   String dropdownvalue = "No Category";
@@ -63,7 +64,7 @@ String subtitle = "5 minutes before ";
     final _task = Tasks(
        
       tasktitle: _tasktitle , 
-      taskdescription: _taskdescription,
+      taskdescription: _taskdescription, datetime: combinedDateTime,
       
           
           );
@@ -260,6 +261,7 @@ String subtitle = "5 minutes before ";
                             if(pickeddate!=null){
                               setState(() {
                                 _datecontroller.text = DateFormat('dd/MM/yyyy').format(pickeddate!);
+
                               });
                             }
                             setState(() {
@@ -332,6 +334,18 @@ String subtitle = "5 minutes before ";
                              initialTime: TimeOfDay.now()
                              );
                              if(pickedtime!=null){
+
+                            combinedDateTime = DateTime(
+                              pickeddate!.day,
+                              pickeddate!.month,
+                              pickeddate!.year,
+                              pickedtime.minute,
+                              pickedtime.hour,
+                              
+
+                            );
+                             
+                             
                              // print(pickedtime!.format(context),
                                DateTime parsedTime = DateFormat.jm().parse(pickedtime!.format(context).toString());
                               
@@ -344,8 +358,10 @@ String subtitle = "5 minutes before ";
                               });
         
                               //pickeddate = DateFormat.jm().parse(pickedtime!.format(context).toString());
+                              
                              }
                         },
+                        
                         )
                       ),
                     ],

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
+import 'package:manage_your/data/category/categoryfunctions.dart';
 import 'package:manage_your/data/functions.dart';
+import 'package:manage_your/model/category_model/category.dart';
 import 'package:manage_your/model/task.dart';
 import 'package:manage_your/utils/apps_str.dart';
 import 'package:uuid/uuid.dart';
@@ -29,9 +32,14 @@ class _AddtaskviewState extends State<Addtaskview> {
 
   String taskname = ""; //Task name by the user
   String description = ""; //description by the user
+  String? catergoryName ="";//category selected by the user
+ 
   DateTime? pickeddate; //date selected by the user
+  TimeOfDay? pickedtime;
   late TimeOfDay formattedTime; //time selected by the user
-  DateTime? combinedDateTime;
+  
+  DateTime defaulttime = DateTime.now();
+  
   
 
   String dropdownvalue = "No Category";
@@ -51,8 +59,28 @@ String subtitle = "5 minutes before ";
 
   var items = ['No Category', 'Work', 'personal', 'Wishlist', 'Birthday','CREATE NEW']; //catergory list
 
+//category creation
+Future<void> categoryCreate(String? catergoryName) async{
+final categroybox = await Hive.openBox<Category>('category_db');
+
+  
+  var existingCategory = categroybox.values.where((element) =>
+  element.name == catergoryName,
+  ).toList();
+
+  if(existingCategory.isEmpty){
+    var newCategory = Category(name: catergoryName);
+    addCategory(newCategory);
+  }
 
 
+}
+
+
+
+
+
+//task creation
   Future<void> onCreate()async{
     final _tasktitle = _titlecontroller.text.trim();
     final _taskdescription = _descriptioncontroller.text.trim();
@@ -64,7 +92,11 @@ String subtitle = "5 minutes before ";
     final _task = Tasks(
        
       tasktitle: _tasktitle , 
-      taskdescription: _taskdescription, datetime: combinedDateTime,
+      taskdescription: _taskdescription, 
+      date: pickeddate,
+      category: catergoryName
+      // datetime: combinedDateTime,
+      
       
           
           );
@@ -238,35 +270,43 @@ String subtitle = "5 minutes before ";
                           controller: _datecontroller,
                           readOnly: true,
                           
-                          decoration: const InputDecoration(
+                          decoration:  InputDecoration(
                             contentPadding: EdgeInsets.symmetric(vertical: 10.0),
                             // icon: Icon(Icons.calendar_month,color: Color.fromARGB(111, 158, 158, 158),
                             // ),
                             prefixIcon:  Icon(Icons.calendar_month,color: Color.fromARGB(111, 158, 158, 158)),
         
                             border: InputBorder.none,
-                            hintText: "dd/mm/yy",
+                            
+                            hintText: DateFormat('dd-MM-yyyy').format(defaulttime) ,
+                            //"dd/mm/yy",
                             hintStyle: TextStyle(color: Color.fromARGB(111, 158, 158, 158),
                             
                           ),
                         ),
                         onTap: ()async{
+
                           pickeddate = await showDatePicker(
+                            
                             context: context,
                             initialDate: DateTime.now(),
                             firstDate: DateTime(2000), 
                             lastDate: DateTime(2100),
                             );
+                            // setState(() {
+                            //   _datecontroller.text = DateTime.now().toString();
+                            // });
                            // DateTime.fromMillisecondsSinceEpoch(millisecondsSinceEpoch)
                             if(pickeddate!=null){
                               setState(() {
+
                                 _datecontroller.text = DateFormat('dd/MM/yyyy').format(pickeddate!);
 
                               });
                             }
-                            setState(() {
-                              _datecontroller.text = DateTime.now().toString();
-                            });
+                            // setState(() {
+                            //   _datecontroller.text = DateTime.now().toString();
+                            // });
                         },
                       ),
                       )
@@ -329,21 +369,21 @@ String subtitle = "5 minutes before ";
                           ),
                         ),
                         onTap: ()async{
-                         TimeOfDay? pickedtime = await showTimePicker(
+                          pickedtime = await showTimePicker(
                             context: context,
                              initialTime: TimeOfDay.now()
                              );
                              if(pickedtime!=null){
 
-                            combinedDateTime = DateTime(
-                              pickeddate!.day,
-                              pickeddate!.month,
-                              pickeddate!.year,
-                              pickedtime.minute,
-                              pickedtime.hour,
+                            // combinedDateTime = DateTime(
+                            //   pickeddate!.day,
+                            //   pickeddate!.month,
+                            //   pickeddate!.year,
+                            //   pickedtime.minute,
+                            //   pickedtime.hour,
                               
 
-                            );
+                            // );
                              
                              
                              // print(pickedtime!.format(context),
@@ -394,6 +434,8 @@ String subtitle = "5 minutes before ";
                         
                       onChanged: (newValue) {
                         setState(() {
+                          catergoryName = newValue;
+                          categoryCreate(catergoryName);
                           dropdownvalue = newValue!;
                           if(newValue=='CREATE NEW'){
                              showDialog(

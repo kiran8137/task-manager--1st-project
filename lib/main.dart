@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:manage_your/model/category_model/category.dart';
 import 'package:manage_your/model/task.dart';
 import 'package:manage_your/theme/theme.dart';
 import 'package:manage_your/theme/themeprovider.dart';
@@ -25,6 +26,9 @@ Future<void> main() async {
   await Hive.initFlutter();
   if(!Hive.isAdapterRegistered(TasksAdapter().typeId)){
     Hive.registerAdapter(TasksAdapter());
+  }
+  if(!Hive.isAdapterRegistered(CategoryAdapter().typeId)){
+    Hive.registerAdapter(CategoryAdapter());
   }
   runApp(
     const MyApp()

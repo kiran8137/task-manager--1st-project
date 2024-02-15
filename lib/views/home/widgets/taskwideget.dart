@@ -8,19 +8,26 @@ import 'package:manage_your/views/taskdetail/taskdetail.dart';
 import 'package:manage_your/views/tasks/updatetaskview.dart';
 
 class Taskwidget extends StatefulWidget {
-  const Taskwidget({
+   Taskwidget({
     super.key, 
     this.tasktitle, 
     this.taskdescription,
-    this.dateTime
+    required this.date,
+    this.time,
+     
 
           
     
-  });
+  })
+  {
+   // print(date.runtimeType);
+  }
 
   final tasktitle;
   final taskdescription;
-  final DateTime? dateTime;
+  //final DateTime? dateTime;
+  final DateTime? date;
+  final TimeOfDay? time;
 
   @override
   State<Taskwidget> createState() => _TaskwidgetState();
@@ -28,17 +35,25 @@ class Taskwidget extends StatefulWidget {
 
 class _TaskwidgetState extends State<Taskwidget> {
 
- 
-   
+String? foramtteddate;
+
+// @override
+// void initState() {
+//     // TODO: implement initState
+//     super.initState();
+//     if(widget.date!=null){
+//       DateFormat('dd/mm/yyyy').format(widget.date!);
+//     }
+//   }
+//foramtteddate = DateFormat('dd-mm-yyyy').format(widget.date);
+
 
 bool ischecked = false;
 
 
   @override
   Widget build(BuildContext context) {
-    if(widget.dateTime!=null){
-      String foramtteddate = DateFormat('dd-mm-yyyy').format(widget.dateTime!);
-    }
+   
     //String foramtteddate = DateFormat('dd-mm-yyyy').format(widget.dateTime!);
     return AnimatedContainer(
       height: 110,
@@ -51,7 +66,8 @@ bool ischecked = false;
           
       child:  ListTile(
         onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context)=> taskDetailview()));
+           final _dbtask= Tasks(tasktitle: widget.tasktitle, taskdescription: widget.taskdescription, date: widget.date, );
+          Navigator.push(context, MaterialPageRoute(builder: (context)=> taskDetailview(task:_dbtask)));
         },
         //task title
 
@@ -73,7 +89,7 @@ bool ischecked = false;
               child: GestureDetector(
                 onTap: () async {
                   
-                   final _dbtask= Tasks(tasktitle: widget.tasktitle, taskdescription: widget.taskdescription,datetime: widget.dateTime);
+                   final _dbtask= Tasks(tasktitle: widget.tasktitle, taskdescription: widget.taskdescription, date: widget.date, );
                    
                   Navigator.push(context, MaterialPageRoute(builder: (context)=>  UpdateTaskView( 
                      task: _dbtask,
@@ -139,7 +155,7 @@ bool ischecked = false;
                       SizedBox(width: 10),
                   //date
                       
-                    Text("",
+                    Text("$foramtteddate",
                   style: TextStyle(color: Colors.white,
                   fontWeight: FontWeight.w400,
                   

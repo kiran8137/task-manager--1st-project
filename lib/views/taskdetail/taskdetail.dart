@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:manage_your/model/task.dart';
 
 class taskDetailview extends StatefulWidget {
-  const taskDetailview({super.key});
+  const taskDetailview({super.key, 
+  required this.task
+
+  });
+
+final Tasks task;
+  // final String? tasktitle;
+  // final String? taskdescription;
+  // final DateTime? duedate;
 
   @override
   State<taskDetailview> createState() => _taskDetailviewState();
@@ -135,11 +145,12 @@ class _taskDetailviewState extends State<taskDetailview> {
                     margin:
                         const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     decoration: BoxDecoration(
-                      color:  Colors.red,
+                      //color:  Colors.red,
                       borderRadius: BorderRadius.circular(10),
                       
                     ),
-                    child: const Text("Task title",style: TextStyle(fontSize: 20,color: Colors.white),),
+                    child:  Text(widget.task.tasktitle,
+                    style: TextStyle(fontSize: 20,color: Colors.grey),),
                   ),
 
                 SizedBox(
@@ -157,22 +168,23 @@ class _taskDetailviewState extends State<taskDetailview> {
                     margin:
                         const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     decoration: BoxDecoration(
-                      color:  Colors.red,
+                     // color:  Colors.red,
                       borderRadius: BorderRadius.circular(10),
                       
                     ),
-                    child: const Text("Task description",style: TextStyle(fontSize: 20,color: Colors.white),),
+                    child:Text(widget.task.taskdescription,
+                    style: TextStyle(fontSize: 20,color: Colors.grey),),
                   ),
 
                   SizedBox(height: MediaQuery.of(context).size.height*0.2),
 
                     const Divider(color: Colors.grey),
 
-                  const Row(
+                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text("Due Date",style: TextStyle(color: Colors.white,fontSize: 16),),
-                      Text("Date",style: TextStyle(color: Colors.white,fontSize: 16),),
+                      Text(DateFormat('dd-MM-yyyy').format(widget.task.date!),style: TextStyle(color: Colors.white,fontSize: 16),),
 
                      
                     ],

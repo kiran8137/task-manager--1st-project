@@ -342,7 +342,10 @@ TextEditingController descriptionEditingController = TextEditingController();
                   child:  Taskwidget(
                     tasktitle: data.tasktitle,
                     taskdescription: data.taskdescription,
-                    dateTime : data.datetime,
+                    // dateTime : data.datetime,
+                    date: data.date,
+                     
+                    
                     
                   
                     

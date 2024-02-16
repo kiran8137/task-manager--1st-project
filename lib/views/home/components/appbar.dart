@@ -19,9 +19,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:manage_your/utils/apps_str.dart';
+import 'package:manage_your/views/home/components/search/searchbar.dart';
 
 PreferredSize appbar(GlobalKey<ScaffoldState>key, BuildContext context){
-  bool isSearchvVisible = false;
+  //bool isSearchvVisible = false;
   return PreferredSize(
     preferredSize: const Size.fromHeight(80),
      child: Container(
@@ -105,7 +106,9 @@ PreferredSize appbar(GlobalKey<ScaffoldState>key, BuildContext context){
                GestureDetector(
                 onTap: () {
 
-                  isSearchvVisible = !isSearchvVisible;
+                   //togglesearch(!isSearchvisible);
+
+                    
                   //todo search
                   //print("search");
                 },

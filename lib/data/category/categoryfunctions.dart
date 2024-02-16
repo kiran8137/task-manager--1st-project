@@ -10,5 +10,6 @@ Future<void> addCategory(Category category)async{
   final categoryid = await categorydb.add(category);
   category.id = categoryid;
 
+print(categorydb.keys);
 
 }

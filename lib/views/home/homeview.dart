@@ -6,6 +6,8 @@ import 'package:manage_your/data/functions.dart';
 import 'package:manage_your/model/task.dart';
 import 'package:manage_your/utils/apps_colors.dart';
 import 'package:manage_your/views/home/components/appbar.dart';
+import 'package:manage_your/views/home/components/search/searchbarvisible.dart';
+import 'package:manage_your/views/home/components/search/searchbar.dart';
 import 'package:manage_your/views/home/widgets/taskwideget.dart';
 import 'package:manage_your/views/settings/settings.dart';
 import 'package:manage_your/views/tasks/Addtaskview.dart';
@@ -25,15 +27,11 @@ final GlobalKey<ScaffoldState> _key = GlobalKey();
 //TextEditingController searchController = TextEditingController();
 TextEditingController titleEditingController = TextEditingController();
 TextEditingController descriptionEditingController = TextEditingController();
+TextEditingController searchController = TextEditingController();
 
  
 
-// @override
-//   void didChangeDependencies() {
-//     // TODO: implement didChangeDependencies
-//     myInteritedWidget = context.dependOnInheritedWidgetOfExactType();
-//     super.didChangeDependencies();
-//   }
+
  
 
 // method to remove task from the list
@@ -43,12 +41,23 @@ TextEditingController descriptionEditingController = TextEditingController();
   tasklistNotifier.value = box.values.toList();
  }
 
+
+
+ bool _isSearchvisible = false;
+
+//  void togglesearch(isSearchvisible){
+//   setState(() {
+//     _isSearchvisible = isSearchvisible;
+//   });
+//  }
+
  
  
   @override
   Widget build(BuildContext context) {
      getAllTasks();
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor:
        Colors.black,
       //Theme.of(context).colorScheme.primary,
@@ -99,7 +108,7 @@ TextEditingController descriptionEditingController = TextEditingController();
 
 
        
-    appBar: appbar(_key, context ),
+    appBar: appbar(_key, context,),
 
 
     //side menu
@@ -199,173 +208,186 @@ TextEditingController descriptionEditingController = TextEditingController();
 
       //body
 
-      body:_buildhomebody(),
+      body:_buildhomebody(_isSearchvisible),
     );
   }
       //homebody
-  Widget _buildhomebody() {
-    return Column(
-     
-      children: [
-
-         
-        
-        //appbar 
-        
-        // Container(
-        //   margin: const EdgeInsets.only(top: 23),
-        //   width: double.infinity,
-        //   height: 90,
-        //   color: Colors.black,
-        //   // color: Colors.red,
-        //   child: Row(
-        //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-        //     children: [
-        //       GestureDetector(
-        //         onTap: () {
-                  
-        //           //todo sidebar
-        //           print("menu");
-        //         },
-        //         child:
-        //         SizedBox(
-        //           height: 18,
-        //           width: 18,
-        //           child: Image.asset("assets/menu.png",
-        //           color: Colors.white,),
-        //         ),
-        //         //  const Icon(
-        //         //   Icons.menu,
-        //         //   color: Colors.white,
-        //         // ),
-        //       ),
-        //       GestureDetector(
-        //         onTap: () {
-        //           //todo navigation to home
-        //           print("home");
-        //         },
-        //         child:  SizedBox(
-        //           height: 18,
-        //           width: 18,
-        //           child: Image.asset("assets/home.png",
-        //           color: Colors.white,),
-        //         )
-        //       ),
-        //       const Text(
-        //         AppStrings.appName,
-        //         style: TextStyle(color: Colors.white, fontSize: 16),
-        //       ),
-        //       GestureDetector(
-        //         onTap: () {
-        //           //todo search
-        //           print("search");
-        //         },
-        //         child: const Icon(
-        //           Icons.search,
-        //           color: Colors.white,
-        //         ),
-        //       ),
-        //       GestureDetector(
-        //         onTap: () {
-        //           //todo navigation to calender
-        //           print(" calendar");
-        //         },
-        //         child: const Icon(
-        //           Icons.calendar_month,
-        //           color: Colors.white,
-        //         ),
-        //       ),
-        //     ],
-        //   ),
-        // ),
-         Divider(
+  Widget _buildhomebody(SearchVisible) {
+    bool isSearchvisible = SearchVisible;
+    return SingleChildScrollView(
+      child: Column(
+       
+        children: [
+      
+           
           
-          // Theme.of(context).colorScheme.secondary,
-          thickness: 0.8,
-        ),
+          //appbar 
+          
+          // Container(
+          //   margin: const EdgeInsets.only(top: 23),
+          //   width: double.infinity,
+          //   height: 90,
+          //   color: Colors.black,
+          //   // color: Colors.red,
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+          //     children: [
+          //       GestureDetector(
+          //         onTap: () {
+                    
+          //           //todo sidebar
+          //           print("menu");
+          //         },
+          //         child:
+          //         SizedBox(
+          //           height: 18,
+          //           width: 18,
+          //           child: Image.asset("assets/menu.png",
+          //           color: Colors.white,),
+          //         ),
+          //         //  const Icon(
+          //         //   Icons.menu,
+          //         //   color: Colors.white,
+          //         // ),
+          //       ),
+          //       GestureDetector(
+          //         onTap: () {
+          //           //todo navigation to home
+          //           print("home");
+          //         },
+          //         child:  SizedBox(
+          //           height: 18,
+          //           width: 18,
+          //           child: Image.asset("assets/home.png",
+          //           color: Colors.white,),
+          //         )
+          //       ),
+          //       const Text(
+          //         AppStrings.appName,
+          //         style: TextStyle(color: Colors.white, fontSize: 16),
+          //       ),
+          //       GestureDetector(
+          //         onTap: () {
+          //           //todo search
+          //           print("search");
+          //         },
+          //         child: const Icon(
+          //           Icons.search,
+          //           color: Colors.white,
+          //         ),
+          //       ),
+          //       GestureDetector(
+          //         onTap: () {
+          //           //todo navigation to calender
+          //           print(" calendar");
+          //         },
+          //         child: const Icon(
+          //           Icons.calendar_month,
+          //           color: Colors.white,
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // ),
+           const Divider(
+            
+            // Theme.of(context).colorScheme.secondary,
+            thickness: 0.8,
+          ),
+      
+          
+      
+          const SizedBox(height:5,),
+      
 
-        const SizedBox(height: 10,),
-        
-        //Tasks
-        SizedBox(
-          width: double.infinity,
-          height: 600,
-          child:  
-          ValueListenableBuilder(
-            valueListenable: tasklistNotifier,
-            builder: 
-            (BuildContext context, List<Tasks> tasklist , Widget? child ){
-              return  ListView.builder(
-              itemCount: tasklist.length,
-              itemBuilder: (context, index) {
-                final data = tasklist[index];
-                return
-                 Slidable(
-                  startActionPane: ActionPane(
-                    motion: const ScrollMotion(),
-                    extentRatio: 0.15,
-                    
-                     children: [
-                      SlidableAction(
-                        onPressed: (context)=>{
-                          showDialog(
-                            context: context, 
-                            builder: (ctx)=>
-                             AlertDialog(
-                              title: const Text("Alert....!"),
-                              content: const Text("Sure You Want to Delete This Task"),
-                              actions: [
-                                TextButton(
-                                onPressed: (){
-                                  Navigator.of(ctx).pop();
-                                },
-                                child: const Text("Cancel")
-                                ),
-                                TextButton(
-                                  onPressed:(){
-                                    _remove(index);
-                                    //Navigator.of(context).pop();
-                                  }, 
-                                  child: const Text("Ok"),
+      //searchbar 
+
+           //searchOptionbar(isSearchvisible, searchController),
+           
+          
+          //Tasks
+          SizedBox(
+            width: double.infinity,
+            height: 600,
+            child:  
+            ValueListenableBuilder(
+              valueListenable: tasklistNotifier,
+              builder: 
+              (BuildContext context, List<Tasks> tasklist , Widget? child ){
+                return  ListView.builder(
+                itemCount: tasklist.length,
+                itemBuilder: (context, index) {
+                  final data = tasklist[index];
+                  return
+                   Slidable(
+                    startActionPane: ActionPane(
+                      motion: const ScrollMotion(),
+                      extentRatio: 0.15,
+                      
+                       children: [
+                        SlidableAction(
+                          onPressed: (context)=>{
+                            showDialog(
+                              context: context, 
+                              builder: (ctx)=>
+                               AlertDialog(
+                                title: const Text("Alert....!"),
+                                content: const Text("Sure You Want to Delete This Task"),
+                                actions: [
+                                  TextButton(
+                                  onPressed: (){
+                                    Navigator.of(ctx).pop();
+                                  },
+                                  child: const Text("Cancel")
                                   ),
-                              ],
-                            )
-                            )
-                          //_remove(index)
-                        },
-                        
-                        icon: CupertinoIcons.delete,
-                        
-                         
-                        )
-                     ]),
-                  child:  Taskwidget(
-                    tasktitle: data.tasktitle,
-                    taskdescription: data.taskdescription,
-                    // dateTime : data.datetime,
-                    date: data.date,
-                     
+                                  TextButton(
+                                    onPressed:(){
+                                      _remove(index);
+                                      //Navigator.of(context).pop();
+                                    }, 
+                                    child: const Text("Ok"),
+                                    ),
+                                ],
+                              )
+                              )
+                            //_remove(index)
+                          },
+                          
+                          icon: CupertinoIcons.delete,
+                          
+                           
+                          )
+                       ]),
+                    child:  Taskwidget(
+                      tasktitle: data.tasktitle,
+                      taskdescription: data.taskdescription,
+                      // dateTime : data.datetime,
+                      date: data.date,
+                       
+                      
+                      
                     
+                      
+                    ),
                     
-                  
+                    );
                     
-                  ),
-                  
-                  );
-                  
+                },
+              );
               },
-            );
-            },
-              
+                
+            )
+            // :const Center(
+            //   child: Text("NO TASK YET",style: TextStyle(color: Colors.white),),
+            // )
           )
-          // :const Center(
-          //   child: Text("NO TASK YET",style: TextStyle(color: Colors.white),),
-          // )
-        )
-      ],
+        ],
+      ),
     );
   }
-}
+
+//  
+ }
 
 
 

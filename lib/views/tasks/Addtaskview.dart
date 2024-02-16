@@ -30,6 +30,7 @@ class _AddtaskviewState extends State<Addtaskview> {
   final TextEditingController _timecontroller = TextEditingController();//controller for time
   final TextEditingController _categorycontroller = TextEditingController();
 
+  
   String taskname = ""; //Task name by the user
   String description = ""; //description by the user
   String? catergoryName ="";//category selected by the user
@@ -93,7 +94,7 @@ final categroybox = await Hive.openBox<Category>('category_db');
        
       tasktitle: _tasktitle , 
       taskdescription: _taskdescription, 
-      date: pickeddate,
+      date: pickeddate ?? DateTime.now(),
       category: catergoryName
       // datetime: combinedDateTime,
       

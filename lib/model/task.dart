@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
 part 'task.g.dart';
@@ -21,6 +20,9 @@ class Tasks {
 
    @HiveField(3)
    String? category;
+
+  //  @HiveField(4)
+  //  DateTime? time;
    
    
 
@@ -31,9 +33,10 @@ class Tasks {
       required this.taskdescription,
       required this.date,
       this.category,
+      //required this.time,
       
       }){
         
-     // print("tasktitle:$tasktitle taskdes:$taskdescription date:$date  category:$category");
+      print("tasktitle:$tasktitle taskdes:$taskdescription date:$date  category:$category");
       }
 }

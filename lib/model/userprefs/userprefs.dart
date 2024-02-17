@@ -14,5 +14,11 @@ class Userpreference{
      @HiveField(1)
      final bool? showonboarding;
 
-  Userpreference({ this.isdarkMode, this.showonboarding});
+
+     @HiveField(2)
+     String? time;
+
+  Userpreference({ this.isdarkMode, this.showonboarding , this.time}){
+    print(time);
+  }
 }

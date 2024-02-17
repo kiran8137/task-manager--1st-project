@@ -1,12 +1,14 @@
  import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:manage_your/data/functions.dart';
 import 'package:manage_your/model/task.dart';
 import 'package:manage_your/utils/apps_str.dart';
 
 class UpdateTaskView extends StatefulWidget {
-  const UpdateTaskView({super.key, required this.task });
+  const UpdateTaskView({super.key, required this.task , required this.index});
 
 final Tasks task;
+final int index;
   
 
   
@@ -17,7 +19,7 @@ final Tasks task;
 
 class _UpdateTaskViewState extends State<UpdateTaskView> {
 
-  late TextEditingController titleController;
+  late TextEditingController titleController ;
   late TextEditingController descriptionController;
 
   
@@ -50,17 +52,19 @@ String subtitle = "5 minutes before ";
 
 
 
-  void updateTask() {
+  // void updateTask() {
+  //   final TasksDB =Hive.box<Tasks>('task_db');
+  //    Tasks newTask = Tasks(tasktitle: titleController.text, taskdescription: descriptionController.text, date: null);
+  //    TasksDB.putAt(widget.index, newTask);
+  //   // widget.task.tasktitle = titleController.text;
+  //   // widget.task.taskdescription = descriptionController.text;
      
-    widget.task.tasktitle = titleController.text;
-    widget.task.taskdescription = descriptionController.text;
-     
-    // Save the updated task to the Hive database
-    // final box = Hive.box<Tasks>('tasks');
-    // box.put(widget.task.id, widget.task);
+  //   // Save the updated task to the Hive database
+  //   // final box = Hive.box<Tasks>('tasks');
+  //   // box.put(widget.task.id, widget.task);
 
      
-  }
+  // }
    
 
   @override
@@ -350,6 +354,7 @@ String subtitle = "5 minutes before ";
                     onTap: () {
                       //print("cancel");
                       Navigator.pop(context);
+                       
                     },
                     child: Container(
                       height: 40,
@@ -369,7 +374,8 @@ String subtitle = "5 minutes before ";
                   GestureDetector(
                     onTap: () {
                      // print("create");
-                     updateTask();
+                     updateTask(titleController , descriptionController, widget.index,);
+                     Navigator.pop(context);
                     },
                     child: Container(
                       height: 40,

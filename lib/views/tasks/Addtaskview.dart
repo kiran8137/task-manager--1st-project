@@ -37,7 +37,9 @@ class _AddtaskviewState extends State<Addtaskview> {
  
   DateTime? pickeddate; //date selected by the user
   TimeOfDay? pickedtime;
-  late TimeOfDay formattedTime; //time selected by the user
+  late TimeOfDay formattedTime;
+  
+  DateTime? parsedTime; //time selected by the user
   
   DateTime defaulttime = DateTime.now();
   
@@ -95,6 +97,7 @@ final categroybox = await Hive.openBox<Category>('category_db');
       tasktitle: _tasktitle , 
       taskdescription: _taskdescription, 
       date: pickeddate ?? DateTime.now(),
+      //time: parsedTime,
       category: catergoryName
       // datetime: combinedDateTime,
       
@@ -272,16 +275,16 @@ final categroybox = await Hive.openBox<Category>('category_db');
                           readOnly: true,
                           
                           decoration:  InputDecoration(
-                            contentPadding: EdgeInsets.symmetric(vertical: 10.0),
+                            contentPadding: const EdgeInsets.symmetric(vertical: 10.0),
                             // icon: Icon(Icons.calendar_month,color: Color.fromARGB(111, 158, 158, 158),
                             // ),
-                            prefixIcon:  Icon(Icons.calendar_month,color: Color.fromARGB(111, 158, 158, 158)),
+                            prefixIcon:  const Icon(Icons.calendar_month,color: Color.fromARGB(111, 158, 158, 158)),
         
                             border: InputBorder.none,
                             
                             hintText: DateFormat('dd-MM-yyyy').format(defaulttime) ,
                             //"dd/mm/yy",
-                            hintStyle: TextStyle(color: Color.fromARGB(111, 158, 158, 158),
+                            hintStyle: const TextStyle(color: Color.fromARGB(111, 158, 158, 158),
                             
                           ),
                         ),
@@ -376,23 +379,23 @@ final categroybox = await Hive.openBox<Category>('category_db');
                              );
                              if(pickedtime!=null){
 
-                            // combinedDateTime = DateTime(
-                            //   pickeddate!.day,
-                            //   pickeddate!.month,
-                            //   pickeddate!.year,
-                            //   pickedtime.minute,
-                            //   pickedtime.hour,
+                          //  DateTime combinedDateTime = DateTime(
+                          //     pickeddate!.day,
+                          //     pickeddate!.month,
+                          //     pickeddate!.year,
+                          //     pickedtime!.minute,
+                          //     pickedtime!.hour,
                               
 
-                            // );
+                          //   );
                              
                              
                              // print(pickedtime!.format(context),
-                               DateTime parsedTime = DateFormat.jm().parse(pickedtime!.format(context).toString());
+                               parsedTime = DateFormat.jm().parse(pickedtime!.format(context).toString());
                               
                                 print(parsedTime);
         
-                                String formattedTime = DateFormat('h:mm a').format(parsedTime);
+                                String formattedTime = DateFormat('h:mm a').format(parsedTime!);
                                 print(formattedTime);
                               setState(() {
                                 _timecontroller.text = formattedTime;
@@ -443,7 +446,7 @@ final categroybox = await Hive.openBox<Category>('category_db');
                               context: context, 
                               builder: (ctx)=>
                               AlertDialog(
-                                title: Text("Create New Category"),
+                                title: const Text("Create New Category"),
                                 content: TextField(
                                   
                                   controller: _categorycontroller,
@@ -460,7 +463,7 @@ final categroybox = await Hive.openBox<Category>('category_db');
                                     onPressed:(){
                                       Navigator.of(context).pop();
                                     }, 
-                                    child: Text("Cancel"),
+                                    child: const Text("Cancel"),
                                     ),
                                     TextButton(
                                     
@@ -472,7 +475,7 @@ final categroybox = await Hive.openBox<Category>('category_db');
                                       _categorycontroller.clear();
                                 
                                     }, 
-                                    child: Text("Create"),
+                                    child: const Text("Create"),
                                     )
                                     
                                 ],

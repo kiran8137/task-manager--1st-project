@@ -14,6 +14,7 @@ class Taskwidget extends StatefulWidget {
     this.taskdescription,
     required this.date,
     this.time,
+    required this.index
      
 
           
@@ -26,8 +27,9 @@ class Taskwidget extends StatefulWidget {
   final tasktitle;
   final taskdescription;
   //final DateTime? dateTime;
-  final DateTime? date;
-  final TimeOfDay? time;
+  final DateTime date;
+  final DateTime? time;
+  final int index;
 
   @override
   State<Taskwidget> createState() => _TaskwidgetState();
@@ -45,8 +47,7 @@ String? foramtteddate;
 //       DateFormat('dd/mm/yyyy').format(widget.date!);
 //     }
 //   }
-//foramtteddate = DateFormat('dd-mm-yyyy').format(widget.date);
-
+ 
 
 bool ischecked = false;
 
@@ -66,8 +67,8 @@ bool ischecked = false;
           
       child:  ListTile(
         onTap: () {
-           final _dbtask= Tasks(tasktitle: widget.tasktitle, taskdescription: widget.taskdescription, date: widget.date, );
-          Navigator.push(context, MaterialPageRoute(builder: (context)=> taskDetailview(task:_dbtask)));
+           final _dbtask= Tasks(tasktitle: widget.tasktitle, taskdescription: widget.taskdescription, date: widget.date,  );
+          Navigator.push(context, MaterialPageRoute(builder: (context)=> taskDetailview(task:_dbtask , index: widget.index,)));
         },
         //task title
 
@@ -89,10 +90,11 @@ bool ischecked = false;
               child: GestureDetector(
                 onTap: () async {
                   
-                   final _dbtask= Tasks(tasktitle: widget.tasktitle, taskdescription: widget.taskdescription, date: widget.date, );
+                   final _dbtask= Tasks(tasktitle: widget.tasktitle, taskdescription: widget.taskdescription, date: widget.date,  );
                    
                   Navigator.push(context, MaterialPageRoute(builder: (context)=>  UpdateTaskView( 
                      task: _dbtask,
+                     index : widget.index
                   )));
                 },
                 child: const Text("Edit",
@@ -145,18 +147,18 @@ bool ischecked = false;
                       
                   //time 
                       
-                   Text("time" ,
-                  style: TextStyle(color: Colors.white,
+                   const Text("time" ,
+                  style:  TextStyle(color: Colors.white,
                   fontWeight: FontWeight.w500,
                   fontSize: 18
                   ),
                   ),
                       
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                   //date
                       
-                    Text("$foramtteddate",
-                  style: TextStyle(color: Colors.white,
+                    Text(DateFormat('dd-MM-yyyy').format(widget.date).toString(),
+                  style: const TextStyle(color: Colors.white,
                   fontWeight: FontWeight.w400,
                   
                   ),
@@ -164,7 +166,7 @@ bool ischecked = false;
             
                   SizedBox(
                     //width: 215,
-                    width: MediaQuery.of(context).size.width*0.5,
+                    width: 150,
                     ),
             
                 Checkbox(

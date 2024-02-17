@@ -1,13 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:hive/hive.dart';
 import 'package:manage_your/data/functions.dart';
 import 'package:manage_your/model/task.dart';
 import 'package:manage_your/utils/apps_colors.dart';
 import 'package:manage_your/views/home/components/appbar.dart';
-import 'package:manage_your/views/home/components/search/searchbarvisible.dart';
-import 'package:manage_your/views/home/components/search/searchbar.dart';
 import 'package:manage_your/views/home/widgets/taskwideget.dart';
 import 'package:manage_your/views/settings/settings.dart';
 import 'package:manage_your/views/tasks/Addtaskview.dart';
@@ -35,11 +32,11 @@ TextEditingController searchController = TextEditingController();
  
 
 // method to remove task from the list
- void _remove(index)async{
-   final box = await Hive.openBox<Tasks>('task_db');
-   box.deleteAt(index);
-  tasklistNotifier.value = box.values.toList();
- }
+//  void _remove(index)async{
+//    final box = await Hive.openBox<Tasks>('task_db');
+//    box.deleteAt(index);
+//   tasklistNotifier.value = box.values.toList();
+//  }
 
 
 
@@ -342,7 +339,7 @@ TextEditingController searchController = TextEditingController();
                                   ),
                                   TextButton(
                                     onPressed:(){
-                                      _remove(index);
+                                      remove(index);
                                       //Navigator.of(context).pop();
                                     }, 
                                     child: const Text("Ok"),
@@ -362,7 +359,8 @@ TextEditingController searchController = TextEditingController();
                       tasktitle: data.tasktitle,
                       taskdescription: data.taskdescription,
                       // dateTime : data.datetime,
-                      date: data.date,
+                      date: data.date!,
+                      index : index
                        
                       
                       

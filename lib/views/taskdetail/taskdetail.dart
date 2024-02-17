@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:manage_your/data/functions.dart';
 import 'package:manage_your/model/task.dart';
+import 'package:manage_your/views/home/homeview.dart';
 
 class taskDetailview extends StatefulWidget {
   const taskDetailview({super.key, 
-  required this.task
+  required this.task,
+  required this.index,
 
   });
 
 final Tasks task;
+final int index;
   // final String? tasktitle;
   // final String? taskdescription;
   // final DateTime? duedate;
@@ -18,15 +22,31 @@ final Tasks task;
 }
 
 class _taskDetailviewState extends State<taskDetailview> {
+   TextEditingController? titlecontroller;
+   TextEditingController? descriptioncontroller;
+  @override
+  void initState() {
+    // TODO: implement initState
+    TextEditingController  titlecontroller = TextEditingController(text: widget.task.tasktitle);
+TextEditingController descriptioncontroller = TextEditingController(text: widget.task.taskdescription);
 
- String dropdownvalue = "No Category";
+
+    super.initState();
+  }
+
+// TextEditingController titlecontroller = TextEditingController(text: widget.task.tasktitle);
+// TextEditingController _descriptioncontroller = TextEditingController();
+
+
+ String? dropdownvalue = "No Category";
 
  var items = ['No Category', 'Work', 'personal', 'Wishlist', 'Birthday','CREATE NEW']; //catergory list
 
-
+late bool iseditSelected = false;
 
   @override
   Widget build(BuildContext context) {
+  
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -67,6 +87,9 @@ class _taskDetailviewState extends State<taskDetailview> {
             },
             onSelected: (value){
               if(value == 0){
+                setState(() {
+                  iseditSelected = !iseditSelected;
+                });
                 print("edit selected");
                 //should navigate to the edit page
               }else if(value == 1){
@@ -87,8 +110,9 @@ class _taskDetailviewState extends State<taskDetailview> {
                                 ),
                                 TextButton(
                                   onPressed:(){
-                                    //_remove(index);
+                                    remove(widget.index);
                                     Navigator.of(context).pop();
+                                      Navigator.push(context, MaterialPageRoute(builder: (context)=> const Homeview() ));
                                   }, 
                                   child: const Text("Ok"),
                                   ),
@@ -149,8 +173,13 @@ class _taskDetailviewState extends State<taskDetailview> {
                       borderRadius: BorderRadius.circular(10),
                       
                     ),
-                    child:  Text(widget.task.tasktitle,
-                    style: TextStyle(fontSize: 20,color: Colors.grey),),
+                    child: iseditSelected?
+                    TextFormField(
+                      controller: titlecontroller,
+                       style: const TextStyle(color: Colors.white),
+                    ):
+                     Text(widget.task.tasktitle,
+                    style: const TextStyle(fontSize: 20,color: Colors.grey),),
                   ),
 
                 SizedBox(
@@ -172,19 +201,23 @@ class _taskDetailviewState extends State<taskDetailview> {
                       borderRadius: BorderRadius.circular(10),
                       
                     ),
-                    child:Text(widget.task.taskdescription,
-                    style: TextStyle(fontSize: 20,color: Colors.grey),),
+                    child: iseditSelected?
+                    TextFormField(
+                      controller: descriptioncontroller,
+                    ):
+                    Text(widget.task.taskdescription,
+                    style: const TextStyle(fontSize: 20,color: Colors.grey),),
                   ),
 
-                  SizedBox(height: MediaQuery.of(context).size.height*0.2),
+                 
 
                     const Divider(color: Colors.grey),
 
-                   Row(
+                   const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text("Due Date",style: TextStyle(color: Colors.white,fontSize: 16),),
-                      Text(DateFormat('dd-MM-yyyy').format(widget.task.date!),style: TextStyle(color: Colors.white,fontSize: 16),),
+                      //Text(DateFormat('dd-MM-yyyy').format(widget.task.date!),style: TextStyle(color: Colors.white,fontSize: 16),),
 
                      
                     ],

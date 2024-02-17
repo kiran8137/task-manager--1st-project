@@ -19,13 +19,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:manage_your/utils/apps_str.dart';
-import 'package:manage_your/views/home/components/search/searchbar.dart';
 
 PreferredSize appbar(GlobalKey<ScaffoldState>key, BuildContext context){
   //bool isSearchvVisible = false;
   return PreferredSize(
     preferredSize: const Size.fromHeight(80),
-     child: Container(
+     child: SizedBox(
     
       width: double.infinity,
       height: 100,
@@ -92,7 +91,7 @@ PreferredSize appbar(GlobalKey<ScaffoldState>key, BuildContext context){
               ),
 
 
-               Text(
+               const Text(
                 AppStrings.appName,
                 style: 
                 //Theme.of(context).textTheme.bodyMedium
@@ -112,7 +111,7 @@ PreferredSize appbar(GlobalKey<ScaffoldState>key, BuildContext context){
                   //todo search
                   //print("search");
                 },
-                child:  Icon(
+                child:  const Icon(
                   Icons.search,
                   color:Colors.white
                   //Theme.of(context).iconTheme.color
@@ -128,7 +127,7 @@ PreferredSize appbar(GlobalKey<ScaffoldState>key, BuildContext context){
                   //todo navigation to calender
                   //print(" calendar");
                 },
-                child: Icon(
+                child: const Icon(
                   Icons.calendar_month,
                   color: Colors.white
                   //Theme.of(context).iconTheme.color

@@ -21,7 +21,7 @@ class OnboardingScreen2 extends StatelessWidget {
                 Positioned(
                     left: 50,
                     top: 100,
-                    child: Container(
+                    child: SizedBox(
                       height: 300,
                       width: 300,
                       //color: Colors.white,

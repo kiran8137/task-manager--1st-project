@@ -19,17 +19,20 @@ class UserpreferenceAdapter extends TypeAdapter<Userpreference> {
     return Userpreference(
       isdarkMode: fields[0] as bool?,
       showonboarding: fields[1] as bool?,
+      time: fields[2] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, Userpreference obj) {
     writer
-      ..writeByte(2)
+      ..writeByte(3)
       ..writeByte(0)
       ..write(obj.isdarkMode)
       ..writeByte(1)
-      ..write(obj.showonboarding);
+      ..write(obj.showonboarding)
+      ..writeByte(2)
+      ..write(obj.time);
   }
 
   @override

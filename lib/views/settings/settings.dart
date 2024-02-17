@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:manage_your/data/functions.dart';
 import 'package:manage_your/theme/themeprovider.dart';
 import 'package:manage_your/utils/apps_colors.dart';
 import 'package:manage_your/views/settings/AboutUs/aboutus.dart';
@@ -32,9 +33,9 @@ String subtitle = "5 minutes before ";
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Colors.black,
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.background,
+        backgroundColor: Colors.black,
 
         leading: GestureDetector(
           onTap: (){
@@ -43,10 +44,10 @@ String subtitle = "5 minutes before ";
           },
           child:  Icon(
             Icons.arrow_back,
-            color:  Theme.of(context).iconTheme.color),
+            color:   Colors.white),
             ),
 
-            title:  Text("Settings",style:
+            title:  const Text("Settings",style:
             // Theme.of(context).textTheme.headlineMedium
             TextStyle(
               color: Colors.white
@@ -80,7 +81,7 @@ String subtitle = "5 minutes before ";
                       ) ,
                       height: 60,
                       width: 90,
-                      child:  Center(
+                      child:  const Center(
                         child:
                        Text("Day",
                       style:  TextStyle(
@@ -124,16 +125,16 @@ String subtitle = "5 minutes before ";
               Navigator.push(context,MaterialPageRoute(builder: (context)=> const PrivacyPolicy()));
               //print("privacy and policy");
             },
-             child:  ListTile(
+             child:  const ListTile(
               leading: Icon(Icons.privacy_tip_outlined,
-              color: Theme.of(context).iconTheme.color,
+              color:  Colors.white,
               size: 29,),
               title: Text("Privacy and Policy",
-                  style: Theme.of(context).textTheme.bodyLarge,
-                  // TextStyle(
-                  //   color: Colors.white,
-                  //   fontSize: 17
-                  // ),
+                  style:  
+                  TextStyle(
+                    color: Colors.white,
+                    fontSize: 17
+                  ),
                   )
               ),
              
@@ -149,16 +150,16 @@ String subtitle = "5 minutes before ";
               Navigator.push(context,MaterialPageRoute(builder: (context)=> const AboutUs()));
               ///print("About Us");
             },
-             child:  ListTile(
+             child:  const ListTile(
               leading: Icon(Icons.info_outline,
-              color: Theme.of(context).iconTheme.color,
+              color:  Colors.white,
               size: 29,),
               title: Text("About Us",
-                  style: Theme.of(context).textTheme.bodyLarge,
-                  // TextStyle(
-                  //   color: Colors.white,
-                  //   fontSize: 17
-                  // ),
+                  style:  
+                  TextStyle(
+                    color: Colors.white,
+                    fontSize: 17
+                  ),
                   ),
             
             
@@ -230,28 +231,30 @@ String subtitle = "5 minutes before ";
               ],
       
               onSelected: (String newvalue) {
+                //adddefaultime(newvalue);
                 setState(() {
                   subtitle = newvalue;
+                  adddefaultime(newvalue);
                 });
               },
                child:  ListTile(
-                leading:  Icon(Icons.edit_notifications_outlined,
-                color: Theme.of(context).iconTheme.color,
+                leading:  const Icon(Icons.edit_notifications_outlined,
+                color:  Colors.white,
                 size: 29,
                 ),
-                title:   Text("Task reminder default",
-                    style: Theme.of(context).textTheme.bodyLarge
-                    //  TextStyle(
-                    //   color: Colors.white,
-                    //   fontSize: 17
-                    // ),
+                title:   const Text("Task reminder default",
+                    style: 
+                     TextStyle(
+                      color: Colors.white,
+                      fontSize: 17
+                    ),
                     ),
                     subtitle:Text(subtitle,
-                    style: Theme.of(context).textTheme.bodyLarge
-                    // const TextStyle(
-                    //   color: Colors.white)
-                    //   ,)
-                    // ),
+                    style:  
+                    const TextStyle(
+                      color: Colors.white)
+                      ,)
+                    ),
                ),
              )
             // Container(
@@ -272,10 +275,9 @@ String subtitle = "5 minutes before ";
             //     ]
             //     ),
             //  ),
+        ]
              ),
-             ),
-        ],
-      ),
-    );
+             );
+        
   }
 }

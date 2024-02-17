@@ -44,12 +44,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
+    return  const MaterialApp(
        //darkTheme: Provider.of<ThemeProvider>(context).themeData,
      // theme: 
       debugShowCheckedModeBanner: false,
       home: 
-      Homeview(),
+       Homeview(),
       //SplashScreen()
       //OnboardingScreen1()
       //onboardingScreen2()

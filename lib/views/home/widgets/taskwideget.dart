@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:intl/intl.dart';
 import 'package:manage_your/data/functions.dart';
+import 'package:manage_your/model/category_model/category.dart';
 import 'package:manage_your/model/task.dart';
 import 'package:manage_your/utils/apps_colors.dart';
 import 'package:manage_your/views/taskdetail/taskdetail.dart';
@@ -12,7 +13,7 @@ class Taskwidget extends StatefulWidget {
     super.key, 
     this.tasktitle, 
     this.taskdescription,
-    required this.date,
+    //required this.date,
     this.time,
     required this.index
      
@@ -22,12 +23,13 @@ class Taskwidget extends StatefulWidget {
   })
   {
    // print(date.runtimeType);
+  // print(date);
   }
 
   final tasktitle;
   final taskdescription;
   //final DateTime? dateTime;
-  final DateTime date;
+  //final DateTime? date;
   final DateTime? time;
   final int index;
 
@@ -39,14 +41,8 @@ class _TaskwidgetState extends State<Taskwidget> {
 
 String? foramtteddate;
 
-// @override
-// void initState() {
-//     // TODO: implement initState
-//     super.initState();
-//     if(widget.date!=null){
-//       DateFormat('dd/mm/yyyy').format(widget.date!);
-//     }
-//   }
+
+ 
  
 
 bool ischecked = false;
@@ -54,7 +50,7 @@ bool ischecked = false;
 
   @override
   Widget build(BuildContext context) {
-   
+    
     //String foramtteddate = DateFormat('dd-mm-yyyy').format(widget.dateTime!);
     return AnimatedContainer(
       height: 110,
@@ -67,7 +63,7 @@ bool ischecked = false;
           
       child:  ListTile(
         onTap: () {
-           final _dbtask= Tasks(tasktitle: widget.tasktitle, taskdescription: widget.taskdescription, date: widget.date,  );
+           final _dbtask= Tasks(tasktitle: widget.tasktitle, taskdescription: widget.taskdescription,  );
           Navigator.push(context, MaterialPageRoute(builder: (context)=> taskDetailview(task:_dbtask , index: widget.index,)));
         },
         //task title
@@ -90,7 +86,7 @@ bool ischecked = false;
               child: GestureDetector(
                 onTap: () async {
                   
-                   final _dbtask= Tasks(tasktitle: widget.tasktitle, taskdescription: widget.taskdescription, date: widget.date,  );
+                   final _dbtask= Tasks(tasktitle: widget.tasktitle, taskdescription: widget.taskdescription,   );
                    
                   Navigator.push(context, MaterialPageRoute(builder: (context)=>  UpdateTaskView( 
                      task: _dbtask,
@@ -157,7 +153,8 @@ bool ischecked = false;
                       const SizedBox(width: 10),
                   //date
                       
-                    Text(DateFormat('dd-MM-yyyy').format(widget.date).toString(),
+                    Text(
+                      "",
                   style: const TextStyle(color: Colors.white,
                   fontWeight: FontWeight.w400,
                   

@@ -30,7 +30,7 @@ Future<void> getAllTasks()async{
 
 Future<void> updateTask(TextEditingController titleController , TextEditingController descriptionController , int index) async {
     final TasksDB =Hive.box<Tasks>('task_db');
-     Tasks newTask = Tasks(tasktitle: titleController.text, taskdescription: descriptionController.text, date: null,   );
+     Tasks newTask = Tasks(tasktitle: titleController.text, taskdescription: descriptionController.text, date: null);
      await TasksDB.putAt(index, newTask);
      getAllTasks();
     // widget.task.tasktitle = titleController.text;

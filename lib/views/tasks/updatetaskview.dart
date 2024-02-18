@@ -374,7 +374,7 @@ String subtitle = "5 minutes before ";
                   GestureDetector(
                     onTap: () {
                      // print("create");
-                     updateTask(titleController , descriptionController, widget.index,);
+                     updateTask(titleController , descriptionController, widget.index);
                      Navigator.pop(context);
                     },
                     child: Container(

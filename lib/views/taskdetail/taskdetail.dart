@@ -24,11 +24,14 @@ final int index;
 class _taskDetailviewState extends State<taskDetailview> {
    TextEditingController? titlecontroller;
    TextEditingController? descriptioncontroller;
+
+   
   @override
   void initState() {
     // TODO: implement initState
-    TextEditingController  titlecontroller = TextEditingController(text: widget.task.tasktitle);
-TextEditingController descriptioncontroller = TextEditingController(text: widget.task.taskdescription);
+ titlecontroller = TextEditingController(text: widget.task.tasktitle);
+descriptioncontroller = TextEditingController(text: widget.task.taskdescription);
+dropdownvalue = widget.task.category;
 
 
     super.initState();
@@ -48,6 +51,7 @@ late bool iseditSelected = false;
   Widget build(BuildContext context) {
   
     return Scaffold(
+       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.black,
       appBar: AppBar(
         leading: GestureDetector(
@@ -183,7 +187,7 @@ late bool iseditSelected = false;
                   ),
 
                 SizedBox(
-                  height: MediaQuery.of(context).size.height*0.05,
+                  height: MediaQuery.of(context).size.height*0.04,
                 ),
 
 
@@ -204,14 +208,17 @@ late bool iseditSelected = false;
                     child: iseditSelected?
                     TextFormField(
                       controller: descriptioncontroller,
+                      style: const TextStyle(color: Colors.white),
                     ):
                     Text(widget.task.taskdescription,
-                    style: const TextStyle(fontSize: 20,color: Colors.grey),),
+                    style: const TextStyle(fontSize: 20,color: Colors.white),),
                   ),
 
-                 
+                  SizedBox(height: 5,),
 
-                    const Divider(color: Colors.grey),
+                    const Divider(color: Color.fromARGB(153, 158, 158, 158)),
+
+                    SizedBox(height: 10,),
 
                    const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -225,7 +232,7 @@ late bool iseditSelected = false;
 
                     const Divider(color: Color.fromARGB(53, 158, 158, 158)),
 
-                    SizedBox(height: MediaQuery.of(context).size.height*0.02),
+                    SizedBox(height: MediaQuery.of(context).size.height*0.04),
 
                      const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -31,7 +31,7 @@ class Tasks {
        
       required this.tasktitle,
       required this.taskdescription,
-      required this.date,
+      this.date,
       this.category,
       //required this.time,
       

@@ -315,6 +315,7 @@ TextEditingController searchController = TextEditingController();
                 itemCount: tasklist.length,
                 itemBuilder: (context, index) {
                   final data = tasklist[index];
+                  print(data.date);
                   return
                    Slidable(
                     startActionPane: ActionPane(
@@ -359,7 +360,7 @@ TextEditingController searchController = TextEditingController();
                       tasktitle: data.tasktitle,
                       taskdescription: data.taskdescription,
                       // dateTime : data.datetime,
-                      date: data.date!,
+                      
                       index : index
                        
                       

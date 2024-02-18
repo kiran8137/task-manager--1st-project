@@ -341,7 +341,7 @@ TextEditingController searchController = TextEditingController();
                                   TextButton(
                                     onPressed:(){
                                       remove(index);
-                                      //Navigator.of(context).pop();
+                                      Navigator.of(context).pop();
                                     }, 
                                     child: const Text("Ok"),
                                     ),
@@ -359,7 +359,7 @@ TextEditingController searchController = TextEditingController();
                     child:  Taskwidget(
                       tasktitle: data.tasktitle,
                       taskdescription: data.taskdescription,
-                      // dateTime : data.datetime,
+                      date: data.date,
                       category : data.category,
                       index : index
                        

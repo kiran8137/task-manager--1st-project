@@ -13,7 +13,7 @@ class Taskwidget extends StatefulWidget {
     super.key, 
     this.tasktitle, 
     this.taskdescription,
-    //required this.date,
+    this.date,
     this.time,
     required this.index,
     required this.category,
@@ -30,7 +30,7 @@ class Taskwidget extends StatefulWidget {
   final tasktitle;
   final taskdescription;
   //final DateTime? dateTime;
-  //final DateTime? date;
+  final DateTime? date;
   final DateTime? time;
   final int index;
   final String? category;
@@ -155,8 +155,8 @@ bool ischecked = false;
                       const SizedBox(width: 10),
                   //date
                       
-                    Text(
-                      "",
+                    Text(DateFormat("dd-MM").format(widget.date!)
+                      ,
                   style: const TextStyle(color: Colors.white,
                   fontWeight: FontWeight.w400,
                   

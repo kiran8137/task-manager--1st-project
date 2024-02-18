@@ -28,11 +28,13 @@ Future<void> getAllTasks()async{
  
 }
 
-Future<void> updateTask(TextEditingController titleController , TextEditingController descriptionController , int index) async {
+Future<void> updateTask({TextEditingController? titleController , TextEditingController? descriptionController , int? index , String? category}) async {
+ 
     final TasksDB =Hive.box<Tasks>('task_db');
-     Tasks newTask = Tasks(tasktitle: titleController.text, taskdescription: descriptionController.text, date: null);
-     await TasksDB.putAt(index, newTask);
+     Tasks newTask = Tasks(tasktitle: titleController!.text, taskdescription: descriptionController!.text, date: null , category: category);
+     await TasksDB.putAt(index!, newTask);
      getAllTasks();
+      print("updated category $category");
     // widget.task.tasktitle = titleController.text;
     // widget.task.taskdescription = descriptionController.text;
      

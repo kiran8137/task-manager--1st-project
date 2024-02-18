@@ -77,7 +77,7 @@ TextEditingController searchController = TextEditingController();
           decoration: BoxDecoration(
              
             borderRadius: BorderRadius.circular(10),
-            color: Appcolors.secondarycolor,
+            color: Appcolors.buttonColor,
           ),
           child: const Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -360,7 +360,7 @@ TextEditingController searchController = TextEditingController();
                       tasktitle: data.tasktitle,
                       taskdescription: data.taskdescription,
                       // dateTime : data.datetime,
-                      
+                      category : data.category,
                       index : index
                        
                       

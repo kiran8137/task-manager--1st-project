@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:manage_your/data/functions.dart';
 import 'package:manage_your/model/task.dart';
+import 'package:manage_your/utils/apps_colors.dart';
 import 'package:manage_your/views/home/homeview.dart';
 
 class taskDetailview extends StatefulWidget {
@@ -25,7 +26,7 @@ class _taskDetailviewState extends State<taskDetailview> {
    TextEditingController? titlecontroller;
    TextEditingController? descriptioncontroller;
 
-   
+
   @override
   void initState() {
     // TODO: implement initState
@@ -130,6 +131,49 @@ late bool iseditSelected = false;
           ],
         backgroundColor: Colors.black,
       ),
+
+      floatingActionButton: 
+      Visibility(
+        visible: iseditSelected,
+        child:  GestureDetector(
+      onTap: (){
+        
+        updateTask(titleController: titlecontroller , descriptionController: descriptioncontroller , index: widget.index , category: dropdownvalue );
+        Navigator.of(context).pop();
+        setState(() {
+          iseditSelected = !iseditSelected;
+        });
+      },
+      child: Container(
+        
+           //width: 600,
+          width: MediaQuery.sizeOf(context).width * 50 / 100,
+          height: 40,
+          decoration: BoxDecoration(
+             
+            borderRadius: BorderRadius.circular(10),
+            color: Appcolors.buttonColor,
+          ),
+          child: const Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Save",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 17,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+             
+             
+            ],
+          ),
+          ),
+    ),
+        ),
+     
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: SafeArea(
         child: SizedBox(
             height: double.infinity,
@@ -139,6 +183,8 @@ late bool iseditSelected = false;
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+
+                  iseditSelected?
 
                    DropdownButton(
                       dropdownColor: const Color.fromARGB(255, 9, 8, 79),
@@ -159,6 +205,11 @@ late bool iseditSelected = false;
                         }
                         );
                       },
+                   ):
+                   Container(
+                    child: Text(widget.task.category!,
+                    style: TextStyle(color: Colors.white,fontSize: 17.5),
+                    ),
                    ),
 
                    SizedBox(height:  MediaQuery.of(context).size.height*0.02 ),

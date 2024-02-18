@@ -15,7 +15,8 @@ class Taskwidget extends StatefulWidget {
     this.taskdescription,
     //required this.date,
     this.time,
-    required this.index
+    required this.index,
+    required this.category,
      
 
           
@@ -32,6 +33,7 @@ class Taskwidget extends StatefulWidget {
   //final DateTime? date;
   final DateTime? time;
   final int index;
+  final String? category;
 
   @override
   State<Taskwidget> createState() => _TaskwidgetState();
@@ -63,7 +65,7 @@ bool ischecked = false;
           
       child:  ListTile(
         onTap: () {
-           final _dbtask= Tasks(tasktitle: widget.tasktitle, taskdescription: widget.taskdescription,  );
+           final _dbtask= Tasks(tasktitle: widget.tasktitle, taskdescription: widget.taskdescription, category: widget.category  );
           Navigator.push(context, MaterialPageRoute(builder: (context)=> taskDetailview(task:_dbtask , index: widget.index,)));
         },
         //task title
@@ -86,7 +88,7 @@ bool ischecked = false;
               child: GestureDetector(
                 onTap: () async {
                   
-                   final _dbtask= Tasks(tasktitle: widget.tasktitle, taskdescription: widget.taskdescription,   );
+                   final _dbtask= Tasks(tasktitle: widget.tasktitle, taskdescription: widget.taskdescription, category: widget.category   );
                    
                   Navigator.push(context, MaterialPageRoute(builder: (context)=>  UpdateTaskView( 
                      task: _dbtask,

@@ -22,9 +22,16 @@ class _UpdateTaskViewState extends State<UpdateTaskView> {
   late TextEditingController titleController ;
   late TextEditingController descriptionController;
 
-  
+  @override
+   void initState() {
+    titleController = TextEditingController(text: widget.task.tasktitle);
+    descriptionController = TextEditingController(text: widget.task.taskdescription);
+    dropdownvalue = widget.task.category;
+    // TODO: implement initState
+    super.initState();
+  }
 
-  String dropdownvalue = "No Category";
+  String? dropdownvalue = "No Category";
   bool status = true;
 
   final timings = [
@@ -41,14 +48,7 @@ String subtitle = "5 minutes before ";
   var items = ['No Category', 'Work', 'personal', 'Wishlist', 'Birthday'];
 
 
-   @override
-   void initState() {
-    titleController = TextEditingController(text: widget.task.tasktitle);
-    descriptionController = TextEditingController(text: widget.task.taskdescription);
-    
-    // TODO: implement initState
-    super.initState();
-  }
+   
 
 
 
@@ -374,8 +374,9 @@ String subtitle = "5 minutes before ";
                   GestureDetector(
                     onTap: () {
                      // print("create");
-                     updateTask(titleController , descriptionController, widget.index);
+                      updateTask(titleController: titleController , descriptionController: descriptionController , index: widget.index , category: dropdownvalue);
                      Navigator.pop(context);
+                     
                     },
                     child: Container(
                       height: 40,

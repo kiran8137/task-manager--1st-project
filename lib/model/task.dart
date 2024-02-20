@@ -23,7 +23,8 @@ class Tasks {
    String? category;
 
    @HiveField(4)
-   TimeOfDay? time;
+   //TimeOfDay? time;
+   String? time;
    
    
 

@@ -29,7 +29,7 @@ Future<void> getAllTasks()async{
  
 }
 
-Future<void> updateTask({TextEditingController? titleController , TextEditingController? descriptionController , int? index , String? category , DateTime? date , TimeOfDay? time}) async {
+Future<void> updateTask({TextEditingController? titleController , TextEditingController? descriptionController , int? index , String? category , DateTime? date , String? time}) async {
  
     final TasksDB =Hive.box<Tasks>('task_db');
      Tasks newTask = Tasks(tasktitle: titleController!.text, taskdescription: descriptionController!.text, date: date , category: category , time: time);

@@ -21,7 +21,7 @@ class TasksAdapter extends TypeAdapter<Tasks> {
       taskdescription: fields[1] as String,
       date: fields[2] as DateTime?,
       category: fields[3] as String?,
-      time: fields[4] as TimeOfDay?,
+      time: fields[4] as String?,
     );
   }
 

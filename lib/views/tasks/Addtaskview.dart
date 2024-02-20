@@ -36,8 +36,9 @@ class _AddtaskviewState extends State<Addtaskview> {
   String? catergoryName ="";//category selected by the user
  
   DateTime? pickeddate; //date selected by the user and sending to the database
-  TimeOfDay? pickedtime; //time selected by the user and sending to the database
-  late TimeOfDay formattedTime;
+  TimeOfDay? pickedtime; 
+
+  String? formattedTime;//time selected by the user and sending to the database
   
   DateTime? parsedTime; 
   
@@ -97,7 +98,7 @@ final categroybox = await Hive.openBox<Category>('category_db');
       tasktitle: _tasktitle , 
       taskdescription: _taskdescription, 
       date: pickeddate ?? DateTime.now(),
-      time: pickedtime,
+      time: formattedTime,
       category: catergoryName
       // datetime: combinedDateTime,
       
@@ -395,10 +396,10 @@ final categroybox = await Hive.openBox<Category>('category_db');
                               
                                 print(parsedTime);
         
-                                String formattedTime = DateFormat('h:mm a').format(parsedTime!);
+                                 formattedTime = DateFormat('h:mm a').format(parsedTime!);
                                 print(formattedTime);
                               setState(() {
-                                _timecontroller.text = formattedTime;
+                                _timecontroller.text = formattedTime!;
                               });
         
                               //pickeddate = DateFormat.jm().parse(pickedtime!.format(context).toString());

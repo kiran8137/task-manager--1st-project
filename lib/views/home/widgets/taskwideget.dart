@@ -31,7 +31,7 @@ class Taskwidget extends StatefulWidget {
   final taskdescription;
   //final DateTime? dateTime;
   final DateTime? date;
-  final TimeOfDay? time;
+  final String? time;
   final int index;
   final String? category;
 
@@ -146,7 +146,9 @@ bool ischecked = false;
                       
                     Text(
                       widget.time!=null?
-                      "${widget.time?.hourOfPeriod}:${widget.time?.minute}":'',
+                      widget.time!:'',
+                      // widget.time!=null?
+                      // "${widget.time?.hourOfPeriod}:${widget.time?.minute}":'',
                       
                   style:  TextStyle(color: Colors.white,
                  // fontWeight: FontWeight.w500,
@@ -161,6 +163,7 @@ bool ischecked = false;
                       
                   style: const TextStyle(color: Colors.white,
                  // fontWeight: FontWeight.w400,
+                 fontSize : 13,
                   
                   ),
                   ),
@@ -170,7 +173,7 @@ bool ischecked = false;
                     //width: 215,
                     
                     //width: 189,
-                    width : 192.5
+                    width : 170
                     ):
                   SizedBox(
                     //width: 215,

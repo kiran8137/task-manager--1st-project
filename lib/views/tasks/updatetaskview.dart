@@ -23,12 +23,15 @@ class _UpdateTaskViewState extends State<UpdateTaskView> {
   late TextEditingController titleController ;
   late TextEditingController descriptionController;
   late TextEditingController datecontroller ;
-   TextEditingController timecontroller = TextEditingController();
+  late  TextEditingController timecontroller ;
 
 
 
   DateTime? NewPickedDate;
   TimeOfDay? NewPickedTime;
+
+
+  String? formattedTime;
 
   @override
    void initState() {
@@ -36,6 +39,7 @@ class _UpdateTaskViewState extends State<UpdateTaskView> {
     descriptionController = TextEditingController(text: widget.task.taskdescription);
     dropdownvalue = widget.task.category;
    datecontroller = TextEditingController(text: DateFormat('dd-MM-yyyy').format(widget.task.date!) );
+   timecontroller = TextEditingController(text : widget.task.time);
     
    
    print(".....${widget.task.time}");
@@ -329,7 +333,7 @@ String subtitle = "5 minutes before ";
                           ),
                         ),
                         onTap: ()async{
-                           NewPickedTime= await showTimePicker(
+                           NewPickedTime = await showTimePicker(
                             context: context,
                              initialTime: TimeOfDay.now()
                              );
@@ -351,10 +355,10 @@ String subtitle = "5 minutes before ";
                               
                                // print(parsedTime);
         
-                               String formattedTime = DateFormat('h:mm a').format(parsedTime!);
+                                formattedTime = DateFormat('h:mm a').format(parsedTime!);
                                 print(formattedTime);
                               setState(() {
-                                timecontroller.text = formattedTime;
+                                timecontroller.text = formattedTime!;
                               }
                               );
         
@@ -490,7 +494,7 @@ String subtitle = "5 minutes before ";
                   GestureDetector(
                     onTap: () {
                      // print("create");
-                      updateTask(titleController: titleController , descriptionController: descriptionController , index: widget.index , category: dropdownvalue , date: NewPickedDate ?? widget.task.date , time: NewPickedTime ?? widget.task.time);
+                      updateTask(titleController: titleController , descriptionController: descriptionController , index: widget.index , category: dropdownvalue , date: NewPickedDate ?? widget.task.date , time: formattedTime ?? widget.task.time);
                      Navigator.pop(context);
                      
                     },

@@ -32,6 +32,7 @@ class _taskDetailviewState extends State<taskDetailview> {
   String? recievedtime;
   TimeOfDay? NewPickedTime;
 
+String? formattedTime;
 
 
   @override
@@ -41,7 +42,8 @@ class _taskDetailviewState extends State<taskDetailview> {
 descriptioncontroller = TextEditingController(text: widget.task.taskdescription);
 dropdownvalue = widget.task.category;
   recieveddate = DateFormat('dd-MM-yyyy').format(widget.task.date!);
-  recievedtime = "${widget.task.time?.hourOfPeriod}:${widget.task.time?.minute}";
+  recievedtime = widget.task.time;
+  //"${widget.task.time?.hourOfPeriod}:${widget.task.time?.minute}";
 
 
     super.initState();
@@ -151,7 +153,7 @@ late bool iseditSelected = false;
         child:  GestureDetector(
       onTap: (){
         
-        updateTask(titleController: titlecontroller , descriptionController: descriptioncontroller , index: widget.index , category: dropdownvalue ,date : NewPickedDate  );
+        updateTask(titleController: titlecontroller , descriptionController: descriptioncontroller , index: widget.index , category: dropdownvalue ,date : NewPickedDate ?? widget.task.date, time: formattedTime ?? recievedtime  );
         Navigator.of(context).pop();
         setState(() {
           iseditSelected = !iseditSelected;
@@ -380,7 +382,7 @@ late bool iseditSelected = false;
                               
                                // print(parsedTime);
         
-                               String formattedTime = DateFormat('h:mm a').format(parsedTime!);
+                                formattedTime = DateFormat('h:mm a').format(parsedTime!);
                                 print(formattedTime);
                               
                               if(NewPickedTime!=null){
@@ -412,7 +414,7 @@ late bool iseditSelected = false;
                            child: Text( 
                             
                             
-                            widget.task.time!=null?
+                            recievedtime!=null?
                              recievedtime!:'No' ,
                         
                             style: TextStyle(color: Colors.white,fontSize: 16)

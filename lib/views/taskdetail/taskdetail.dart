@@ -26,6 +26,13 @@ class _taskDetailviewState extends State<taskDetailview> {
    TextEditingController? titlecontroller;
    TextEditingController? descriptioncontroller;
 
+  String? recieveddate;
+  DateTime? NewPickedDate;
+
+  String? recievedtime;
+  TimeOfDay? NewPickedTime;
+
+
 
   @override
   void initState() {
@@ -33,6 +40,8 @@ class _taskDetailviewState extends State<taskDetailview> {
  titlecontroller = TextEditingController(text: widget.task.tasktitle);
 descriptioncontroller = TextEditingController(text: widget.task.taskdescription);
 dropdownvalue = widget.task.category;
+  recieveddate = DateFormat('dd-MM-yyyy').format(widget.task.date!);
+  recievedtime = "${widget.task.time?.hourOfPeriod}:${widget.task.time?.minute}";
 
 
     super.initState();
@@ -42,11 +51,15 @@ dropdownvalue = widget.task.category;
 // TextEditingController _descriptioncontroller = TextEditingController();
 
 
- String? dropdownvalue = "No Category";
+ String? dropdownvalue ="No Category";
 
  var items = ['No Category', 'Work', 'personal', 'Wishlist', 'Birthday','CREATE NEW']; //catergory list
 
 late bool iseditSelected = false;
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -138,7 +151,7 @@ late bool iseditSelected = false;
         child:  GestureDetector(
       onTap: (){
         
-        updateTask(titleController: titlecontroller , descriptionController: descriptioncontroller , index: widget.index , category: dropdownvalue );
+        updateTask(titleController: titlecontroller , descriptionController: descriptioncontroller , index: widget.index , category: dropdownvalue ,date : NewPickedDate  );
         Navigator.of(context).pop();
         setState(() {
           iseditSelected = !iseditSelected;
@@ -271,29 +284,147 @@ late bool iseditSelected = false;
 
                     SizedBox(height: 10,),
 
-                   const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("Due Date",style: TextStyle(color: Colors.white,fontSize: 16),),
-                      //Text(DateFormat('dd-MM-yyyy').format(widget.task.date!),style: TextStyle(color: Colors.white,fontSize: 16),),
-
+                    GestureDetector(
                      
-                    ],
-                  ),
+                      onTap:  
+                         
+                         ()async{
+                          print("click worked well");
+                          
+                        if(iseditSelected){
+                          NewPickedDate = await showDatePicker(
+                            
+                            context: context,
+                            initialDate: widget.task.date,
+                            firstDate: DateTime(2000), 
+                            lastDate: DateTime(2100),
+                            );
+                        }
+                          // NewPickedDate = await showDatePicker(
+                            
+                          //   context: context,
+                          //   initialDate: DateTime.now(),
+                          //   firstDate: DateTime(2000), 
+                          //   lastDate: DateTime(2100),
+                          //   );
+                            // setState(() {
+                            //   datecontroller.text = DateTime.now().toString();
+                            // });
+                           // DateTime.fromMillisecondsSinceEpoch(millisecondsSinceEpoch)
+                            if(NewPickedDate!=null){
+                              setState(() {
+
+                                 recieveddate = DateFormat('dd/MM/yyyy').format(NewPickedDate!);
+
+                              });
+                            }
+                            // setState(() {
+                            //   _datecontroller.text = DateTime.now().toString();
+                            // });
+                        },
+                      
+                      child: Row(
+                      //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text("Due Date",style: TextStyle(color: Colors.white,fontSize: 16),),
+
+                        
+                        SizedBox(width: 196,),
+                        
+                        Container(
+                          height: 30,
+                          width: 100,
+                          
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                             color: const Color.fromARGB(255, 48, 47, 47),
+                          ),
+                         
+                          child: Center(
+                            child: Text(recieveddate!,
+                              //DateFormat('dd-MM-yyyy').format(widget.task.date!),
+                            style: TextStyle(color: Colors.white,fontSize: 16),))),
+                      
+                       
+                      ],
+                      ),
+                    ),
 
                     const Divider(color: Color.fromARGB(53, 158, 158, 158)),
 
                     SizedBox(height: MediaQuery.of(context).size.height*0.04),
 
-                     const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("Time",style: TextStyle(color: Colors.white,fontSize: 16),),
-                      Text("Time",style: TextStyle(color: Colors.white,fontSize: 16),),
+                      GestureDetector(
+                        onTap:  ()async{
 
-                     
-                    ],
-                  ),
+                          if(iseditSelected){
+                             NewPickedTime= await showTimePicker(
+                            context: context,
+                             initialTime: TimeOfDay.now()
+                             );
+                        //      if(pickedtime!=null){
+
+                        //   //  DateTime combinedDateTime = DateTime(
+                        //   //     pickeddate!.day,
+                        //   //     pickeddate!.month,
+                        //   //     pickeddate!.year,
+                        //   //     pickedtime!.minute,
+                        //   //     pickedtime!.hour,
+                              
+
+                        //   //   );
+                             
+                             
+                        //      // print(pickedtime!.format(context),
+                              DateTime parsedTime = DateFormat.jm().parse(NewPickedTime!.format(context).toString());
+                              
+                               // print(parsedTime);
+        
+                               String formattedTime = DateFormat('h:mm a').format(parsedTime!);
+                                print(formattedTime);
+                              
+                              if(NewPickedTime!=null){
+                                setState(() {
+                                  recievedtime = formattedTime;
+                                });
+                              }
+                              // setState(() {
+                                
+                              //    recievedtime = formattedTime;
+                              // });
+                          }
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                       const  Text("Time",style: TextStyle(color: Colors.white,fontSize: 16),),
+                                             
+                         Container(
+                        
+                         height: 30,
+                          width: 100,
+                          
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                             color: const Color.fromARGB(255, 48, 47, 47),
+                          ),
+                         child: Center(
+                           child: Text( 
+                            
+                            
+                            widget.task.time!=null?
+                             recievedtime!:'No' ,
+                        
+                            style: TextStyle(color: Colors.white,fontSize: 16)
+                            ),
+                         ),
+                         )
+                                             // Text("Time",style: TextStyle(color: Colors.white,fontSize: 16),),
+                        
+                                             
+                                            ],
+                                          ),
+                      ),
 
                   const Divider(color: Color.fromARGB(53, 158, 158, 158)),
 

@@ -31,7 +31,7 @@ class Taskwidget extends StatefulWidget {
   final taskdescription;
   //final DateTime? dateTime;
   final DateTime? date;
-  final DateTime? time;
+  final TimeOfDay? time;
   final int index;
   final String? category;
 
@@ -45,9 +45,8 @@ String? foramtteddate;
 
 
  
- 
-
 bool ischecked = false;
+
 
 
   @override
@@ -65,7 +64,7 @@ bool ischecked = false;
           
       child:  ListTile(
         onTap: () {
-           final _dbtask= Tasks(tasktitle: widget.tasktitle, taskdescription: widget.taskdescription, category: widget.category  );
+           final _dbtask= Tasks(tasktitle: widget.tasktitle, taskdescription: widget.taskdescription, category: widget.category , date: widget.date, time: widget.time  );
           Navigator.push(context, MaterialPageRoute(builder: (context)=> taskDetailview(task:_dbtask , index: widget.index,)));
         },
         //task title
@@ -88,7 +87,7 @@ bool ischecked = false;
               child: GestureDetector(
                 onTap: () async {
                   
-                   final _dbtask= Tasks(tasktitle: widget.tasktitle, taskdescription: widget.taskdescription, category: widget.category   );
+                   final _dbtask= Tasks(tasktitle: widget.tasktitle, taskdescription: widget.taskdescription, category: widget.category ,date: widget.date , time: widget.time  );
                    
                   Navigator.push(context, MaterialPageRoute(builder: (context)=>  UpdateTaskView( 
                      task: _dbtask,
@@ -145,38 +144,50 @@ bool ischecked = false;
                       
                   //time 
                       
-                   const Text("time" ,
+                    Text(
+                      widget.time!=null?
+                      "${widget.time?.hourOfPeriod}:${widget.time?.minute}":'',
+                      
                   style:  TextStyle(color: Colors.white,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 18
+                 // fontWeight: FontWeight.w500,
+                  fontSize: 13
                   ),
                   ),
                       
                       const SizedBox(width: 10),
                   //date
                       
-                    Text(DateFormat("dd-MM").format(widget.date!)
-                      ,
+                    Text(DateFormat("dd-MM").format(widget.date ?? DateTime.now()),
+                      
                   style: const TextStyle(color: Colors.white,
-                  fontWeight: FontWeight.w400,
+                 // fontWeight: FontWeight.w400,
                   
                   ),
                   ),
-            
+
+                  widget.time!=null?
+                   SizedBox(
+                    //width: 215,
+                    
+                    //width: 189,
+                    width : 192.5
+                    ):
                   SizedBox(
                     //width: 215,
-                    width: 150,
+                    
+                    width: 226,
+                    //width : 226
                     ),
             
-                Checkbox(
-                  value: ischecked, 
-                  onChanged: (value){
-                    // setState(() {
-                    //   ischecked = !ischecked;
-                    // });
-                  },
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                  )
+              Checkbox(
+              value: ischecked, 
+              onChanged: (value){
+                // setState(() {
+                //   ischecked = !ischecked;
+                // });
+              },
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+              )
                
                  
                 ],

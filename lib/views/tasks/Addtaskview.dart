@@ -35,11 +35,11 @@ class _AddtaskviewState extends State<Addtaskview> {
   String description = ""; //description by the user
   String? catergoryName ="";//category selected by the user
  
-  DateTime? pickeddate; //date selected by the user
-  TimeOfDay? pickedtime;
+  DateTime? pickeddate; //date selected by the user and sending to the database
+  TimeOfDay? pickedtime; //time selected by the user and sending to the database
   late TimeOfDay formattedTime;
   
-  DateTime? parsedTime; //time selected by the user
+  DateTime? parsedTime; 
   
   DateTime defaulttime = DateTime.now();
   
@@ -97,7 +97,7 @@ final categroybox = await Hive.openBox<Category>('category_db');
       tasktitle: _tasktitle , 
       taskdescription: _taskdescription, 
       date: pickeddate ?? DateTime.now(),
-      //time: parsedTime,
+      time: pickedtime,
       category: catergoryName
       // datetime: combinedDateTime,
       

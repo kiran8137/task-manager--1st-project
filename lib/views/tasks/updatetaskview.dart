@@ -1,5 +1,6 @@
  import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:intl/intl.dart';
 import 'package:manage_your/data/functions.dart';
 import 'package:manage_your/model/task.dart';
 import 'package:manage_your/utils/apps_str.dart';
@@ -21,12 +22,24 @@ class _UpdateTaskViewState extends State<UpdateTaskView> {
 
   late TextEditingController titleController ;
   late TextEditingController descriptionController;
+  late TextEditingController datecontroller ;
+   TextEditingController timecontroller = TextEditingController();
+
+
+
+  DateTime? NewPickedDate;
+  TimeOfDay? NewPickedTime;
 
   @override
    void initState() {
     titleController = TextEditingController(text: widget.task.tasktitle);
     descriptionController = TextEditingController(text: widget.task.taskdescription);
     dropdownvalue = widget.task.category;
+   datecontroller = TextEditingController(text: DateFormat('dd-MM-yyyy').format(widget.task.date!) );
+    
+   
+   print(".....${widget.task.time}");
+
     // TODO: implement initState
     super.initState();
   }
@@ -212,6 +225,54 @@ String subtitle = "5 minutes before ";
                         borderRadius: BorderRadius.circular(10),
                         color: Colors.white,
                       ),
+                      child : TextFormField(
+                        
+                          textAlign: TextAlign.start,
+                          controller: datecontroller,
+                          readOnly: true,
+                          
+                          decoration:  const InputDecoration(
+                            contentPadding: EdgeInsets.symmetric(vertical: 10.0),
+                            // icon: Icon(Icons.calendar_month,color: Color.fromARGB(111, 158, 158, 158),
+                            // ),
+                            prefixIcon:  Icon(Icons.calendar_month,color: Color.fromARGB(111, 158, 158, 158)),
+        
+                            border: InputBorder.none,
+                            
+                            
+                           // hintText: DateFormat('dd-MM-yyyy').format(defaulttime) ,
+                            //"dd/mm/yy",
+                            hintStyle: TextStyle(color: Color.fromARGB(111, 158, 158, 158),
+                            
+                          ),
+                        ),
+                        onTap: ()async{
+
+                          NewPickedDate = await showDatePicker(
+                            
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime(2000), 
+                            lastDate: DateTime(2100),
+                            );
+                            // setState(() {
+                            //   datecontroller.text = DateTime.now().toString();
+                            // });
+                           // DateTime.fromMillisecondsSinceEpoch(millisecondsSinceEpoch)
+                            if(NewPickedDate!=null){
+                              setState(() {
+
+                                datecontroller.text = DateFormat('dd/MM/yyyy').format(NewPickedDate!);
+
+                              });
+                            }
+                            // setState(() {
+                            //   _datecontroller.text = DateTime.now().toString();
+                            // });
+                        },
+                      ),
+                      
+                      
                     ),
                   ],
                 ),
@@ -249,6 +310,60 @@ String subtitle = "5 minutes before ";
                         borderRadius: BorderRadius.circular(10),
                         color: Colors.white,
                       ),
+
+                      child: TextFormField(
+                          textAlign: TextAlign.start,
+                          controller: timecontroller,
+                          readOnly: true,
+                          
+                          decoration: const InputDecoration(
+                            contentPadding: EdgeInsets.symmetric(vertical: 10.0),
+                            // icon: Icon(Icons.calendar_month,color: Color.fromARGB(111, 158, 158, 158),
+                            // ),
+                            prefixIcon:  Icon(Icons.access_time_outlined,color: Color.fromARGB(111, 158, 158, 158)),
+        
+                            border: InputBorder.none,
+                            hintText: "hh:mm",
+                            hintStyle: TextStyle(color: Color.fromARGB(111, 158, 158, 158),
+                            
+                          ),
+                        ),
+                        onTap: ()async{
+                           NewPickedTime= await showTimePicker(
+                            context: context,
+                             initialTime: TimeOfDay.now()
+                             );
+                        //      if(pickedtime!=null){
+
+                        //   //  DateTime combinedDateTime = DateTime(
+                        //   //     pickeddate!.day,
+                        //   //     pickeddate!.month,
+                        //   //     pickeddate!.year,
+                        //   //     pickedtime!.minute,
+                        //   //     pickedtime!.hour,
+                              
+
+                        //   //   );
+                             
+                             
+                        //      // print(pickedtime!.format(context),
+                              DateTime parsedTime = DateFormat.jm().parse(NewPickedTime!.format(context).toString());
+                              
+                               // print(parsedTime);
+        
+                               String formattedTime = DateFormat('h:mm a').format(parsedTime!);
+                                print(formattedTime);
+                              setState(() {
+                                timecontroller.text = formattedTime;
+                              }
+                              );
+        
+                              //pickeddate = DateFormat.jm().parse(pickedtime!.format(context).toString());
+                              
+                             }
+                         
+                        
+                        ),
                     ),
                   ],
                 ),
@@ -264,7 +379,7 @@ String subtitle = "5 minutes before ";
                 ),
                 DropdownButton(
                     dropdownColor: const Color.fromARGB(255, 9, 8, 79),
-                    value: dropdownvalue,
+                    value:  dropdownvalue,
                     items: items.map((items) {
                       return DropdownMenuItem(
                         value: items,
@@ -276,7 +391,8 @@ String subtitle = "5 minutes before ";
                     }).toList(),
                     onChanged: (String? newValue) {
                       setState(() {
-                        dropdownvalue = newValue!;
+                         dropdownvalue = newValue!;
+
                       });
                     }),
               ],
@@ -374,7 +490,7 @@ String subtitle = "5 minutes before ";
                   GestureDetector(
                     onTap: () {
                      // print("create");
-                      updateTask(titleController: titleController , descriptionController: descriptionController , index: widget.index , category: dropdownvalue);
+                      updateTask(titleController: titleController , descriptionController: descriptionController , index: widget.index , category: dropdownvalue , date: NewPickedDate ?? widget.task.date , time: NewPickedTime ?? widget.task.time);
                      Navigator.pop(context);
                      
                     },

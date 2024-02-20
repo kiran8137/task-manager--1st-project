@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:manage_your/model/task.dart';
 import 'package:manage_your/model/userprefs/userprefs.dart';
@@ -28,10 +29,10 @@ Future<void> getAllTasks()async{
  
 }
 
-Future<void> updateTask({TextEditingController? titleController , TextEditingController? descriptionController , int? index , String? category}) async {
+Future<void> updateTask({TextEditingController? titleController , TextEditingController? descriptionController , int? index , String? category , DateTime? date , TimeOfDay? time}) async {
  
     final TasksDB =Hive.box<Tasks>('task_db');
-     Tasks newTask = Tasks(tasktitle: titleController!.text, taskdescription: descriptionController!.text, date: null , category: category);
+     Tasks newTask = Tasks(tasktitle: titleController!.text, taskdescription: descriptionController!.text, date: date , category: category , time: time);
      await TasksDB.putAt(index!, newTask);
      getAllTasks();
       print("updated category $category");

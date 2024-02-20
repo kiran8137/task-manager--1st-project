@@ -22,6 +22,7 @@ import 'package:provider/provider.dart';
 //import 'package:manage_your/views/tasks/Addtask.dart';
 
 Future<void> main() async {
+  
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   if(!Hive.isAdapterRegistered(TasksAdapter().typeId)){

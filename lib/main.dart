@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:manage_your/model/category_model/category.dart';
 import 'package:manage_your/model/task.dart';
+import 'package:manage_your/model/userprefs/userprefs.dart';
+import 'package:manage_your/model/userprofile/userprofile.dart';
 import 'package:manage_your/theme/theme.dart';
 import 'package:manage_your/theme/themeprovider.dart';
 import 'package:manage_your/views/home/homeview.dart';
@@ -31,6 +33,13 @@ Future<void> main() async {
   if(!Hive.isAdapterRegistered(CategoryAdapter().typeId)){
     Hive.registerAdapter(CategoryAdapter());
   }
+  if(!Hive.isAdapterRegistered(UserpreferenceAdapter().typeId)){
+    Hive.registerAdapter(UserpreferenceAdapter());
+  }
+  if(!Hive.isAdapterRegistered(UserprofileAdapter().typeId)){
+    Hive.registerAdapter(UserprofileAdapter());
+  }
+  
   runApp(
     const MyApp()
     //  ChangeNotifierProvider(
@@ -50,7 +59,7 @@ class MyApp extends StatelessWidget {
      // theme: 
       debugShowCheckedModeBanner: false,
       home: 
-       Homeview(),
+      Homeview(),
       //SplashScreen()
       //OnboardingScreen1()
       //onboardingScreen2()

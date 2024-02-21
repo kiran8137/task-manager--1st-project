@@ -172,10 +172,14 @@ final categroybox = await Hive.openBox<Category>('category_db');
                 child:  Padding(
                   padding: const EdgeInsets.all(5.0),
                   child: TextFormField(
+                    
+                    style: TextStyle(
+                      fontSize: 5
+                    ),
                      controller: _titlecontroller,
                     validator: (value) {
                        if (value == null || value.isEmpty) {
-                        return 'Please enter a task title';
+                        return ' ';
                           }
                         return null;
                     },
@@ -190,7 +194,7 @@ final categroybox = await Hive.openBox<Category>('category_db');
               ),
               Container(
                 //////
-                margin: const EdgeInsets.only(left: 0, right: 230),
+                margin: const EdgeInsets.only(left: 0, right: 265),
                 child: const Text(
                   AppStrings.descriptioninput,
                   style: TextStyle(

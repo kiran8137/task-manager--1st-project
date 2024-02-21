@@ -12,7 +12,9 @@ import 'package:manage_your/views/tasks/Addtaskview.dart';
 
 
 class Homeview extends StatefulWidget {
-  const Homeview({super.key});
+  const Homeview({super.key,this.username});
+
+  final String? username;
 
   @override
   State<Homeview> createState() => _HomeviewState();
@@ -73,7 +75,7 @@ TextEditingController searchController = TextEditingController();
         
            //width: 600,
           width: MediaQuery.sizeOf(context).width * 60 / 100,
-          height: 45,
+          height: MediaQuery.of(context).size.height * 0.06,
           decoration: BoxDecoration(
              
             borderRadius: BorderRadius.circular(10),
@@ -115,7 +117,7 @@ TextEditingController searchController = TextEditingController();
       child: ListView(
         children: [
           
-          const SizedBox(height: 65),
+           SizedBox(height: MediaQuery.of(context).size.height * 0.1),
            DrawerHeader(
             
             padding: const EdgeInsets.all(0),
@@ -130,7 +132,7 @@ TextEditingController searchController = TextEditingController();
                  // Icon(Icons.close),
 
                   const SizedBox(height: 5,),
-                  const Text("",style: TextStyle(fontSize: 20,color: Colors.white),
+                   Text("Hello , Mr ${widget.username}",style: TextStyle(fontSize: 20,color: Colors.white),
                   ),
               
                   const SizedBox(height: 10,),

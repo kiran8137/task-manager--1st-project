@@ -7,18 +7,20 @@ class Userpreference{
 
     
 
+ 
+
+
      @HiveField(0)
-     final bool? isdarkMode;
-
-
-     @HiveField(1)
      final bool? showonboarding;
 
 
-     @HiveField(2)
-     String? time;
+     @HiveField(1)
+     String? remindertime;
 
-  Userpreference({ this.isdarkMode, this.showonboarding , this.time}){
-    print(time);
+     @HiveField(2)
+     String? username;
+
+  Userpreference({this.showonboarding , this.remindertime , this.username}){
+    print(remindertime);
   }
 }

@@ -19,6 +19,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:manage_your/utils/apps_str.dart';
+import 'package:manage_your/views/home/components/search/searchscreen.dart';
 
 PreferredSize appbar(GlobalKey<ScaffoldState>key, BuildContext context){
   //bool isSearchvVisible = false;
@@ -106,7 +107,7 @@ PreferredSize appbar(GlobalKey<ScaffoldState>key, BuildContext context){
                 onTap: () {
 
                    //togglesearch(!isSearchvisible);
-
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=> const SearchScreen()));
                     
                   //todo search
                   //print("search");

@@ -5,8 +5,8 @@ import 'package:manage_your/model/task.dart';
 import 'package:manage_your/utils/apps_colors.dart';
 import 'package:manage_your/views/home/homeview.dart';
 
-class taskDetailview extends StatefulWidget {
-  const taskDetailview({super.key, 
+class TaskDetailView extends StatefulWidget {
+  const TaskDetailView({super.key, 
   required this.task,
   required this.index,
 
@@ -19,25 +19,25 @@ final int index;
   // final DateTime? duedate;
 
   @override
-  State<taskDetailview> createState() => _taskDetailviewState();
+  State<TaskDetailView> createState() => _TaskDetailViewState();
 }
 
-class _taskDetailviewState extends State<taskDetailview> {
+class _TaskDetailViewState extends State<TaskDetailView> {
    TextEditingController? titlecontroller;
    TextEditingController? descriptioncontroller;
 
   String? recieveddate;
-  DateTime? NewPickedDate;
+  DateTime? newPickedDate;
 
   String? recievedtime;
-  TimeOfDay? NewPickedTime;
+  TimeOfDay? newPickedTime;
 
 String? formattedTime;
 
 
   @override
   void initState() {
-    // TODO: implement initState
+     
  titlecontroller = TextEditingController(text: widget.task.tasktitle);
 descriptioncontroller = TextEditingController(text: widget.task.taskdescription);
 dropdownvalue = widget.task.category;
@@ -153,7 +153,7 @@ late bool iseditSelected = false;
         child:  GestureDetector(
       onTap: (){
         
-        updateTask(titleController: titlecontroller , descriptionController: descriptioncontroller , index: widget.index , category: dropdownvalue ,date : NewPickedDate ?? widget.task.date, time: formattedTime ?? recievedtime  );
+        updateTask(titleController: titlecontroller , descriptionController: descriptioncontroller , index: widget.index , category: dropdownvalue ,date : newPickedDate ?? widget.task.date, time: formattedTime ?? recievedtime  );
         Navigator.of(context).pop();
         setState(() {
           iseditSelected = !iseditSelected;
@@ -221,10 +221,8 @@ late bool iseditSelected = false;
                         );
                       },
                    ):
-                   Container(
-                    child: Text(widget.task.category!,
-                    style: TextStyle(color: Colors.white,fontSize: 17.5),
-                    ),
+                   Text(widget.task.category!,
+                   style: const TextStyle(color: Colors.white,fontSize: 17.5),
                    ),
 
                    SizedBox(height:  MediaQuery.of(context).size.height*0.02 ),
@@ -280,11 +278,11 @@ late bool iseditSelected = false;
                     style: const TextStyle(fontSize: 20,color: Colors.white),),
                   ),
 
-                  SizedBox(height: 5,),
+                  const SizedBox(height: 5,),
 
                     const Divider(color: Color.fromARGB(153, 158, 158, 158)),
 
-                    SizedBox(height: 10,),
+                    const SizedBox(height: 10,),
 
                     GestureDetector(
                      
@@ -294,7 +292,7 @@ late bool iseditSelected = false;
                           print("click worked well");
                           
                         if(iseditSelected){
-                          NewPickedDate = await showDatePicker(
+                          newPickedDate = await showDatePicker(
                             
                             context: context,
                             initialDate: widget.task.date,
@@ -313,10 +311,10 @@ late bool iseditSelected = false;
                             //   datecontroller.text = DateTime.now().toString();
                             // });
                            // DateTime.fromMillisecondsSinceEpoch(millisecondsSinceEpoch)
-                            if(NewPickedDate!=null){
+                            if(newPickedDate!=null){
                               setState(() {
 
-                                 recieveddate = DateFormat('dd/MM/yyyy').format(NewPickedDate!);
+                                 recieveddate = DateFormat('dd/MM/yyyy').format(newPickedDate!);
 
                               });
                             }
@@ -331,7 +329,7 @@ late bool iseditSelected = false;
                         const Text("Due Date",style: TextStyle(color: Colors.white,fontSize: 16),),
 
                         
-                        SizedBox(width: 196,),
+                        const SizedBox(width: 196,),
                         
                         Container(
                           height: 30,
@@ -345,7 +343,7 @@ late bool iseditSelected = false;
                           child: Center(
                             child: Text(recieveddate!,
                               //DateFormat('dd-MM-yyyy').format(widget.task.date!),
-                            style: TextStyle(color: Colors.white,fontSize: 16),))),
+                            style: const TextStyle(color: Colors.white,fontSize: 16),))),
                       
                        
                       ],
@@ -360,7 +358,7 @@ late bool iseditSelected = false;
                         onTap:  ()async{
 
                           if(iseditSelected){
-                             NewPickedTime= await showTimePicker(
+                             newPickedTime= await showTimePicker(
                             context: context,
                              initialTime: TimeOfDay.now()
                              );
@@ -378,14 +376,14 @@ late bool iseditSelected = false;
                              
                              
                         //      // print(pickedtime!.format(context),
-                              DateTime parsedTime = DateFormat.jm().parse(NewPickedTime!.format(context).toString());
+                              DateTime parsedTime = DateFormat.jm().parse(newPickedTime!.format(context).toString());
                               
                                // print(parsedTime);
         
                                 formattedTime = DateFormat('h:mm a').format(parsedTime!);
                                 print(formattedTime);
                               
-                              if(NewPickedTime!=null){
+                              if(newPickedTime!=null){
                                 setState(() {
                                   recievedtime = formattedTime;
                                 });
@@ -417,7 +415,7 @@ late bool iseditSelected = false;
                             recievedtime!=null?
                              recievedtime!:'No' ,
                         
-                            style: TextStyle(color: Colors.white,fontSize: 16)
+                            style: const TextStyle(color: Colors.white,fontSize: 16)
                             ),
                          ),
                          )

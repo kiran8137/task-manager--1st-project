@@ -8,6 +8,7 @@ import 'package:manage_your/model/userprefs/userprefs.dart';
 import 'package:manage_your/model/userprofile/userprofile.dart';
 import 'package:manage_your/theme/theme.dart';
 import 'package:manage_your/theme/themeprovider.dart';
+import 'package:manage_your/views/home/components/search/searchscreen.dart';
 import 'package:manage_your/views/home/homeview.dart';
 //import 'package:manage_your/views/taskdetail.dart';
 import 'package:manage_your/views/onboardscreens/onboardingScreensmain.dart';
@@ -72,6 +73,7 @@ class MyApp extends StatelessWidget {
      //UpdateTaskView()
      //taskDetailview()
      //SettingsPage()
+     //searchscreen()
       
        
     );

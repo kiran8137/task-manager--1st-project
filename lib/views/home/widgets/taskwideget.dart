@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/adapters.dart';
 import 'package:intl/intl.dart';
-import 'package:manage_your/data/functions.dart';
-import 'package:manage_your/model/category_model/category.dart';
 import 'package:manage_your/model/task.dart';
 import 'package:manage_your/utils/apps_colors.dart';
 import 'package:manage_your/views/taskdetail/taskdetail.dart';
@@ -64,8 +61,8 @@ bool ischecked = false;
           
       child:  ListTile(
         onTap: () {
-           final _dbtask= Tasks(tasktitle: widget.tasktitle, taskdescription: widget.taskdescription, category: widget.category , date: widget.date, time: widget.time  );
-          Navigator.push(context, MaterialPageRoute(builder: (context)=> taskDetailview(task:_dbtask , index: widget.index,)));
+           final dbtask= Tasks(tasktitle: widget.tasktitle, taskdescription: widget.taskdescription, category: widget.category , date: widget.date, time: widget.time  );
+          Navigator.push(context, MaterialPageRoute(builder: (context)=> TaskDetailView(task:dbtask , index: widget.index,)));
         },
         //task title
 
@@ -87,10 +84,10 @@ bool ischecked = false;
               child: GestureDetector(
                 onTap: () async {
                   
-                   final _dbtask= Tasks(tasktitle: widget.tasktitle, taskdescription: widget.taskdescription, category: widget.category ,date: widget.date , time: widget.time  );
+                   final dbtask= Tasks(tasktitle: widget.tasktitle, taskdescription: widget.taskdescription, category: widget.category ,date: widget.date , time: widget.time  );
                    
                   Navigator.push(context, MaterialPageRoute(builder: (context)=>  UpdateTaskView( 
-                     task: _dbtask,
+                     task: dbtask,
                      index : widget.index
                   )));
                 },
@@ -150,7 +147,7 @@ bool ischecked = false;
                       // widget.time!=null?
                       // "${widget.time?.hourOfPeriod}:${widget.time?.minute}":'',
                       
-                  style:  TextStyle(color: Colors.white,
+                  style:  const TextStyle(color: Colors.white,
                  // fontWeight: FontWeight.w500,
                   fontSize: 13
                   ),
@@ -169,13 +166,13 @@ bool ischecked = false;
                   ),
 
                   widget.time!=null?
-                   SizedBox(
+                   const SizedBox(
                     //width: 215,
                     
                     //width: 189,
                     width : 170
                     ):
-                  SizedBox(
+                  const SizedBox(
                     //width: 215,
                     
                     width: 226,

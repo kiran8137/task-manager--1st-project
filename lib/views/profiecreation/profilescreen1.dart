@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:manage_your/data/userprofile/userprofile.dart';
 import 'package:manage_your/model/userprofile/userprofile.dart';
 import 'package:manage_your/views/home/homeview.dart';
@@ -10,17 +9,16 @@ class ProfileScreen extends StatelessWidget {
 
   final _usernamecontroller = TextEditingController();
 
- final  String _errorMessage = '';
 
   
   final _formkey = GlobalKey<FormState>();
 
 
   Future<void> _adduserprofile() async{
-    final _userprofileName = _usernamecontroller.text.trim();
+    final userprofileName = _usernamecontroller.text.trim();
 
-    final _username = Userprofile(name: _userprofileName);
-    addprofile(_username);
+    final username = Userprofile(name: userprofileName);
+    addprofile(username);
   }
 
   @override
@@ -128,7 +126,7 @@ class ProfileScreen extends StatelessWidget {
                     }else{
                       print("user name is empty");
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
+                        const SnackBar(
                           content: Text("Enter a username"))
                       );
                     }

@@ -42,7 +42,7 @@ TextEditingController searchController = TextEditingController();
 
 
 
- bool _isSearchvisible = false;
+ bool isSearchvisible = false;
 
 //  void togglesearch(isSearchvisible){
 //   setState(() {
@@ -132,7 +132,7 @@ TextEditingController searchController = TextEditingController();
                  // Icon(Icons.close),
 
                   const SizedBox(height: 5,),
-                   Text("Hello , Mr ${widget.username}",style: TextStyle(fontSize: 20,color: Colors.white),
+                   Text("Hello , Mr ${widget.username}",style: const TextStyle(fontSize: 20,color: Colors.white),
                   ),
               
                   const SizedBox(height: 10,),
@@ -207,12 +207,11 @@ TextEditingController searchController = TextEditingController();
 
       //body
 
-      body:_buildhomebody(_isSearchvisible),
+      body:_buildhomebody( ),
     );
   }
       //homebody
-  Widget _buildhomebody(SearchVisible) {
-    bool isSearchvisible = SearchVisible;
+  Widget _buildhomebody( ) {
     return SingleChildScrollView(
       child: Column(
        

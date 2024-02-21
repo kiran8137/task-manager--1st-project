@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:manage_your/data/functions.dart';
-import 'package:manage_your/theme/themeprovider.dart';
 import 'package:manage_your/utils/apps_colors.dart';
 import 'package:manage_your/views/settings/AboutUs/aboutus.dart';
 import 'package:manage_your/views/settings/privacy_policy/privacy_policy.dart';
-import 'package:provider/provider.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -42,7 +40,7 @@ String subtitle = "5 minutes before ";
             Navigator.pop(context);
           //  print("settings go back");
           },
-          child:  Icon(
+          child:  const Icon(
             Icons.arrow_back,
             color:   Colors.white),
             ),

@@ -74,6 +74,8 @@ dependencies:
   #sidebarX
   sidebarx: ^0.16.3
   provider: ^6.1.1
+  google_fonts: ^6.1.0
+  flutter_staggered_animations: ^1.1.1
   
   
   
@@ -116,7 +118,10 @@ flutter:
    - assets/setting.png
    - assets/onboarding1.png
    - assets/onboarding2.png
-   
+   - assets/Checklist.jpg
+   - assets/task.png
+   - assets/createtasklogo.png
+
 
 
 

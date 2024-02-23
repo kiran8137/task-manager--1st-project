@@ -18,8 +18,7 @@ class CategoryAdapter extends TypeAdapter<Category> {
     };
     return Category(
       name: fields[0] as String?,
-      id: fields[1] as int?,
-    );
+    )..id = fields[1] as String?;
   }
 
   @override

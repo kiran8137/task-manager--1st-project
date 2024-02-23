@@ -60,7 +60,7 @@ class _AddtaskviewState extends State<Addtaskview> {
 String subtitle = "5 minutes before ";
 
 
-  var items = ['No Category', 'Work', 'personal', 'Wishlist', 'Birthday','CREATE NEW']; //catergory list
+//  var items = ['No Category', 'Work', 'personal', 'Wishlist', 'Birthday','CREATE NEW']; //catergory list
 
 //category creation
 Future<void> categoryCreate(String? catergoryName) async{

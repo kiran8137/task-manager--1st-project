@@ -1,5 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:hive/hive.dart';
+import 'package:manage_your/data/functions.dart';
 import 'package:manage_your/model/task.dart';
 import 'package:manage_your/views/home/homeview.dart';
 import 'package:manage_your/views/home/widgets/taskwideget.dart';
@@ -34,6 +38,13 @@ else{
   });
 }
 }
+
+ void removefromarray(index)async{
+   
+  searchResult.removeAt(index);
+   
+ }
+
 
 
   @override
@@ -82,27 +93,42 @@ else{
       //body
       body:  
       searchResult.isEmpty?
-      const Center(
-        child: Text("Nothing",style: TextStyle(color:Colors.white),),
+       Center(
+        child: SizedBox(
+                    height: 200,
+                    width: 200,
+                    child:  Image.asset('assets/notask.png'),
+                      ),
       ):
-        ListView.builder(
-          itemCount: searchResult.length,
-          itemBuilder: (context , index){
-            final task = searchResult[index];
-            return GestureDetector(
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>TaskDetailView(task: task, index: index)));
-              },
-              child: Taskwidget( 
-                      tasktitle: task.tasktitle,
-                      taskdescription: task.taskdescription,
-                      date: task.date,
-                      time: task.time,
-                      category : task.category,
-                      index : index,
-              ),
-            );
-          })
+        AnimationLimiter(
+          child: ListView.builder(
+            itemCount: searchResult.length,
+            itemBuilder: (context , index){
+              final task = searchResult[index];
+              return   AnimationConfiguration.staggeredList(
+                      position: index,
+                      duration: const Duration(milliseconds: 1000),
+                       child: SlideAnimation(
+                        verticalOffset: 50.0,
+                         child: FadeInAnimation(
+                           child: Taskwidget(
+                             tasktitle: task.tasktitle,
+                             taskdescription: task.taskdescription,
+                             date: task.date,
+                             time: task.time,
+                             category : task.category,
+                             index : index
+                              
+                             
+                             
+                           
+                             
+                           ),
+                         ),
+                       ),
+                     );
+            }),
+        )
     );
   }
 }

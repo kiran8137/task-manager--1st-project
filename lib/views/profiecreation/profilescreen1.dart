@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:manage_your/data/userprofile/userprofile.dart';
-import 'package:manage_your/model/userprofile/userprofile.dart';
+ 
 import 'package:manage_your/views/home/homeview.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -14,12 +15,12 @@ class ProfileScreen extends StatelessWidget {
   final _formkey = GlobalKey<FormState>();
 
 
-  Future<void> _adduserprofile() async{
-    final userprofileName = _usernamecontroller.text.trim();
+  // Future<void> _adduserprofile() async{
+  //   final userprofileName = _usernamecontroller.text.trim();
 
-    final username = Userprofile(name: userprofileName);
-    addprofile(username);
-  }
+  //   final username = Userprofile(name: userprofileName);
+  //   addprofile(username);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -119,16 +120,21 @@ class ProfileScreen extends StatelessWidget {
                 bottom: 200,
                 left: 100,
                 child: GestureDetector(
-                  onTap: () {
+                  onTap: () async{
                     if(_formkey.currentState!.validate()){
+                      // final userprofileName = _usernamecontroller.text.trim();
+
+                      //  final userprefsbox = Hive.box('userprefs_db');
+                      //     await userprefsbox.put('usernameadded', true);
+                      //     await userprefsbox.put('username',userprofileName );
                       Navigator.push(context, CupertinoPageRoute(builder: (context) =>  Homeview(username: _usernamecontroller.text)));
-                      _adduserprofile();
+                    //  _adduserprofile();
                     }else{
                       print("user name is empty");
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text("Enter a username"))
-                      );
+                      // ScaffoldMessenger.of(context).showSnackBar(
+                      //   const SnackBar(
+                      //     content: Text("Enter a username"))
+                      // );
                     }
                      
                    // print("submit");

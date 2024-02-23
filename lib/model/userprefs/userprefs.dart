@@ -20,6 +20,9 @@ class Userpreference{
      @HiveField(2)
      String? username;
 
+     @HiveField(3)
+     bool? usernameadded;
+
   Userpreference({this.showonboarding , this.remindertime , this.username}){
     print(remindertime);
   }

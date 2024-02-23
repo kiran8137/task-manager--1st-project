@@ -302,7 +302,7 @@ List<String> selectedCategory = [];
                     return
                      AnimationConfiguration.staggeredList(
                       position: index,
-                      duration: const Duration(milliseconds: 1100),
+                      duration: const Duration(milliseconds: 1000),
                        child: SlideAnimation(
                         verticalOffset: 50.0,
                          child: FadeInAnimation(

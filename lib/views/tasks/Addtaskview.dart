@@ -63,21 +63,21 @@ String subtitle = "5 minutes before ";
 //  var items = ['No Category', 'Work', 'personal', 'Wishlist', 'Birthday','CREATE NEW']; //catergory list
 
 //category creation
-Future<void> categoryCreate(String? catergoryName) async{
-final categroybox = await Hive.openBox<Category>('category_db');
+// Future<void> categoryCreate(String? catergoryName) async{
+// final categroybox = await Hive.openBox<Category>('category_db');
 
   
-  var existingCategory = categroybox.values.where((element) =>
-  element.name == catergoryName,
-  ).toList();
+//   var existingCategory = categroybox.values.where((element) =>
+//   element.name == catergoryName,
+//   ).toList();
 
-  if(existingCategory.isEmpty){
-    var newCategory = Category(name: catergoryName);
-    addCategory(newCategory);
-  }
+//   if(existingCategory.isEmpty){
+//     var newCategory = Category(name: catergoryName);
+//     addCategory(newCategory);
+//   }
 
 
-}
+// }
 
 
 
@@ -458,6 +458,7 @@ final categroybox = await Hive.openBox<Category>('category_db');
                                     onChanged: (value){
                                       setState(() {
                                          newCategory=value;
+                                         
                                       });
                                      
                                      
@@ -492,7 +493,8 @@ final categroybox = await Hive.openBox<Category>('category_db');
                             }
                 
                           });
-                        }),
+                        },
+                        ),
                   ],
                 ),
                 // const SizedBox(

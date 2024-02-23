@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:manage_your/views/profiecreation/profilescreen1.dart';
 
 class OnboardingScreen1 extends StatelessWidget {
@@ -27,8 +28,9 @@ class OnboardingScreen1 extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         GestureDetector(
-                          onTap: (){
-
+                          onTap: () async {
+                          //    final userprefsbox = Hive.box('userprefs_db');
+                          // await userprefsbox.put('showonboarding', true);
                             //Skip
                             Navigator.pushReplacement(context,CupertinoPageRoute(builder: (context)=>  ProfileScreen()));
                            // print("skip");

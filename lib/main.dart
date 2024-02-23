@@ -5,7 +5,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:manage_your/model/category_model/category.dart';
 import 'package:manage_your/model/task.dart';
 import 'package:manage_your/model/userprefs/userprefs.dart';
-import 'package:manage_your/model/userprofile/userprofile.dart';
+ 
 import 'package:manage_your/theme/theme.dart';
 import 'package:manage_your/theme/themeprovider.dart';
 import 'package:manage_your/views/home/components/search/searchscreen.dart';
@@ -37,9 +37,10 @@ Future<void> main() async {
   if(!Hive.isAdapterRegistered(UserpreferenceAdapter().typeId)){
     Hive.registerAdapter(UserpreferenceAdapter());
   }
-  if(!Hive.isAdapterRegistered(UserprofileAdapter().typeId)){
-    Hive.registerAdapter(UserprofileAdapter());
-  }
+
+
+  await Hive.openBox('userprefs_db');
+   
   
   runApp(
     const MyApp()

@@ -40,7 +40,7 @@ String? formattedTime;
      
  titlecontroller = TextEditingController(text: widget.task.tasktitle);
 descriptioncontroller = TextEditingController(text: widget.task.taskdescription);
-dropdownvalue = widget.task.category;
+//dropdownvalue = widget.task.category;
   recieveddate = DateFormat('dd-MM-yyyy').format(widget.task.date!);
   recievedtime = widget.task.time;
   //"${widget.task.time?.hourOfPeriod}:${widget.task.time?.minute}";

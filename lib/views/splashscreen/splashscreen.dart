@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'package:manage_your/views/home/homeview.dart';
 import 'package:manage_your/views/onboardscreens/onboardingScreensmain.dart';
 
 
@@ -14,17 +16,31 @@ class _SplashScreenState extends State<SplashScreen> {
 void initState() {
     // TODO: implement initState
     super.initState();
-    _navigatetohome();
+
+    navigateOnboarding();
   }
 
-  _navigatetohome()async{
+  navigateOnboarding()async{
     await Future.delayed(const Duration(milliseconds: 1500),(){});
     Navigator.pushReplacement(context,
     MaterialPageRoute(builder: (context)=> const MainOnboarding()));
   }
+
+   
   
   @override
   Widget build(BuildContext context) {
+
+  //  final userprefsbox = Hive.box('userprefs_db');
+  //  final bool onboard = userprefsbox.get('showonboarding')?? false;
+  //  final bool profileAdded = userprefsbox.get('usernameadded') ?? false;
+
+  //  if(onboard && profileAdded){
+  //     Navigator.push(context, (MaterialPageRoute(builder: (context)=>Homeview())));
+  //  }else{
+  //   navigateOnboarding();
+  //  }
+
     return   Scaffold(
       backgroundColor: const Color.fromARGB(255, 29, 111, 205),
 

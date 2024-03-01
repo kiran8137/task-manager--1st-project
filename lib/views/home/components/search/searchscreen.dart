@@ -1,13 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:hive/hive.dart';
-import 'package:manage_your/data/functions.dart';
 import 'package:manage_your/model/task.dart';
 import 'package:manage_your/views/home/homeview.dart';
 import 'package:manage_your/views/home/widgets/taskwideget.dart';
-import 'package:manage_your/views/taskdetail/taskdetail.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});

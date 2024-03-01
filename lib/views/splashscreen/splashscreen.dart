@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/adapters.dart';
-import 'package:manage_your/views/home/homeview.dart';
-import 'package:manage_your/views/onboardscreens/onboardingScreensmain.dart';
+import 'package:manage_your/views/onboardscreens/onboarding_screens_main.dart';
 
 
 class SplashScreen extends StatefulWidget {

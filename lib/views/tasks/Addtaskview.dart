@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
 import 'package:manage_your/data/category/categoryfunctions.dart';
 import 'package:manage_your/data/functions.dart';
-import 'package:manage_your/model/category_model/category.dart';
 import 'package:manage_your/model/task.dart';
 import 'package:manage_your/utils/apps_str.dart';
 
@@ -45,7 +43,8 @@ class _AddtaskviewState extends State<Addtaskview> {
   
   
 
-  String dropdownvalue = "No Category";
+  String? defaultcategory = 'Category';
+  String? selectedCategory;
   String newCategory = '';
   bool status = true;
 
@@ -90,7 +89,7 @@ String subtitle = "5 minutes before ";
     if(tasktitle.isEmpty || taskdescription.isEmpty){
       return;
     } 
-    print('$tasktitle $taskdescription');
+    //print('$tasktitle $taskdescription');
 
     final task = Tasks(
        
@@ -98,7 +97,7 @@ String subtitle = "5 minutes before ";
       taskdescription: taskdescription, 
       date: pickeddate ?? DateTime.now(),
       time: formattedTime,
-      category: catergoryName
+      category: defaultcategory,
       // datetime: combinedDateTime,
       
       
@@ -413,24 +412,43 @@ String subtitle = "5 minutes before ";
                           
                           )
                         ),
+
+                        
                       ],
                     ),
+
+                    
                   ],
                 ),
                 const SizedBox(
                   height: 10,
                 ),
+
+                 
+
+                
                 Row(
                   children: [
                     const SizedBox(
                       width: 24,
                     ),
+
+                    SizedBox(
+                      child: Text(defaultcategory!,
+                      style: TextStyle(color: Colors.white,fontSize: 20),),
+                    ),
+
+                    SizedBox(
+                      width: 10,
+                    ),
+                    
                 
                 
                     // Category section
                     DropdownButton(
+                      
                         dropdownColor: const Color.fromARGB(255, 9, 8, 79),
-                        value: dropdownvalue,
+                        value: selectedCategory,
                         items: items.map((items) {
                           return DropdownMenuItem(
                             value: items,
@@ -441,13 +459,16 @@ String subtitle = "5 minutes before ";
                           );
                         }).toList(),
                           
-                        onChanged: (newValue) {
+                        onChanged: (String? newValue) {
                           setState(() {
-                            catergoryName = newValue;
-                            categoryCreate(catergoryName);
-                            dropdownvalue = newValue!;
-                            if(newValue=='CREATE NEW'){
-                               showDialog(
+                            //defaultcategory = newValue;
+                            //catergoryName = newValue;
+                           // categoryCreate(catergoryName);
+                           if(newValue!='CREATE NEW'){
+                             //selectedCategory = newValue;
+                             defaultcategory = newValue;
+                           }else{
+                            showDialog(
                                 context: context, 
                                 builder: (ctx)=>
                                 AlertDialog(
@@ -455,14 +476,18 @@ String subtitle = "5 minutes before ";
                                   content: TextField(
                                     
                                     controller: _categorycontroller,
-                                    onChanged: (value){
-                                      setState(() {
-                                         newCategory=value;
+                                    // onChanged: (value){
+                                    //   setState(() {
+                                    //     // newCategory=value;
+                                    //    // catergoryName = value;
+                                    //     selectedCategory = value;
+                                    //    // categoryCreate(catergoryName);
                                          
-                                      });
+                                    //   }
+                                    //   );
                                      
                                      
-                                    },
+                                    // },
                                   ),
                                   actions: [
                                     TextButton(
@@ -474,9 +499,50 @@ String subtitle = "5 minutes before ";
                                       TextButton(
                                       
                                       onPressed:(){
-                                         setState(() {
-                                        items.insert(items.length-1,newCategory);
-                                      });
+
+                                          String newCategory =
+                                      _categorycontroller.text.trim().toLowerCase();
+                                  if (newCategory.isNotEmpty && items.contains(newCategory)) {
+                                    setState(() {
+                                      defaultcategory = newCategory;
+                                    });
+                                    print("already added");
+                                     showDialog(
+                                      context: context, builder: (ctx)=>
+                                      const AlertDialog(
+                                        title: Text("Category already added"),
+                                      )
+                                      );
+                                      
+                                    // items.add(newCategory);
+                                    // selectedCategory = newCategory;
+                                  }else{
+                                    items.add(newCategory);
+                                    categoryCreate(newCategory);
+                                  
+                                  }
+
+                                  setState(() {
+                                     
+                                     defaultcategory = newCategory;
+                                  });
+                                   
+                                  //        setState(() {
+                                  //         String newCategory =
+                                  //     _categorycontroller.text.trim().toLowerCase();
+                                  // if (newCategory.isNotEmpty && items.contains(newCategory)) {
+                                  //    showDialog(
+                                  //     context: context, builder: (ctx)=>
+                                  //     const AlertDialog(
+                                  //       title: Text("Category already added"),
+                                  //     )
+                                  //     );
+                                  //   // items.add(newCategory);
+                                  //   // selectedCategory = newCategory;
+                                  // }
+                                  //  items.add(newCategory);
+                                  // selectedCategory = newCategory;
+                                  //     });
                                         Navigator.of(context).pop();
                                         _categorycontroller.clear();
                                   
@@ -490,9 +556,12 @@ String subtitle = "5 minutes before ";
                                 
                 
                                 );
-                            }
+                           }
+                           
+                            
                 
-                          });
+                          },
+                          );
                         },
                         ),
                   ],

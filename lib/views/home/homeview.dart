@@ -10,7 +10,6 @@ import 'package:manage_your/utils/apps_colors.dart';
 import 'package:manage_your/views/home/components/appbar.dart';
 import 'package:manage_your/views/home/widgets/taskwideget.dart';
 import 'package:manage_your/views/settings/settings.dart';
-import 'package:manage_your/views/taskdetail/taskdetail.dart';
 import 'package:manage_your/views/tasks/Addtaskview.dart';
  
 
@@ -33,7 +32,7 @@ TextEditingController descriptionEditingController = TextEditingController();
 TextEditingController searchController = TextEditingController();
 
  
-List<String> selectedCategory = [];
+ List<String> selectedCategory = [];
 
  
 
@@ -67,26 +66,32 @@ List<String> selectedCategory = [];
       
 
       //floating Action button
-      floatingActionButton:  InkWell(
+      floatingActionButton: AnimationConfiguration.staggeredGrid(
+  position: 0,
+  duration: const Duration(milliseconds: 1000),
+  columnCount: 2,
+  child: SlideAnimation(
+    verticalOffset: 50.0,
+    child: FadeInAnimation(
+      duration: const Duration(milliseconds:1000),
+      child: InkWell(
         splashColor: Colors.blue,
-      onTap: (){
-       // displaybottomsheet(context);
-       Navigator.push(context,MaterialPageRoute(builder: (context) => Addtaskview()));
-       // print("fab tapped");
+        onTap: (){
+          print(items);
+          // displaybottomsheet(context);
+          Navigator.push(context,MaterialPageRoute(builder: (context) => const Addtaskview()));
+          // print("fab tapped");
 
-       //Navigator.pop(context, MaterialPageRoute(builder: (context)=> const addtask()));
-      },
-      child: Container(
-        
-           //width: 600,
-          width: MediaQuery.sizeOf(context).width * 60 / 100,
+          //Navigator.pop(context, MaterialPageRoute(builder: (context)=> const addtask()));
+        },
+        child: Container(
+          width: MediaQuery.of(context).size.width * 60 / 100,
           height: MediaQuery.of(context).size.height * 0.06,
           decoration: BoxDecoration(
-             
             borderRadius: BorderRadius.circular(10),
             color: Appcolors.buttonColor,
           ),
-          child:  Row(
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
@@ -101,15 +106,13 @@ List<String> selectedCategory = [];
                 height: 30,
                 width: 30,
                 child: Image.asset("assets/createtasklogo.png",fit: BoxFit.contain,))
-              // Icon(
-              //   Icons.edit,
-              //   size: 20,
-              //   color: Colors.white,
-              // )
             ],
           ),
-          ),
+        ),
+      ),
     ),
+  ),
+),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
 
        key: _key,
@@ -240,34 +243,9 @@ List<String> selectedCategory = [];
           Container(
             height : 50,
             
-            padding : EdgeInsets.all(8),
+            padding : const EdgeInsets.all(8),
             
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: categoryitems.map((category) => Padding(
-                  padding:  EdgeInsets.symmetric(horizontal : 10),
-                  child: FilterChip(
-                    shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20)),
-                    backgroundColor: Color.fromARGB(255, 224, 224, 224),
-                    label: Text(category),
-                    selected: selectedCategory.contains(category), 
-                    onSelected: (selected){
-                      setState(() {
-                        if(selected){
-                        selectedCategory.add(category);
-                      }else{
-                        selectedCategory.remove(category);
-                      }
-                      });
-                    }
-                    ),
-                )).toList()
-                
-              ),
-            ),
+            child: categoryfilter(),
            ),
 
             
@@ -298,7 +276,7 @@ List<String> selectedCategory = [];
                      itemCount: tasklist.length,
                      itemBuilder: (context, index) {
                     final data = tasklist[index];
-                    print(data.date);
+                   // print(data.date);
                     return
                      AnimationConfiguration.staggeredList(
                       position: index,
@@ -331,7 +309,7 @@ List<String> selectedCategory = [];
                                           TextButton(
                                             onPressed:(){
                                               remove(index);
-                                            //  Navigator.of(context).pop();
+                                              Navigator.of(ctx).pop();
                                             }, 
                                             child: const Text("Ok"),
                                             ),
@@ -406,7 +384,39 @@ List<String> selectedCategory = [];
     );
   }
 
-//  
+
+
+
+  SingleChildScrollView categoryfilter() {
+    return SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: categoryitems.map((category) => Padding(
+                padding:  const EdgeInsets.symmetric(horizontal : 10),
+                child: FilterChip(
+                  shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20)),
+                  backgroundColor: const Color.fromARGB(255, 224, 224, 224),
+                  label: Text(category),
+                  selected: selectedCategory.contains(category), 
+                  onSelected: (selected){
+                    setState(() {
+                      if(selected){
+                      selectedCategory.add(category);
+                    }else{
+                      selectedCategory.remove(category);
+                    }
+                    });
+                  }
+                  ),
+              )).toList()
+              
+            ),
+          );
+  }
+
+// //  
  }
 
 

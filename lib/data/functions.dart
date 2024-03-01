@@ -34,7 +34,7 @@ Future<void> updateTask({TextEditingController? titleController , TextEditingCon
      Tasks newTask = Tasks(tasktitle: titleController!.text, taskdescription: descriptionController!.text, date: date , category: category , time: time);
      await tasksDB.putAt(index!, newTask);
      getAllTasks();
-      print("updated category $category");
+      //print("updated category $category");
     // widget.task.tasktitle = titleController.text;
     // widget.task.taskdescription = descriptionController.text;
      

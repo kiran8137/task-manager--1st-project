@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
-import 'package:manage_your/data/userprofile/userprofile.dart';
  
 import 'package:manage_your/views/home/homeview.dart';
 
@@ -130,7 +128,7 @@ class ProfileScreen extends StatelessWidget {
                       Navigator.push(context, CupertinoPageRoute(builder: (context) =>  Homeview(username: _usernamecontroller.text)));
                     //  _adduserprofile();
                     }else{
-                      print("user name is empty");
+                     // print("user name is empty");
                       // ScaffoldMessenger.of(context).showSnackBar(
                       //   const SnackBar(
                       //     content: Text("Enter a username"))

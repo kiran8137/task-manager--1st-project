@@ -2,7 +2,6 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/adapters.dart';
 import 'package:manage_your/views/profiecreation/profilescreen1.dart';
 
 class OnboardingScreen2 extends StatelessWidget {

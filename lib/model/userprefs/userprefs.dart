@@ -11,7 +11,7 @@ class Userpreference{
 
 
      @HiveField(0)
-     final bool? showonboarding;
+      bool? showonboarding;
 
 
      @HiveField(1)
@@ -24,6 +24,6 @@ class Userpreference{
      bool? usernameadded;
 
   Userpreference({this.showonboarding , this.remindertime , this.username}){
-    print(remindertime);
+    //print(remindertime);
   }
 }

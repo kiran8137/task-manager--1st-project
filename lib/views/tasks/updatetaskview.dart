@@ -24,7 +24,10 @@ class _UpdateTaskViewState extends State<UpdateTaskView> {
   late TextEditingController descriptionController;
   late TextEditingController datecontroller ;
   late  TextEditingController timecontroller ;
- late TextEditingController categorycontroller;
+ //late TextEditingController categorycontroller;
+
+ final TextEditingController categorycontroller = TextEditingController();
+
 
 
   DateTime? newPickedDate;
@@ -34,21 +37,24 @@ class _UpdateTaskViewState extends State<UpdateTaskView> {
   String? formattedTime;
 
 
+  String? defaultcategory;
+  String? selectedCategory ;
   String? catergoryName ="";
   String newCategory = '';
-  String? dropdownvalue = "No Category";
+  //String? dropdownvalue = "No Category";
 
   @override
    void initState() {
     titleController = TextEditingController(text: widget.task.tasktitle);
     descriptionController = TextEditingController(text: widget.task.taskdescription);
-    dropdownvalue = widget.task.category;
+    //selectedCategory = widget.task.category;
    datecontroller = TextEditingController(text: DateFormat('dd-MM-yyyy').format(widget.task.date!) );
    timecontroller = TextEditingController(text : widget.task.time);
    //categorycontroller = TextEditingController(text: widget.task.category);
+   defaultcategory = widget.task.category;
     
    
-   print(".....${widget.task.time}");
+   //print(".....${widget.task.time}");
 
      
     super.initState();
@@ -366,7 +372,7 @@ String subtitle = "5 minutes before ";
                                  // print(parsedTime);
           
                                   formattedTime = DateFormat('h:mm a').format(parsedTime!);
-                                  print(formattedTime);
+                                 // print(formattedTime);
                                 setState(() {
                                   timecontroller.text = formattedTime!;
                                 }
@@ -391,9 +397,20 @@ String subtitle = "5 minutes before ";
                   const SizedBox(
                     width: 24,
                   ),
+
+
+                   SizedBox(
+                      child: Text(defaultcategory!,
+                      style: const TextStyle(color: Colors.white,fontSize: 20),),
+                    ),
+
+                    SizedBox(
+                      width: 10,
+                    ),
+
                   DropdownButton(
                       dropdownColor: const Color.fromARGB(255, 9, 8, 79),
-                      value: widget.task.category,
+                      value: selectedCategory,
                       items: items.map((items) {
                         return DropdownMenuItem(
                           value: items,
@@ -405,11 +422,15 @@ String subtitle = "5 minutes before ";
                       }).toList(),
                       onChanged: (String? newValue) {
                         setState(() {
-                           dropdownvalue = newValue!;
-                           catergoryName = newValue;
-                            categoryCreate(catergoryName);
+                           
+                          //  catergoryName = newValue;
+                          //   categoryCreate(catergoryName);
 
-                              if(newValue=='CREATE NEW'){
+                            if(newValue!='CREATE NEW'){
+                             // selectedCategory = newValue;
+                             defaultcategory = newValue;
+                                
+                            }else{
                                showDialog(
                                 context: context, 
                                 builder: (ctx)=>
@@ -418,14 +439,18 @@ String subtitle = "5 minutes before ";
                                   content: TextField(
                                     
                                     controller: categorycontroller,
-                                    onChanged: (value){
-                                      setState(() {
-                                         newCategory=value;
+                                    // onChanged: (value){
+                                    //   setState(() {
+                                    //     // newCategory=value;
+                                    //    // catergoryName = value;
+                                    //     selectedCategory = value;
+                                    //    // categoryCreate(catergoryName);
                                          
-                                      });
+                                    //   }
+                                    //   );
                                      
                                      
-                                    },
+                                    // },
                                   ),
                                   actions: [
                                     TextButton(
@@ -437,9 +462,50 @@ String subtitle = "5 minutes before ";
                                       TextButton(
                                       
                                       onPressed:(){
-                                         setState(() {
-                                        items.insert(items.length-1,newCategory);
-                                      });
+
+                                          String newCategory =
+                                      categorycontroller.text.trim().toLowerCase();
+                                  if (newCategory.isNotEmpty && items.contains(newCategory)) {
+                                    setState(() {
+                                      defaultcategory = newCategory;
+                                    });
+                                    print("already added");
+                                     showDialog(
+                                      context: context, builder: (ctx)=>
+                                      const AlertDialog(
+                                        title: Text("Category already added"),
+                                      )
+                                      );
+                                      
+                                    // items.add(newCategory);
+                                    // selectedCategory = newCategory;
+                                  }else{
+                                    items.add(newCategory);
+                                    categoryCreate(newCategory);
+                                  
+                                  }
+
+                                  setState(() {
+                                     
+                                    defaultcategory = newCategory;
+                                  });
+                                   
+                                  //        setState(() {
+                                  //         String newCategory =
+                                  //     _categorycontroller.text.trim().toLowerCase();
+                                  // if (newCategory.isNotEmpty && items.contains(newCategory)) {
+                                  //    showDialog(
+                                  //     context: context, builder: (ctx)=>
+                                  //     const AlertDialog(
+                                  //       title: Text("Category already added"),
+                                  //     )
+                                  //     );
+                                  //   // items.add(newCategory);
+                                  //   // selectedCategory = newCategory;
+                                  // }
+                                  //  items.add(newCategory);
+                                  // selectedCategory = newCategory;
+                                  //     });
                                         Navigator.of(context).pop();
                                         categorycontroller.clear();
                                   
@@ -553,7 +619,7 @@ String subtitle = "5 minutes before ";
                     GestureDetector(
                       onTap: () {
                        // print("create");
-                        updateTask(titleController: titleController , descriptionController: descriptionController , index: widget.index , category: dropdownvalue , date: newPickedDate ?? widget.task.date , time: formattedTime ?? widget.task.time);
+                        updateTask(titleController: titleController , descriptionController: descriptionController , index: widget.index , category: defaultcategory , date: newPickedDate ?? widget.task.date , time: formattedTime ?? widget.task.time);
                        Navigator.pop(context);
                        
                       },

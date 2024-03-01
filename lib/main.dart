@@ -11,7 +11,7 @@ import 'package:manage_your/theme/themeprovider.dart';
 import 'package:manage_your/views/home/components/search/searchscreen.dart';
 import 'package:manage_your/views/home/homeview.dart';
 //import 'package:manage_your/views/taskdetail.dart';
-import 'package:manage_your/views/onboardscreens/onboardingScreensmain.dart';
+import 'package:manage_your/views/onboardscreens/onboarding_screens_main.dart';
 import 'package:manage_your/views/onboardscreens/onboardscreen1.dart';
 import 'package:manage_your/views/profiecreation/profilescreen1.dart';
 import 'package:manage_your/views/settings/AboutUs/aboutus.dart';
@@ -62,7 +62,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: 
       Homeview(),
-      //SplashScreen()
+     // SplashScreen()
       //OnboardingScreen1()
       //onboardingScreen2()
       //MainOnboarding(),

@@ -110,10 +110,10 @@ late bool iseditSelected = false;
                 setState(() {
                   iseditSelected = !iseditSelected;
                 });
-                print("edit selected");
+                //print("edit selected");
                 //should navigate to the edit page
               }else if(value == 1){
-                print("delete is selected");
+               // print("delete is selected");
                 //should delete the task
                   showDialog(
                             context: context, 
@@ -289,7 +289,7 @@ late bool iseditSelected = false;
                       onTap:  
                          
                          ()async{
-                          print("click worked well");
+                         // print("click worked well");
                           
                         if(iseditSelected){
                           newPickedDate = await showDatePicker(
@@ -381,7 +381,7 @@ late bool iseditSelected = false;
                                // print(parsedTime);
         
                                 formattedTime = DateFormat('h:mm a').format(parsedTime!);
-                                print(formattedTime);
+                               // print(formattedTime);
                               
                               if(newPickedTime!=null){
                                 setState(() {

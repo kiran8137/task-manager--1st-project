@@ -42,6 +42,7 @@ class _UpdateTaskViewState extends State<UpdateTaskView> {
   String? catergoryName ="";
   String newCategory = '';
   //String? dropdownvalue = "No Category";
+ 
 
   @override
    void initState() {
@@ -53,6 +54,8 @@ class _UpdateTaskViewState extends State<UpdateTaskView> {
    //categorycontroller = TextEditingController(text: widget.task.category);
    defaultcategory = widget.task.category;
     
+    
+
    
    //print(".....${widget.task.time}");
 
@@ -350,7 +353,7 @@ String subtitle = "5 minutes before ";
                           onTap: ()async{
                              newPickedTime = await showTimePicker(
                               context: context,
-                               initialTime: TimeOfDay.now()
+                               initialTime:  TimeOfDay.now()
 
                                );
                           //      if(pickedtime!=null){
@@ -367,7 +370,7 @@ String subtitle = "5 minutes before ";
                                
                                
                           //      // print(pickedtime!.format(context),
-                                DateTime parsedTime = DateFormat.jm().parse(newPickedTime!.format(context).toString());
+                                DateTime parsedTime = DateFormat.jm().parse(newPickedTime! .format(context).toString());
                                 
                                  // print(parsedTime);
           

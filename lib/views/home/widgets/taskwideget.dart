@@ -179,15 +179,15 @@ bool ischecked = false;
                     //width : 226
                     ),
             
-              Checkbox(
-              value: ischecked, 
-              onChanged: (value){
-                // setState(() {
-                //   ischecked = !ischecked;
-                // });
-              },
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-              )
+              // Checkbox(
+              // value: ischecked, 
+              // onChanged: (value){
+              //   // setState(() {
+              //   //   ischecked = !ischecked;
+              //   // });
+              // },
+              // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+              // )
                
                  
                 ],

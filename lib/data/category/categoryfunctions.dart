@@ -6,10 +6,10 @@ import 'package:manage_your/model/category_model/category.dart';
 
 
 //categorylist show in the home page
-var categoryitems = [  'Work', 'personal', 'Wishlist', 'Birthday'];
+var categoryitems = [  'work', 'personal', 'wishlist', 'birthday'];
 
 //catergory list
-List<String> items = [ 'Work', 'personal', 'Wishlist', 'Birthday','CREATE NEW'];
+List<String> items = [ 'work', 'personal', 'wishlist', 'birthday','CREATE NEW'];
 //ValueNotifier<List<String>> itemsnotifier = ValueNotifier(['No Category', 'Work', 'personal', 'Wishlist', 'Birthday','CREATE NEW']);
 
 

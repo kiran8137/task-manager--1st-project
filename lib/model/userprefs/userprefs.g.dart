@@ -18,9 +18,8 @@ class UserpreferenceAdapter extends TypeAdapter<Userpreference> {
     };
     return Userpreference(
       showonboarding: fields[0] as bool?,
-      remindertime: fields[1] as String?,
-      username: fields[2] as String?,
-    );
+      username: fields[1] as String?,
+    )..usernameadded = fields[2] as bool?;
   }
 
   @override
@@ -30,9 +29,9 @@ class UserpreferenceAdapter extends TypeAdapter<Userpreference> {
       ..writeByte(0)
       ..write(obj.showonboarding)
       ..writeByte(1)
-      ..write(obj.remindertime)
+      ..write(obj.username)
       ..writeByte(2)
-      ..write(obj.username);
+      ..write(obj.usernameadded);
   }
 
   @override

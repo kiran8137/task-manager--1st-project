@@ -86,7 +86,7 @@ String subtitle = "5 minutes before ";
   Future<void> onCreate()async{
     final tasktitle = _titlecontroller.text.trim();
     final taskdescription = _descriptioncontroller.text.trim();
-    if(tasktitle.isEmpty || taskdescription.isEmpty){
+    if(tasktitle.isEmpty || taskdescription.isEmpty || defaultcategory!.isEmpty || defaultcategory == "Category" ){
       return;
     } 
     //print('$tasktitle $taskdescription');
@@ -334,6 +334,7 @@ String subtitle = "5 minutes before ";
                           // color: Colors.red,
                     
                     
+                    
                           //selecting the time
                     
                           child: const Text(
@@ -501,7 +502,7 @@ String subtitle = "5 minutes before ";
                                       onPressed:(){
 
                                           String newCategory =
-                                      _categorycontroller.text.trim().toLowerCase();
+                                      _categorycontroller.text.trim();
                                   if (newCategory.isNotEmpty && items.contains(newCategory)) {
                                     setState(() {
                                       defaultcategory = newCategory;
@@ -563,6 +564,8 @@ String subtitle = "5 minutes before ";
                           },
                           );
                         },
+
+                        
                         ),
                   ],
                 ),
@@ -671,11 +674,27 @@ String subtitle = "5 minutes before ";
                           child:  Center(
                               child: GestureDetector(
                                 onTap: (){
-                                   if (_formKey.currentState!.validate()) {
+                                   if (_formKey.currentState!.validate()  ) {
+                                    if(defaultcategory!=null && defaultcategory != 'Category'){
+                                    onCreate();
+                                    Navigator.pop(context);
+                                    }else{
+                                      const snack = SnackBar(
+                                      content: Text("Category not selected",
+                                      style: TextStyle(color: Colors.black),),
+                                      backgroundColor: Colors.white,
+                                      elevation: 10,
+                                      behavior: SnackBarBehavior.floating,
+                                      );
+                                      ScaffoldMessenger.of(context).showSnackBar(snack);
+                                    }
                   // If the form is valid, proceed with form submission
-                                  onCreate();
-                                  Navigator.pop(context);
+                                  // onCreate();
+                                  // Navigator.pop(context);
                                    }
+                                    
+                                   
+
                                    
                                 },
                                 child: const Text(

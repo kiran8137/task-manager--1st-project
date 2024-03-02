@@ -22,13 +22,13 @@ class TasksAdapter extends TypeAdapter<Tasks> {
       date: fields[2] as DateTime?,
       category: fields[3] as String?,
       time: fields[4] as String?,
-    );
+    )..reminderTime = fields[5] as String?;
   }
 
   @override
   void write(BinaryWriter writer, Tasks obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.tasktitle)
       ..writeByte(1)
@@ -38,7 +38,9 @@ class TasksAdapter extends TypeAdapter<Tasks> {
       ..writeByte(3)
       ..write(obj.category)
       ..writeByte(4)
-      ..write(obj.time);
+      ..write(obj.time)
+      ..writeByte(5)
+      ..write(obj.reminderTime);
   }
 
   @override

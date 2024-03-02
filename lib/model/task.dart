@@ -25,6 +25,8 @@ class Tasks {
    //TimeOfDay? time;
    String? time;
    
+   @HiveField(5)
+   String? reminderTime;
    
 
   Tasks( 
@@ -35,9 +37,11 @@ class Tasks {
       required this.date,
       this.category,
       this.time,
+      reminderime
       
       }){
-        
+      
+       
       print("......tasktitle:$tasktitle taskdes:$taskdescription date:$date  category:$category");
       }
 }

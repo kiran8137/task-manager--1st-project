@@ -192,49 +192,49 @@ String subtitle = "5 minutes before ";
              
             //  print("default time");
             },
-             child:PopupMenuButton(
-             // initialValue: subtitle,
-              itemBuilder: (context) => [
-                PopupMenuItem(
-                  value: timings[0],
-                  child: Text(timings[0],
+            //  child:PopupMenuButton(
+            //  // initialValue: subtitle,
+            //   itemBuilder: (context) => [
+            //     PopupMenuItem(
+            //       value: timings[0],
+            //       child: Text(timings[0],
                    
-                  ),
-                  ),
+            //       ),
+            //       ),
       
-                   PopupMenuItem(
-                  value: timings[1],
-                  child: Text(timings[1]),
-                  ),
+            //        PopupMenuItem(
+            //       value: timings[1],
+            //       child: Text(timings[1]),
+            //       ),
       
-                   PopupMenuItem(
-                  value: timings[2],
-                  child: Text(timings[2]),
-                  ),
+            //        PopupMenuItem(
+            //       value: timings[2],
+            //       child: Text(timings[2]),
+            //       ),
       
-                   PopupMenuItem(
-                  value: timings[3],
-                  child: Text(timings[3]),
-                  ),
+            //        PopupMenuItem(
+            //       value: timings[3],
+            //       child: Text(timings[3]),
+            //       ),
       
-                   PopupMenuItem(
-                  value: timings[4],
-                  child: Text(timings[4]),
-                  ),
+            //        PopupMenuItem(
+            //       value: timings[4],
+            //       child: Text(timings[4]),
+            //       ),
       
-                   PopupMenuItem(
-                  value: timings[5],
-                  child: Text(timings[5]),
-                  ), 
-              ],
+            //        PopupMenuItem(
+            //       value: timings[5],
+            //       child: Text(timings[5]),
+            //       ), 
+            //   ],
       
-              onSelected: (String newvalue) {
-                //adddefaultime(newvalue);
-                setState(() {
-                  subtitle = newvalue;
-                  adddefaultime(newvalue);
-                });
-              },
+            //   onSelected: (String newvalue) {
+            //     //adddefaultime(newvalue);
+            //     setState(() {
+            //       subtitle = newvalue;
+            //       adddefaultime(newvalue);
+            //     });
+            //   },
                child:  ListTile(
                 leading:  const Icon(Icons.edit_notifications_outlined,
                 color:  Colors.white,
@@ -254,7 +254,7 @@ String subtitle = "5 minutes before ";
                       ,)
                     ),
                ),
-             )
+             //)
             // Container(
             //   margin: const EdgeInsets.only(left: 10),
             //   height: 50,

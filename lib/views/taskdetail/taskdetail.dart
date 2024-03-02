@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:manage_your/data/category/categoryfunctions.dart';
 import 'package:manage_your/data/functions.dart';
 import 'package:manage_your/model/task.dart';
 import 'package:manage_your/utils/apps_colors.dart';
@@ -26,6 +27,8 @@ class _TaskDetailViewState extends State<TaskDetailView> {
    TextEditingController? titlecontroller;
    TextEditingController? descriptioncontroller;
 
+   final TextEditingController categorycontroller = TextEditingController();
+
   String? recieveddate;
   DateTime? newPickedDate;
 
@@ -33,6 +36,10 @@ class _TaskDetailViewState extends State<TaskDetailView> {
   TimeOfDay? newPickedTime;
 
 String? formattedTime;
+
+
+
+String? defaultcategory;
 
 
   @override
@@ -45,7 +52,13 @@ descriptioncontroller = TextEditingController(text: widget.task.taskdescription)
   recievedtime = widget.task.time;
   //"${widget.task.time?.hourOfPeriod}:${widget.task.time?.minute}";
 
+// if(items.contains(widget.task.category)){
+//   dropdownvalue = widget.task.category;
+// }
 
+
+
+ defaultcategory = widget.task.category;
     super.initState();
   }
 
@@ -53,9 +66,9 @@ descriptioncontroller = TextEditingController(text: widget.task.taskdescription)
 // TextEditingController _descriptioncontroller = TextEditingController();
 
 
- String? dropdownvalue ="No Category";
+ String? dropdownvalue;
 
- var items = ['No Category', 'Work', 'personal', 'Wishlist', 'Birthday','CREATE NEW']; //catergory list
+// var items = ['No Category', 'Work', 'personal', 'Wishlist', 'Birthday','CREATE NEW']; //catergory list
 
 late bool iseditSelected = false;
 
@@ -153,7 +166,7 @@ late bool iseditSelected = false;
         child:  GestureDetector(
       onTap: (){
         
-        updateTask(titleController: titlecontroller , descriptionController: descriptioncontroller , index: widget.index , category: dropdownvalue ,date : newPickedDate ?? widget.task.date, time: formattedTime ?? recievedtime  );
+        updateTask(titleController: titlecontroller , descriptionController: descriptioncontroller , index: widget.index , category: defaultcategory ,date : newPickedDate ?? widget.task.date, time: formattedTime ?? recievedtime  );
         Navigator.of(context).pop();
         setState(() {
           iseditSelected = !iseditSelected;
@@ -201,25 +214,135 @@ late bool iseditSelected = false;
 
                   iseditSelected?
 
-                   DropdownButton(
-                      dropdownColor: const Color.fromARGB(255, 9, 8, 79),
-                      value: dropdownvalue,  // the previously selected category should be appear as initial value
-                      items: items.map((items) {
-                        return DropdownMenuItem(
-                          value: items,
-                          child: Text(
-                            items,
-                            style: const TextStyle(color: Colors.white),
-                          ),
-                        );
-                      }).toList(),
-                        
-                      onChanged: (newValue) {
+
+
+                   Row(
+                     children: [
+
+                      SizedBox(
+                      child: Text(defaultcategory!,
+                      style: const TextStyle(color: Colors.white,fontSize: 20),),
+                    ),
+
+                       DropdownButton(
+                         
+                          dropdownColor: const Color.fromARGB(255, 9, 8, 79),
+                          value: dropdownvalue,  // the previously selected category should be appear as initial value
+                          items: items.map((items) {
+                            return DropdownMenuItem(
+                              value: items,
+                              child: Text(
+                                items,
+                                style: const TextStyle(color: Colors.white),
+                              ),
+                            );
+                          }).toList(),
+                            
+                           onChanged: (String? newValue) {
                         setState(() {
-                          dropdownvalue = newValue!; 
-                        }
+                           
+                          //  catergoryName = newValue;
+                          //   categoryCreate(catergoryName);
+
+                            if(newValue!='CREATE NEW'){
+                             // selectedCategory = newValue;
+                             defaultcategory = newValue;
+                                
+                            }else{
+                               showDialog(
+                                context: context, 
+                                builder: (ctx)=>
+                                AlertDialog(
+                                  title: const Text("Create New Category"),
+                                  content: TextField(
+                                    
+                                    controller: categorycontroller,
+                                    // onChanged: (value){
+                                    //   setState(() {
+                                    //     // newCategory=value;
+                                    //    // catergoryName = value;
+                                    //     selectedCategory = value;
+                                    //    // categoryCreate(catergoryName);
+                                         
+                                    //   }
+                                    //   );
+                                     
+                                     
+                                    // },
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                      onPressed:(){
+                                        Navigator.of(context).pop();
+                                      }, 
+                                      child: const Text("Cancel"),
+                                      ),
+                                      TextButton(
+                                      
+                                      onPressed:(){
+
+                                          String newCategory =
+                                      categorycontroller.text.trim().toLowerCase();
+                                  if (newCategory.isNotEmpty && items.contains(newCategory)) {
+                                    setState(() {
+                                      defaultcategory = newCategory;
+                                    });
+                                    print("already added");
+                                     showDialog(
+                                      context: context, builder: (ctx)=>
+                                      const AlertDialog(
+                                        title: Text("Category already added"),
+                                      )
+                                      );
+                                      
+                                    // items.add(newCategory);
+                                    // selectedCategory = newCategory;
+                                  }else{
+                                    items.add(newCategory);
+                                    categoryCreate(newCategory);
+                                  
+                                  }
+
+                                  setState(() {
+                                     
+                                    defaultcategory = newCategory;
+                                  });
+                                   
+                                  //        setState(() {
+                                  //         String newCategory =
+                                  //     _categorycontroller.text.trim().toLowerCase();
+                                  // if (newCategory.isNotEmpty && items.contains(newCategory)) {
+                                  //    showDialog(
+                                  //     context: context, builder: (ctx)=>
+                                  //     const AlertDialog(
+                                  //       title: Text("Category already added"),
+                                  //     )
+                                  //     );
+                                  //   // items.add(newCategory);
+                                  //   // selectedCategory = newCategory;
+                                  // }
+                                  //  items.add(newCategory);
+                                  // selectedCategory = newCategory;
+                                  //     });
+                                        Navigator.of(context).pop();
+                                        categorycontroller.clear();
+                                  
+                                      }, 
+                                      child: const Text("Create"),
+                                      )
+                                      
+                                  ],
+                                )
+                                  
+                                
+                
+                                );
+                            }
+                        },
                         );
                       },
+                       ),
+                     ],
                    ):
                    Text(widget.task.category!,
                    style: const TextStyle(color: Colors.white,fontSize: 17.5),
@@ -329,7 +452,7 @@ late bool iseditSelected = false;
                         const Text("Due Date",style: TextStyle(color: Colors.white,fontSize: 16),),
 
                         
-                        const SizedBox(width: 196,),
+                        const SizedBox(width: 214,),
                         
                         Container(
                           height: 30,

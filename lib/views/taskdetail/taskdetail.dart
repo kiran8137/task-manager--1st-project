@@ -481,36 +481,58 @@ late bool iseditSelected = false;
                         onTap:  ()async{
 
                           if(iseditSelected){
-                             newPickedTime= await showTimePicker(
-                            context: context,
-                             initialTime: TimeOfDay.now()
-                             );
-                        //      if(pickedtime!=null){
 
-                        //   //  DateTime combinedDateTime = DateTime(
-                        //   //     pickeddate!.day,
-                        //   //     pickeddate!.month,
-                        //   //     pickeddate!.year,
-                        //   //     pickedtime!.minute,
-                        //   //     pickedtime!.hour,
-                              
+                           final  pickedtime = await showTimePicker(
+                              context: context,
+                               initialTime:  TimeOfDay.now()
 
-                        //   //   );
-                             
-                             
-                        //      // print(pickedtime!.format(context),
-                              DateTime parsedTime = DateFormat.jm().parse(newPickedTime!.format(context).toString());
-                              
-                               // print(parsedTime);
-        
-                                formattedTime = DateFormat('h:mm a').format(parsedTime!);
-                               // print(formattedTime);
-                              
-                              if(newPickedTime!=null){
+                               );
+
+                               if(pickedtime!=null){
                                 setState(() {
-                                  recievedtime = formattedTime;
+                                  newPickedTime = pickedtime;
                                 });
-                              }
+                                
+                                 DateTime parsedTime = DateFormat.jm().parse(newPickedTime! .format(context).toString());
+                                 formattedTime = DateFormat('h:mm a').format(parsedTime!);
+                                recievedtime = formattedTime!;  
+                                  
+
+                               }else{
+                                print("user didn't update it");
+                               }
+
+
+                        //      newPickedTime= await showTimePicker(
+                        //     context: context,
+                        //      initialTime: TimeOfDay.now()
+                        //      );
+                        // //      if(pickedtime!=null){
+
+                        // //   //  DateTime combinedDateTime = DateTime(
+                        // //   //     pickeddate!.day,
+                        // //   //     pickeddate!.month,
+                        // //   //     pickeddate!.year,
+                        // //   //     pickedtime!.minute,
+                        // //   //     pickedtime!.hour,
+                              
+
+                        // //   //   );
+                             
+                             
+                        // //      // print(pickedtime!.format(context),
+                        //       DateTime parsedTime = DateFormat.jm().parse(newPickedTime!.format(context).toString());
+                              
+                        //        // print(parsedTime);
+        
+                        //         formattedTime = DateFormat('h:mm a').format(parsedTime!);
+                        //        // print(formattedTime);
+                              
+                        //       if(newPickedTime!=null){
+                        //         setState(() {
+                        //           recievedtime = formattedTime;
+                        //         });
+                        //       }
                               // setState(() {
                                 
                               //    recievedtime = formattedTime;

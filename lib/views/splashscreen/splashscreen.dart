@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:manage_your/model/username_model/username.dart';
+import 'package:manage_your/views/home/homeview.dart';
 import 'package:manage_your/views/onboardscreens/onboarding_screens_main.dart';
 
 
@@ -19,9 +22,24 @@ void initState() {
   }
 
   navigateOnboarding()async{
-    await Future.delayed(const Duration(milliseconds: 1500),(){});
+   
+   final usernamebox = await Hive.openBox<Username>('username_db');
+
+   final isusername =  usernamebox.get('1');
+   print(isusername?.name);   
+
+   if(isusername?.nameentered == true){
+     await Future.delayed(const Duration(milliseconds: 1500),(){});
+     Navigator.pushReplacement(context,
+    MaterialPageRoute(builder: (context)=>  Homeview(username: isusername?.name,)));
+   }else{
+
+       await Future.delayed(const Duration(milliseconds: 1500),(){});
     Navigator.pushReplacement(context,
     MaterialPageRoute(builder: (context)=> const MainOnboarding()));
+   }
+    
+   
   }
 
    

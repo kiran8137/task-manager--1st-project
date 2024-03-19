@@ -351,35 +351,42 @@ String subtitle = "5 minutes before ";
                             ),
                           ),
                           onTap: ()async{
-                             newPickedTime = await showTimePicker(
+
+                            final  pickedtime = await showTimePicker(
                               context: context,
                                initialTime:  TimeOfDay.now()
 
                                );
-                          //      if(pickedtime!=null){
-          
-                          //   //  DateTime combinedDateTime = DateTime(
-                          //   //     pickeddate!.day,
-                          //   //     pickeddate!.month,
-                          //   //     pickeddate!.year,
-                          //   //     pickedtime!.minute,
-                          //   //     pickedtime!.hour,
-                                
-          
-                          //   //   );
-                               
-                               
-                          //      // print(pickedtime!.format(context),
-                                DateTime parsedTime = DateFormat.jm().parse(newPickedTime! .format(context).toString());
-                                
-                                 // print(parsedTime);
-          
-                                  formattedTime = DateFormat('h:mm a').format(parsedTime!);
-                                 // print(formattedTime);
+
+                               if(pickedtime!=null){
                                 setState(() {
-                                  timecontroller.text = formattedTime!;
-                                }
-                                );
+                                  newPickedTime = pickedtime;
+                                });
+                                
+                                 DateTime parsedTime = DateFormat.jm().parse(newPickedTime! .format(context).toString());
+                                 formattedTime = DateFormat('h:mm a').format(parsedTime!);
+                                 timecontroller.text = formattedTime!;  
+                                  
+
+                               }else{
+                                print("user didn't update it");
+                               }
+                            //  newPickedTime = await showTimePicker(
+                            //   context: context,
+                            //    initialTime:  TimeOfDay.now()
+
+                            //    );
+                           
+                                // DateTime parsedTime = DateFormat.jm().parse(newPickedTime! .format(context).toString());
+                                
+                                  
+          
+                                  // formattedTime = DateFormat('h:mm a').format(parsedTime!);
+                                 // print(formattedTime);
+                                // setState(() {
+                                //   timecontroller.text = formattedTime!;
+                                // }
+                                // );
           
                                 //pickeddate = DateFormat.jm().parse(pickedtime!.format(context).toString());
                                 
@@ -407,7 +414,7 @@ String subtitle = "5 minutes before ";
                       style: const TextStyle(color: Colors.white,fontSize: 20),),
                     ),
 
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
 

@@ -4,7 +4,7 @@ import 'package:manage_your/model/task.dart';
 import 'package:manage_your/utils/apps_colors.dart';
 import 'package:manage_your/views/taskdetail/taskdetail.dart';
 import 'package:manage_your/views/tasks/updatetaskview.dart';
-
+//import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 class Taskwidget extends StatefulWidget {
    Taskwidget({
     super.key, 
@@ -38,11 +38,18 @@ class Taskwidget extends StatefulWidget {
 
 class _TaskwidgetState extends State<Taskwidget> {
 
+ 
+
+ 
+   
+
 String? foramtteddate;
 
 
  
 bool ischecked = false;
+
+
 
 
 
@@ -60,7 +67,10 @@ bool ischecked = false;
           ),
           
       child:  ListTile(
-        onTap: () {
+        onTap: () async{
+          // NotificationService().showNotification(
+          //   title: 'sample testing' , body: 'it works'
+          // );
            final dbtask= Tasks(tasktitle: widget.tasktitle, taskdescription: widget.taskdescription, category: widget.category , date: widget.date, time: widget.time  );
           Navigator.push(context, MaterialPageRoute(builder: (context)=> TaskDetailView(task:dbtask , index: widget.index,)));
         },
@@ -142,27 +152,42 @@ bool ischecked = false;
                   //time 
                       
                     Text(
-                      widget.time!=null?
-                      widget.time!:'',
-                      // widget.time!=null?
-                      // "${widget.time?.hourOfPeriod}:${widget.time?.minute}":'',
-                      
-                  style:  const TextStyle(color: Colors.white,
-                 // fontWeight: FontWeight.w500,
-                  fontSize: 13
-                  ),
-                  ),
-                      
-                      const SizedBox(width: 10),
-                  //date
-                      
-                    Text(DateFormat("dd-MM").format(widget.date ?? DateTime.now()),
+                      DateFormat("d MMM yyyy").format(widget.date ?? DateTime.now()),
                       
                   style: const TextStyle(color: Colors.white,
                  // fontWeight: FontWeight.w400,
                  fontSize : 13,
                   
                   ),
+                //       widget.time!=null?
+                //       widget.time!:'',
+                      
+                      
+                //   style:  const TextStyle(color: Colors.white,
+                //  // fontWeight: FontWeight.w500,
+                //   fontSize: 13
+                //   ),
+                  ),
+                      
+                      const SizedBox(width: 10),
+                  //date
+                      
+                    Text(
+                            widget.time!=null?
+                      widget.time!:'',
+                      
+                      
+                  style:  const TextStyle(color: Colors.white,
+                 // fontWeight: FontWeight.w500,
+                  fontSize: 13
+                  ),
+                //       DateFormat("dd-MM").format(widget.date ?? DateTime.now()),
+                      
+                //   style: const TextStyle(color: Colors.white,
+                //  // fontWeight: FontWeight.w400,
+                //  fontSize : 13,
+                  
+                //   ),
                   ),
 
                   widget.time!=null?

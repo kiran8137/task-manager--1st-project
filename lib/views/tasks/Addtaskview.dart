@@ -436,10 +436,10 @@ String subtitle = "5 minutes before ";
 
                     SizedBox(
                       child: Text(defaultcategory!,
-                      style: TextStyle(color: Colors.white,fontSize: 20),),
+                      style: const TextStyle(color: Colors.white,fontSize: 20),),
                     ),
 
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     
@@ -502,8 +502,8 @@ String subtitle = "5 minutes before ";
                                       onPressed:(){
 
                                           String newCategory =
-                                      _categorycontroller.text.trim();
-                                  if (newCategory.isNotEmpty && items.contains(newCategory)) {
+                                      _categorycontroller.text.trim().toLowerCase();
+                                  if (newCategory.isNotEmpty && items.contains(newCategory) ) {
                                     setState(() {
                                       defaultcategory = newCategory;
                                     });
@@ -517,15 +517,18 @@ String subtitle = "5 minutes before ";
                                       
                                     // items.add(newCategory);
                                     // selectedCategory = newCategory;
-                                  }else{
+                                  }else if(_categorycontroller.text.isNotEmpty){
                                     items.add(newCategory);
                                     categoryCreate(newCategory);
                                   
                                   }
+                                  
 
                                   setState(() {
-                                     
-                                     defaultcategory = newCategory;
+                                     if(_categorycontroller.text.isNotEmpty){
+                                      defaultcategory = newCategory;
+                                     }
+                                    //  defaultcategory = newCategory;
                                   });
                                    
                                   //        setState(() {
@@ -674,6 +677,8 @@ String subtitle = "5 minutes before ";
                           child:  Center(
                               child: GestureDetector(
                                 onTap: (){
+
+                                  
                                    if (_formKey.currentState!.validate()  ) {
                                     if(defaultcategory!=null && defaultcategory != 'Category'){
                                     onCreate();
@@ -692,6 +697,7 @@ String subtitle = "5 minutes before ";
                                   // onCreate();
                                   // Navigator.pop(context);
                                    }
+                                    
                                     
                                    
 

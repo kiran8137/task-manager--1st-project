@@ -1,32 +1,37 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'userprefs.dart';
+part of 'username.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class UserpreferenceAdapter extends TypeAdapter<Userpreference> {
+class UsernameAdapter extends TypeAdapter<Username> {
   @override
-  final int typeId = 2;
+  final int typeId = 4;
 
   @override
-  Userpreference read(BinaryReader reader) {
+  Username read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return Userpreference(
-      showonboarding: fields[0] as bool?,
+    return Username(
+      name: fields[0] as String?,
+      nameentered: fields[1] as bool?,
     );
   }
 
   @override
-  void write(BinaryWriter writer, Userpreference obj) {
+  void write(BinaryWriter writer, Username obj) {
     writer
-      ..writeByte(1)
+      ..writeByte(3)
       ..writeByte(0)
-      ..write(obj.showonboarding);
+      ..write(obj.name)
+      ..writeByte(1)
+      ..write(obj.nameentered)
+      ..writeByte(2)
+      ..write(obj.id);
   }
 
   @override
@@ -35,7 +40,7 @@ class UserpreferenceAdapter extends TypeAdapter<Userpreference> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is UserpreferenceAdapter &&
+      other is UsernameAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

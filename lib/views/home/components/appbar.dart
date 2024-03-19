@@ -19,6 +19,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:manage_your/utils/apps_str.dart';
+import 'package:manage_your/views/home/components/calender/calender.dart';
 import 'package:manage_your/views/home/components/search/searchscreen.dart';
 
 PreferredSize appbar(GlobalKey<ScaffoldState>key, BuildContext context){
@@ -125,6 +126,7 @@ PreferredSize appbar(GlobalKey<ScaffoldState>key, BuildContext context){
 
                 GestureDetector(
                 onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=> const CalenderScreen()));
                   //todo navigation to calender
                   //print(" calendar");
                 },

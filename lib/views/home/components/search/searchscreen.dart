@@ -19,6 +19,10 @@ class _SearchScreenState extends State<SearchScreen> {
   final _taskdb = Hive.box<Tasks>('task_db');
   List<Tasks>searchResult = [];
 
+
+  DateTime? start;
+  DateTime? end;
+
 void searchTask(String query){
 query =  query.toLowerCase();
 if(query.isEmpty){
@@ -41,6 +45,15 @@ else{
    
  }
 
+ void filterbydaterange(){
+  setState(() {
+    searchResult = _taskdb.values.where((task) => task.date!.isAfter(start!) &&
+                   task.date!.isBefore(end!) 
+   ).toList();
+  });
+   
+ }
+
 
 
   @override
@@ -58,6 +71,39 @@ else{
 
       appBar: AppBar(
         backgroundColor: Colors.black,
+        actions: [
+           
+           PopupMenuButton(
+            
+            iconColor: Colors.white,
+            itemBuilder: (context)=>
+            [
+              const PopupMenuItem(
+                value: 1,
+                child:Text('Range Pick'),
+                ),
+
+              
+            ],
+            onSelected: (value) async{
+              if(value==1) {
+                final result = await showDateRangePicker(
+                  context: context,
+                  firstDate: DateTime.now(),
+                  lastDate: DateTime.now().add( const Duration(days: 365)
+                  ),
+                  );
+                  if(result!=null){
+                    setState(() {
+                      start = result.start;
+                      end = result.end;
+                      filterbydaterange();
+                    });
+                  }
+              }
+            },
+            )
+        ],
           leading: GestureDetector(
             onTap: (){
               Navigator.push(context,MaterialPageRoute(builder: ((context) => const Homeview())));
@@ -68,21 +114,26 @@ else{
               size: 30,
             ),
           ),
-          title: TextField(
-            controller: searchcontroller,
-            onChanged: (query) {
-              searchTask(query);
-            },
-            autofocus: true,
-            cursorColor: Colors.white,
-            style: const TextStyle(color: Colors.white,fontSize: 18),
-            decoration: const InputDecoration(
-              border: InputBorder.none,
-              
-              hintText: 'Search...',
-              hintStyle: TextStyle(fontSize: 18,color: Colors.grey),
+          title: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(
+              controller: searchcontroller,
+              onChanged: (query) {
+                searchTask(query);
+              },
+              autofocus: true,
+              cursorColor: Colors.white,
+              style: const TextStyle(color: Colors.white,fontSize: 18),
+              decoration: const InputDecoration(
+                border: InputBorder.none,
+                
+                hintText: 'Search...',
+                hintStyle: TextStyle(fontSize: 18,color: Colors.grey),
+              ),
             ),
-          )),
+          ),
+
+          ),
 
       //side menu
 
@@ -100,6 +151,7 @@ else{
           child: ListView.builder(
             itemCount: searchResult.length,
             itemBuilder: (context , index){
+              
               final task = searchResult[index];
               return   AnimationConfiguration.staggeredList(
                       position: index,
@@ -123,7 +175,8 @@ else{
                          ),
                        ),
                      );
-            }),
+            }
+            ),
         )
     );
   }

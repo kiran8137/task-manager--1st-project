@@ -17,13 +17,13 @@ class Userpreference{
     //  @HiveField(1)
     //  String? reminderTime =  DateTime.now().subtract(Duration(minutes: 5)).toString();
 
-     @HiveField(1)
-     String? username;
+    //  @HiveField(1)
+    //  String? username;
 
-     @HiveField(2)
-     bool? usernameadded;
+    //  @HiveField(2)
+    //  bool? usernameadded;
 
-  Userpreference({this.showonboarding , this.username}){
+  Userpreference({this.showonboarding}){
      //reminderTime = DateTime.now().subtract(Duration(minutes: remindertime)).toString();
      
     //print(remindertime);

@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:manage_your/data/userprofile/userprofile.dart';
+import 'package:manage_your/model/username_model/username.dart';
  
 import 'package:manage_your/views/home/homeview.dart';
 
@@ -75,8 +77,9 @@ class ProfileScreen extends StatelessWidget {
               top: 250,
               left: 90,
               child: Container(
-                height: 60,
-                width: 220,
+                
+                height: 70,
+                width: 230,
                 decoration: BoxDecoration(
                     color: const Color.fromARGB(135, 158, 158, 158),
                     borderRadius: BorderRadius.circular(10)),
@@ -84,32 +87,35 @@ class ProfileScreen extends StatelessWidget {
                   key: _formkey,
                 
                 
-                  child: TextFormField(
-                    onChanged: (value) {
-                     // String name = value;
-                    }, 
-                    decoration:  const InputDecoration(
-                      hintText: "Enter your name",
-                      border: InputBorder.none,
-                       
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextFormField(
+                      onChanged: (value) {
+                       // String name = value;
+                      }, 
+                      decoration:  const InputDecoration(
+                        hintText: "Enter your name",
+                        border: InputBorder.none,
+                         
+                      ),
+                      
+                    
+                      controller: _usernamecontroller,
+                      
+                      validator: (value){
+                        if(value!.isEmpty ){
+                          return "Enter a username";
+                          
+                        }
+                        if (value.length < 3){
+                          return " name must be at least 2 characters";
+                          
+                        }
+                        return null;
+                      }
+                      
+                    
                     ),
-                    
-                  
-                    controller: _usernamecontroller,
-                    
-                    validator: (value){
-                      if(value!.isEmpty ){
-                        return "Enter a username";
-                        
-                      }
-                      if (value.length < 3){
-                        return " name must be at least 2 characters";
-                        
-                      }
-                      return null;
-                    }
-                    
-                  
                   ),
                 ),
               ),
@@ -120,20 +126,20 @@ class ProfileScreen extends StatelessWidget {
                 child: GestureDetector(
                   onTap: () async{
                     if(_formkey.currentState!.validate()){
-                      // final userprofileName = _usernamecontroller.text.trim();
-
-                      //  final userprefsbox = Hive.box('userprefs_db');
-                      //     await userprefsbox.put('usernameadded', true);
-                      //     await userprefsbox.put('username',userprofileName );
+                        //final usernamedb = await Hive.openBox<Username>('username_db');
+                        final username = Username(name: _usernamecontroller.text , nameentered: true , );
+                         addusername(username);
+                       
                       Navigator.push(context, CupertinoPageRoute(builder: (context) =>  Homeview(username: _usernamecontroller.text)));
                     //  _adduserprofile();
-                    }else{
+                    }
+                    //else{
                      // print("user name is empty");
                       // ScaffoldMessenger.of(context).showSnackBar(
                       //   const SnackBar(
                       //     content: Text("Enter a username"))
                       // );
-                    }
+                   // }
                      
                    // print("submit");
                     //when submit navigate to home page

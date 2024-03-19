@@ -48,7 +48,7 @@ Future<void> updateTask({TextEditingController? titleController , TextEditingCon
 
   void remove(index)async{
    final box = await Hive.openBox<Tasks>('task_db');
-   box.deleteAt(index);
+   await box.deleteAt(index);
   tasklistNotifier.value = box.values.toList();
  }
 
@@ -58,5 +58,12 @@ Future<void> updateTask({TextEditingController? titleController , TextEditingCon
    final userpfs = await Hive.openBox('userpfs_db');
    userpfs.add(time);
  }
+
+ Future<void> deletealltask() async {
+  final tasksDB = await Hive.openBox<Tasks>('task_db');
+  await tasksDB.clear();
+  getAllTasks();
+ }
+
 
 

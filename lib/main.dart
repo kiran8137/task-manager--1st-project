@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:manage_your/model/category_model/category.dart';
 import 'package:manage_your/model/task.dart';
+import 'package:manage_your/model/username_model/username.dart';
+ 
 import 'package:manage_your/model/userprefs/userprefs.dart';
  
 import 'package:manage_your/theme/theme.dart';
@@ -37,9 +39,14 @@ Future<void> main() async {
   if(!Hive.isAdapterRegistered(UserpreferenceAdapter().typeId)){
     Hive.registerAdapter(UserpreferenceAdapter());
   }
+  if(!Hive.isAdapterRegistered(UsernameAdapter().typeId)){
+    Hive.registerAdapter(UsernameAdapter());
+  }
 
 
   await Hive.openBox('userprefs_db');
+
+   
    
   
   runApp(
@@ -56,17 +63,17 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return  const MaterialApp(
+    return   const MaterialApp(
        //darkTheme: Provider.of<ThemeProvider>(context).themeData,
      // theme: 
       debugShowCheckedModeBanner: false,
       home: 
-      Homeview(),
-     // SplashScreen()
+     // Homeview(),
+      SplashScreen()
       //OnboardingScreen1()
       //onboardingScreen2()
       //MainOnboarding(),
-     //profileScreen1(),
+     // ProfileScreen()
      
      //privacypolicy(),
      //aboutUs()

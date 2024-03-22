@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:manage_your/model/task.dart';
+import 'package:manage_your/model/task/task.dart';
 
 ValueNotifier<List<Tasks>> tasklistNotifier = ValueNotifier([]);
 

@@ -73,10 +73,17 @@ dependencies:
 
   #sidebarX
   sidebarx: ^0.16.3
+
   provider: ^6.1.1
+
   google_fonts: ^6.1.0
+
   flutter_staggered_animations: ^1.1.1
+
+
   table_calendar: ^3.0.8
+
+  flutter_speed_dial: ^7.0.0
 
   
   #flutter_local_notifications: ^17.0.0
@@ -126,6 +133,12 @@ flutter:
    - assets/task.png
    - assets/createtasklogo.png
    - assets/notask.png
+   - assets/add.png
+   - assets/events.png
+   - assets/add image.png
+   - assets/add-image.png
+   - assets/gallery.png
+
 
 
 

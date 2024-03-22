@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:manage_your/data/category/categoryfunctions.dart';
@@ -5,17 +6,17 @@ import 'package:manage_your/data/task/taskfunctions.dart';
 import 'package:manage_your/model/task/task.dart';
 import 'package:manage_your/utils/apps_str.dart';
 
-class Addtaskview extends StatefulWidget {
+class Updateeventview extends StatefulWidget {
  
-  const Addtaskview({super.key});
+  const Updateeventview({super.key});
 
  
  
   @override
-  State<Addtaskview> createState() => _AddtaskviewState();
+  State<Updateeventview> createState() => _UpdateeventviewState();
 }
 
-class _AddtaskviewState extends State<Addtaskview> {
+class _UpdateeventviewState extends State<Updateeventview> {
 
   final _formKey = GlobalKey<FormState>();
 
@@ -82,29 +83,7 @@ String subtitle = "5 minutes before ";
 
 
 
-//task creation
-  Future<void> onCreate()async{
-    final tasktitle = _titlecontroller.text.trim();
-    final taskdescription = _descriptioncontroller.text.trim();
-    if(tasktitle.isEmpty || taskdescription.isEmpty || defaultcategory!.isEmpty || defaultcategory == "Category" ){
-      return;
-    } 
-    //print('$tasktitle $taskdescription');
-
-    final task = Tasks(
-       
-      tasktitle: tasktitle , 
-      taskdescription: taskdescription, 
-      date: pickeddate ?? DateTime.now(),
-      time: formattedTime,
-      category: defaultcategory,
-      // datetime: combinedDateTime,
-      
-      
-          
-          );
-    addtask(task);
-  }
+ 
 
   @override
   Widget build(BuildContext   context) {
@@ -124,7 +103,8 @@ String subtitle = "5 minutes before ";
           child: SingleChildScrollView(
             child: Column(
               children: [
-                Container(
+                
+                 Container(
                   margin: const EdgeInsets.only(top: 40),
                   width: MediaQuery.sizeOf(context).width * 80 / 100,
                   height: 50,
@@ -133,7 +113,7 @@ String subtitle = "5 minutes before ";
                       border: Border(bottom: BorderSide(color: Colors.white))),
                   child: const Center(
                     child: Text(
-                      AppStrings.newtask,
+                      'Update Event',
                       style: TextStyle(
                           fontSize: 20,
                           color: Colors.white,
@@ -141,28 +121,33 @@ String subtitle = "5 minutes before ";
                     ),
                   ),
                 ),
+
                 const SizedBox(
                   width: double.infinity,
                   height: 50,
                 ),
-                Container(
-                  ///
-                  margin: const EdgeInsets.only(left: 0, right: 280),
-                  child: const Text(
-                    AppStrings.tasktitle,
+
+               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Container(
+                    height: 100,
+                    width: 185,
+                     
+                    child:  Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                      const  Text(
+                    'Event Name',
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 17,
                         fontWeight: FontWeight.w400),
                   ),
-                ),
-                const SizedBox(
-                  height: 7,
-                ),
-                Container(
+                     Container(
                  // padding: const EdgeInsets.all(10),
                    // margin: EdgeInsets.only(left: 10, ),
-                  width: MediaQuery.of(context).size.width - 40,
+                  width: 185,
                   height: 70,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
@@ -184,56 +169,69 @@ String subtitle = "5 minutes before ";
                       },
                       
                       decoration: const InputDecoration(
-                          border: InputBorder.none, hintText: "Add Task Name..."),
+                          border: InputBorder.none,  ),
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Container(
-                  //////
-                  margin: const EdgeInsets.only(left: 0, right: 265),
-                  child: const Text(
-                    AppStrings.descriptioninput,
+                      ],
+                    ),
+                  ),
+
+                  Container(
+                    height: 100,
+                    width: 185,
+                    
+                    child: Column(
+                       crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                   'Event Location',
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 17,
                         fontWeight: FontWeight.w400),
                   ),
-                ),
-                const SizedBox(
-                  height: 7,
-                ),
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  //margin: EdgeInsets.only(left: 0,right: 75),
-                  width: MediaQuery.of(context).size.width - 40,
+
+                  Container(
+                 // padding: const EdgeInsets.all(10),
+                   // margin: EdgeInsets.only(left: 10, ),
+                  width: 185,
                   height: 70,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: Colors.white,
                   ),
-                  child: TextFormField(
-                    controller: _descriptioncontroller,
-                    validator: (value) {
-                       if (value == null || value.isEmpty) {
-                           return 'Please enter a task description';
-                          }
+                  child:  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextFormField(
+                      
+                      style: const TextStyle(
+                         
+                      ),
+                       controller: _titlecontroller,
+                      validator: (value) {
+                         if (value == null || value.isEmpty) {
+                          return 'please enter the task description';
+                            }
                           return null;
-                    },
-                    decoration: const InputDecoration(
-                        border: InputBorder.none, hintText: 'Add description...'),
+                      },
+                      
+                      decoration: const InputDecoration(
+                          border: InputBorder.none,  ),
+                    ),
                   ),
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      ],
+                    ),
+                  )
+                ],
+               ),
+
+               Row(
+                 mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Column(
+                     crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         // Text("data"),
                         Container(
@@ -258,9 +256,7 @@ String subtitle = "5 minutes before ";
                           ),
                         ),
                     
-                        const SizedBox(
-                          height: 7,
-                        ),
+                        
                     
                         Container(
                          // padding: const EdgeInsets.all(8),
@@ -319,8 +315,9 @@ String subtitle = "5 minutes before ";
                         ),
                         )
                       ]
-                    ),
-                    Column(
+                  ),
+
+                  Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         // Text("data"),
@@ -346,9 +343,7 @@ String subtitle = "5 minutes before ";
                           ),
                         ),
                     
-                        const SizedBox(
-                          height: 7,
-                        ),
+                        
                     
                         Container(
                           //padding: const EdgeInsets.all(8),
@@ -417,227 +412,32 @@ String subtitle = "5 minutes before ";
                         
                       ],
                     ),
+                ],
+               ),
 
-                    
-                  ],
+                Card(
+                color: const Color.fromARGB(255, 220, 219, 219),
+                child: SizedBox(
+                  height: 230,
+
+                  width: 350,
+                  child: SizedBox(
+                    width: 10,
+                    height: 10,
+                    child: Image.asset('assets/gallery.png',  )),
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
+               ),
 
-                 
+               Text("Tap to add an image",
+               style: TextStyle(
+                fontSize: 15,
+                color: Colors.white
+               ),
+               ),
 
-                
-                Row(
-                  children: [
-                    const SizedBox(
-                      width: 24,
-                    ),
+              SizedBox(height: 140,),
 
-                    SizedBox(
-                      child: Text(defaultcategory!,
-                      style: const TextStyle(color: Colors.white,fontSize: 20),),
-                    ),
-
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    
-                
-                
-                    // Category section
-                    DropdownButton(
-                      
-                        dropdownColor: const Color.fromARGB(255, 9, 8, 79),
-                        value: selectedCategory,
-                        items: items.map((items) {
-                          return DropdownMenuItem(
-                            value: items,
-                            child: Text(
-                              items,
-                              style: const TextStyle(color: Colors.white),
-                            ),
-                          );
-                        }).toList(),
-                          
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            //defaultcategory = newValue;
-                            //catergoryName = newValue;
-                           // categoryCreate(catergoryName);
-                           if(newValue!='CREATE NEW'){
-                             //selectedCategory = newValue;
-                             defaultcategory = newValue;
-                           }else{
-                            showDialog(
-                                context: context, 
-                                builder: (ctx)=>
-                                AlertDialog(
-                                  title: const Text("Create New Category"),
-                                  content: TextField(
-                                    
-                                    controller: _categorycontroller,
-                                    // onChanged: (value){
-                                    //   setState(() {
-                                    //     // newCategory=value;
-                                    //    // catergoryName = value;
-                                    //     selectedCategory = value;
-                                    //    // categoryCreate(catergoryName);
-                                         
-                                    //   }
-                                    //   );
-                                     
-                                     
-                                    // },
-                                  ),
-                                  actions: [
-                                    TextButton(
-                                      onPressed:(){
-                                        Navigator.of(context).pop();
-                                      }, 
-                                      child: const Text("Cancel"),
-                                      ),
-                                      TextButton(
-                                      
-                                      onPressed:(){
-
-                                          String newCategory =
-                                      _categorycontroller.text.trim().toLowerCase();
-                                  if (newCategory.isNotEmpty && items.contains(newCategory) ) {
-                                    setState(() {
-                                      defaultcategory = newCategory;
-                                    });
-                                    print("already added");
-                                     showDialog(
-                                      context: context, builder: (ctx)=>
-                                      const AlertDialog(
-                                        title: Text("Category already added"),
-                                      )
-                                      );
-                                      
-                                    // items.add(newCategory);
-                                    // selectedCategory = newCategory;
-                                  }else if(_categorycontroller.text.isNotEmpty){
-                                    items.add(newCategory);
-                                    categoryCreate(newCategory);
-                                  
-                                  }
-                                  
-
-                                  setState(() {
-                                     if(_categorycontroller.text.isNotEmpty){
-                                      defaultcategory = newCategory;
-                                     }
-                                    //  defaultcategory = newCategory;
-                                  });
-                                   
-                                  //        setState(() {
-                                  //         String newCategory =
-                                  //     _categorycontroller.text.trim().toLowerCase();
-                                  // if (newCategory.isNotEmpty && items.contains(newCategory)) {
-                                  //    showDialog(
-                                  //     context: context, builder: (ctx)=>
-                                  //     const AlertDialog(
-                                  //       title: Text("Category already added"),
-                                  //     )
-                                  //     );
-                                  //   // items.add(newCategory);
-                                  //   // selectedCategory = newCategory;
-                                  // }
-                                  //  items.add(newCategory);
-                                  // selectedCategory = newCategory;
-                                  //     });
-                                        Navigator.of(context).pop();
-                                        _categorycontroller.clear();
-                                  
-                                      }, 
-                                      child: const Text("Create"),
-                                      )
-                                      
-                                  ],
-                                )
-                                  
-                                
-                
-                                );
-                           }
-                           
-                            
-                
-                          },
-                          );
-                        },
-
-                        
-                        ),
-                  ],
-                ),
-                // const SizedBox(
-                //   height: 15,
-                // ),
-                    
-                    
-                const SizedBox(
-                  width: 24,
-                ),
-                    
-                
-                GestureDetector(
-                  onTap: () {
-                    //print("reminder");
-                  },
-                  child: PopupMenuButton(
-                    itemBuilder: (context) => [
-                      PopupMenuItem(
-                        value: timings[0],
-                        child: Text(timings[0]),
-                      ),
-                      PopupMenuItem(
-                        value: timings[1],
-                        child: Text(timings[1]),
-                      ),
-                      PopupMenuItem(
-                        value: timings[2],
-                        child: Text(timings[2]),
-                      ),
-                      PopupMenuItem(
-                        value: timings[3],
-                        child: Text(timings[3]),
-                      ),
-                      PopupMenuItem(
-                        value: timings[4],
-                        child: Text(timings[4]),
-                      ),
-                      PopupMenuItem(
-                        value: timings[5],
-                        child: Text(timings[5]),
-                      ),
-                    ],
-                    onSelected: (String newvalue) {
-                      setState(() {
-                        subtitle = newvalue;
-                      });
-                    },
-                    child: ListTile(
-                  leading: const Icon(Icons.edit_notifications_outlined,color: Colors.white,size: 30,),
-                  title:  const Text("Reminder At",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 17
-                      ),
-                      ),
-                      subtitle:Text(subtitle,
-                      style: const TextStyle(color: Colors.white),)
-                      ),
-                  //   child: Text("Reminder At",
-                  //       style: TextStyle(color: Colors.white, fontSize: 18)),
-                   ),
-                ),
-                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.15,
-                  // 118,
-                ),
-                Padding(
+               Padding(
                   padding: const EdgeInsets.only(bottom: 20),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -681,7 +481,7 @@ String subtitle = "5 minutes before ";
                                   
                                    if (_formKey.currentState!.validate()  ) {
                                     if(defaultcategory!=null && defaultcategory != 'Category'){
-                                    onCreate();
+                                     
                                     Navigator.pop(context);
                                     }else{
                                       const snack = SnackBar(
@@ -704,7 +504,7 @@ String subtitle = "5 minutes before ";
                                    
                                 },
                                 child: const Text(
-                                "Create",
+                                "Confirm",
                                  style: TextStyle(color: Colors.white),
                               ),
                               )),
@@ -713,6 +513,10 @@ String subtitle = "5 minutes before ";
                     ],
                   ),
                 )
+
+
+ 
+                 
               ],
             ),
           ),

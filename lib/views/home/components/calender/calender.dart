@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:manage_your/model/task.dart';
+import 'package:manage_your/model/task/task.dart';
 import 'package:manage_your/utils/apps_colors.dart';
 import 'package:manage_your/views/home/widgets/taskwideget.dart';
 import 'package:manage_your/views/tasks/Addtaskview.dart';

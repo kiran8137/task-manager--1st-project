@@ -3,13 +3,16 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:manage_your/model/category_model/category.dart';
-import 'package:manage_your/model/task.dart';
+import 'package:manage_your/model/event/event.dart';
+import 'package:manage_your/model/task/task.dart';
 import 'package:manage_your/model/username_model/username.dart';
  
 import 'package:manage_your/model/userprefs/userprefs.dart';
  
 import 'package:manage_your/theme/theme.dart';
 import 'package:manage_your/theme/themeprovider.dart';
+import 'package:manage_your/views/Events/event/eventdetail.dart';
+import 'package:manage_your/views/Events/event/updateEvent.dart';
 import 'package:manage_your/views/home/components/search/searchscreen.dart';
 import 'package:manage_your/views/home/homeview.dart';
 //import 'package:manage_your/views/taskdetail.dart';
@@ -42,6 +45,9 @@ Future<void> main() async {
   if(!Hive.isAdapterRegistered(UsernameAdapter().typeId)){
     Hive.registerAdapter(UsernameAdapter());
   }
+  if(!Hive.isAdapterRegistered(EventAdapter().typeId)){
+    Hive.registerAdapter(EventAdapter());
+  }
 
 
   await Hive.openBox('userprefs_db');
@@ -68,8 +74,8 @@ class MyApp extends StatelessWidget {
      // theme: 
       debugShowCheckedModeBanner: false,
       home: 
-     // Homeview(),
-      SplashScreen()
+      Homeview(),
+      //SplashScreen()
       //OnboardingScreen1()
       //onboardingScreen2()
       //MainOnboarding(),
@@ -82,8 +88,8 @@ class MyApp extends StatelessWidget {
      //taskDetailview()
      //SettingsPage()
      //searchscreen()
-      
-       
+     // Updateeventview()
+      // EventDetailView()
     );
   }
 }

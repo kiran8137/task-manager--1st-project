@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:manage_your/model/task.dart';
+import 'package:manage_your/model/task/task.dart';
 import 'package:manage_your/utils/apps_colors.dart';
 import 'package:manage_your/views/taskdetail/taskdetail.dart';
 import 'package:manage_your/views/tasks/updatetaskview.dart';

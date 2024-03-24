@@ -298,7 +298,7 @@ String subtitle = "5 minutes before ";
                               
                               context: context,
                               initialDate: DateTime.now(),
-                              firstDate: DateTime(2000), 
+                              firstDate:DateTime.now(), 
                               lastDate: DateTime(2100),
                               );
                               // setState(() {

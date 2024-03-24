@@ -143,7 +143,7 @@ late bool iseditSelected = false;
                                 ),
                                 TextButton(
                                   onPressed:(){
-                                    remove(widget.index);
+                                    removetask(widget.index);
                                     Navigator.of(context).pop();
                                       Navigator.push(context, MaterialPageRoute(builder: (context)=> const Homeview() ));
                                   }, 

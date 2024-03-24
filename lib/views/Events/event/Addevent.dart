@@ -60,7 +60,8 @@ class _AddeventviewState extends State<Addeventview> {
 
   final event = Event(eventname: eventname, 
   eventlocation: eventlocation, 
-  date: eventdate ?? DateTime.now()
+  date: eventdate ?? DateTime.now(),
+  time: formattedTime,
   );
 
   addevents(event);
@@ -283,7 +284,7 @@ class _AddeventviewState extends State<Addeventview> {
                               
                               context: context,
                               initialDate: DateTime.now(),
-                              firstDate: DateTime(2000), 
+                              firstDate: DateTime.now(), 
                               lastDate: DateTime(2100),
                               );
                               // setState(() {
@@ -454,6 +455,7 @@ class _AddeventviewState extends State<Addeventview> {
                       GestureDetector(
                         onTap: () {
                           onCreateevent();
+                          Navigator.pop(context);
                          // print("create");
                         },
                         child: Container(

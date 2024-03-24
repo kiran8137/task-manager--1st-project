@@ -1,4 +1,5 @@
 import 'dart:ffi';
+import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,8 +10,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
 import 'package:manage_your/alert_dialogs/no_task.dart';
 import 'package:manage_your/data/category/categoryfunctions.dart';
+import 'package:manage_your/data/event/eventfucntions.dart';
 import 'package:manage_your/data/task/taskfunctions.dart';
 import 'package:manage_your/data/userprofile/userprofile.dart';
+import 'package:manage_your/model/event/event.dart';
 import 'package:manage_your/model/task/task.dart';
 import 'package:manage_your/utils/apps_colors.dart';
 import 'package:manage_your/views/Events/event/Addevent.dart';
@@ -62,6 +65,7 @@ class _HomeviewState extends State<Homeview> {
   @override
   Widget build(BuildContext context) {
     getAllTasks();
+    getallevents();
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -482,7 +486,7 @@ class _HomeviewState extends State<Homeview> {
                                                                     "Cancel")),
                                                             TextButton(
                                                               onPressed: () {
-                                                                remove(index);
+                                                                removetask(index);
                                                                 Navigator.of(ctx)
                                                                     .pop();
                                                               },
@@ -549,8 +553,75 @@ class _HomeviewState extends State<Homeview> {
 
 
 
-
-       Eventwidget()
+      ValueListenableBuilder(
+        valueListenable: eventlistNotifier, 
+        builder:  (BuildContext context, List<Event> eventlist,
+                      Widget? child){
+                        return Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: AnimationLimiter(
+                            child: ListView.builder(
+                              itemCount: eventlist.length,
+                              itemBuilder: ((context, index) {
+                                final events = eventlist[index];
+                                return AnimationConfiguration.staggeredList(
+                                   position: index,
+                                  duration: const Duration(milliseconds: 1000),
+                                  child: SlideAnimation(
+                                   // verticalOffset: 50.0,
+                                    child: FadeInAnimation(
+                                      child: Slidable(
+                                        startActionPane: ActionPane(
+                                          motion: const ScrollMotion(), 
+                                          children: [
+                                            SlidableAction(
+                                              icon: CupertinoIcons.delete,
+                                              onPressed: (onPressed){
+                                                 showDialog(
+                                                    context: context,
+                                                    builder: (ctx) => AlertDialog(
+                                                          title: const Text(
+                                                              "Alert....!"),
+                                                          content: const Text(
+                                                              "Sure You Want to Delete This Task"),
+                                                          actions: [
+                                                            TextButton(
+                                                                onPressed: () {
+                                                                  Navigator.of(ctx).pop();
+                                                                      
+                                                                },
+                                                                child: const Text(
+                                                                    "Cancel")),
+                                                            TextButton(
+                                                              onPressed: () {
+                                                                removeevent(index);
+                                                                Navigator.of(ctx)
+                                                                    .pop();
+                                                              },
+                                                              child: const Text(
+                                                                  "Ok"),
+                                                            ),
+                                                          ],
+                                                        ));
+                                              })
+                                          ]),
+                                        child: Eventwidget(
+                                          eventname: events.eventname,
+                                          eventlocation: events.eventlocation,
+                                          date: events.date,
+                                          time: events.time,
+                                          index: index,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              })),
+                          ),
+                        );
+                      })
+       
+       
       ]
     );
   }

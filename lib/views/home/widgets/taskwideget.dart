@@ -18,11 +18,8 @@ class Taskwidget extends StatefulWidget {
 
           
     
-  })
-  {
-   // print(date.runtimeType);
-  // print(date);
-  }
+  });
+
 
   final tasktitle;
   final taskdescription;

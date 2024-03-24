@@ -46,7 +46,7 @@ Future<void> updateTask({TextEditingController? titleController , TextEditingCon
   }
 
 
-  void remove(index)async{
+  void removetask(index)async{
    final box = await Hive.openBox<Tasks>('task_db');
    await box.deleteAt(index);
   tasklistNotifier.value = box.values.toList();

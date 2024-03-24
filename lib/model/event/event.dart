@@ -12,19 +12,23 @@ class Event{
   String eventlocation;
 
   @HiveField(2)
-  DateTime date;
+  DateTime? date;
 
   @HiveField(3)
   String? time;
+
+  @HiveField(4)
+  String? imagepath;
 
 Event({
   required this.eventname,
   required this.eventlocation,
   required this.date,
-  this.time
+  this.time,
+  this.imagepath
 }){
 
-  print("......eventname:$eventname eventlocation:$eventlocation date:$date   ");
+  print("......eventname:$eventname eventlocation:$eventlocation date:$date time:$time  ");
 }
 
   

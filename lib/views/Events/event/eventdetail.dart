@@ -1,31 +1,34 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:manage_your/data/category/categoryfunctions.dart';
+import 'package:manage_your/data/event/eventfucntions.dart';
 import 'package:manage_your/data/task/taskfunctions.dart';
+import 'package:manage_your/model/event/event.dart';
 import 'package:manage_your/model/task/task.dart';
 import 'package:manage_your/utils/apps_colors.dart';
 import 'package:manage_your/views/home/homeview.dart';
 
 class EventDetailView extends StatefulWidget {
   const EventDetailView({
-    super.key,
+    super.key, 
+    required this.event, 
+    required this.index,
   });
 
-// final Tasks task;
-// final int index;
-  // final String? tasktitle;
-  // final String? taskdescription;
-  // final DateTime? duedate;
+ final Event event;
+final int index;
 
   @override
   State<EventDetailView> createState() => _EventDetailViewState();
 }
 
 class _EventDetailViewState extends State<EventDetailView> {
-  TextEditingController? titlecontroller;
-  TextEditingController? descriptioncontroller;
+  TextEditingController? eventnamecontroller;
+  TextEditingController? eventlocationcontroller;
 
-  final TextEditingController categorycontroller = TextEditingController();
+   
 
   String? recieveddate;
   DateTime? newPickedDate;
@@ -39,15 +42,18 @@ class _EventDetailViewState extends State<EventDetailView> {
 
   @override
   void initState() {
+
+    eventnamecontroller = TextEditingController(text: widget.event.eventname);
+    eventlocationcontroller = TextEditingController(text: widget.event.eventlocation);
+    recieveddate = DateFormat('dd-MM-yyyy').format(widget.event.date!);
+    recievedtime = widget.event.time;
+
     super.initState();
   }
 
-// TextEditingController titlecontroller = TextEditingController(text: widget.task.tasktitle);
-// TextEditingController _descriptioncontroller = TextEditingController();
+ 
 
-  String? dropdownvalue;
-
-// var items = ['No Category', 'Work', 'personal', 'Wishlist', 'Birthday','CREATE NEW']; //catergory list
+  
 
   late bool iseditSelected = false;
 
@@ -134,6 +140,14 @@ class _EventDetailViewState extends State<EventDetailView> {
         visible: iseditSelected,
         child: GestureDetector(
           onTap: () {
+            updateEvent(
+              eventnameController: eventnamecontroller,
+              eventlocationController: eventlocationcontroller,
+              date: newPickedDate ?? widget.event.date, 
+              time: formattedTime ?? recievedtime,
+              index: widget.index
+            
+            );
             Navigator.of(context).pop();
             setState(() {
               iseditSelected = !iseditSelected;
@@ -185,8 +199,8 @@ class _EventDetailViewState extends State<EventDetailView> {
                 const SizedBox(
                   height: 5,
                 ),
-                const Text(
-                  'Event Name',
+                 Text(
+                   widget.event.eventname,
                   style: TextStyle(fontSize: 25, color: Colors.white),
                 ),
                 const SizedBox(
@@ -198,9 +212,10 @@ class _EventDetailViewState extends State<EventDetailView> {
 
                     if (iseditSelected) {
                       newPickedDate = await showDatePicker(
+                        
                         context: context,
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime(2000),
+                        initialDate: widget.event.date,
+                        firstDate: DateTime.now(),
                         lastDate: DateTime(2100),
                       );
                     }
@@ -242,9 +257,9 @@ class _EventDetailViewState extends State<EventDetailView> {
                             borderRadius: BorderRadius.circular(5),
                             color: const Color.fromARGB(255, 48, 47, 47),
                           ),
-                          child: const Center(
+                          child:  Center(
                               child: Text(
-                            '',
+                            recieveddate!,
                             //DateFormat('dd-MM-yyyy').format(widget.task.date!),
                             style: TextStyle(
                                 color: Colors.white, fontSize: 16),
@@ -335,14 +350,14 @@ class _EventDetailViewState extends State<EventDetailView> {
                 const Divider(color: Color.fromARGB(53, 158, 158, 158)),
 
                  const SizedBox(height: 5),
-                const Row(
+                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       "Location",
                       style: TextStyle(color: Colors.white, fontSize: 16),
                     ),
-                    Text('location',
+                    Text(widget.event.eventlocation,
                         style: TextStyle(
                             color: Colors.white, fontSize: 16))
                   ],

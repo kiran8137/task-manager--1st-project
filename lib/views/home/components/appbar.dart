@@ -5,6 +5,7 @@ import 'package:manage_your/views/home/components/calender/calender.dart';
 import 'package:manage_your/views/home/components/search/searchscreen.dart';
 
 PreferredSize appbar(GlobalKey<ScaffoldState>key, BuildContext context){
+   
   //bool isSearchvVisible = false;
   return PreferredSize(
     preferredSize: const Size.fromHeight(110),
@@ -95,7 +96,7 @@ PreferredSize appbar(GlobalKey<ScaffoldState>key, BuildContext context){
                     onTap: () {
             
                        //togglesearch(!isSearchvisible);
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> const SearchScreen()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>  SearchScreen()));
                         
                       //todo search
                       //print("search");
@@ -129,7 +130,8 @@ PreferredSize appbar(GlobalKey<ScaffoldState>key, BuildContext context){
               ],
             ),
 
-            const TabBar(
+             TabBar(
+              
               indicatorColor: Colors.blue,
               tabs: [
                 Tab(

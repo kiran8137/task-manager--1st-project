@@ -611,6 +611,7 @@ class _HomeviewState extends State<Homeview> {
                                           date: events.date,
                                           time: events.time,
                                           index: index,
+                                          imagepath: events.imagepath,
                                         ),
                                       ),
                                     ),

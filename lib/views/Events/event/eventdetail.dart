@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -191,6 +192,7 @@ class _EventDetailViewState extends State<EventDetailView> {
                   height: 250,
                   width: double.infinity,
                   color: Colors.red,
+                  child: Image.file(File(widget.event.imagepath!),fit:BoxFit.cover),
                 ),
                 const SizedBox(
                   height: 5,

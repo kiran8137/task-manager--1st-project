@@ -1,5 +1,7 @@
 // ignore_for_file: unused_import
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:manage_your/model/category_model/category.dart';
@@ -26,6 +28,7 @@ import 'package:manage_your/views/splashscreen/splashscreen.dart';
 import 'package:manage_your/views/taskdetail/taskdetail.dart';
 import 'package:manage_your/views/tasks/Addtaskview.dart';
 import 'package:manage_your/views/tasks/updatetaskview.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 //import 'package:manage_your/views/tasks/Addtask.dart';
 
@@ -33,6 +36,9 @@ Future<void> main() async {
   
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
+  Directory directory = await getApplicationDocumentsDirectory();
+
+
   if(!Hive.isAdapterRegistered(TasksAdapter().typeId)){
     Hive.registerAdapter(TasksAdapter());
   }

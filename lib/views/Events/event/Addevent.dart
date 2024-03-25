@@ -1,4 +1,4 @@
-
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:manage_your/data/category/categoryfunctions.dart';
@@ -7,6 +7,7 @@ import 'package:manage_your/data/task/taskfunctions.dart';
 import 'package:manage_your/model/event/event.dart';
 import 'package:manage_your/model/task/task.dart';
 import 'package:manage_your/utils/apps_str.dart';
+import 'package:image_picker/image_picker.dart';
 
 class Addeventview extends StatefulWidget {
  
@@ -33,6 +34,9 @@ class _AddeventviewState extends State<Addeventview> {
   String eventname = ""; //Task name by the user
   String eventlocation = ""; //description by the user
   DateTime? eventdate;  
+  XFile? _image;
+  final picker = ImagePicker();
+  
    
  
   
@@ -62,9 +66,20 @@ class _AddeventviewState extends State<Addeventview> {
   eventlocation: eventlocation, 
   date: eventdate ?? DateTime.now(),
   time: formattedTime,
+  imagepath: _image!.path,
   );
 
   addevents(event);
+ }
+
+
+
+ getimagefromcamera() async{
+  final image = await  picker.pickImage(source: ImageSource.gallery);
+
+  setState(() {
+    _image = image;
+  });
  }
 
  
@@ -405,18 +420,30 @@ class _AddeventviewState extends State<Addeventview> {
                 ],
                ),
 
-                Card(
-                color: const Color.fromARGB(255, 220, 219, 219),
-                child: SizedBox(
-                  height: 230,
 
-                  width: 350,
+
+                GestureDetector(
+                  onTap: (){
+                    getimagefromcamera();
+                  },
+                  child: Card(
+                  color: const Color.fromARGB(255, 220, 219, 219),
                   child: SizedBox(
-                    width: 10,
-                    height: 10,
-                    child: Image.asset('assets/gallery.png',  )),
+                    height: 230,
+                  
+                    width: 350,
+                    child: SizedBox(
+                      width: 10,
+                      height: 10,
+                      child: 
+                      _image==null ?
+                       Image.asset('assets/gallery.png'):
+                       Image.file(File(_image!.path,),fit:BoxFit.cover,
+                       ),
+                     ),
+                  ),
+                                 ),
                 ),
-               ),
 
                Text("Tap to add an image",
                style: TextStyle(
@@ -454,8 +481,23 @@ class _AddeventviewState extends State<Addeventview> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          onCreateevent();
-                          Navigator.pop(context);
+                          if(_formKey.currentState!.validate()){
+                            if(_image!=null){
+                              onCreateevent();
+                               Navigator.pop(context);
+                            }else{
+                               const snack = SnackBar(
+                                      content: Text("Image not selected",
+                                      style: TextStyle(color: Colors.black),),
+                                      backgroundColor: Colors.white,
+                                      elevation: 10,
+                                      behavior: SnackBarBehavior.floating,
+                                      );
+                                      ScaffoldMessenger.of(context).showSnackBar(snack);
+                            }
+                          }
+                          
+                         // Navigator.pop(context);
                          // print("create");
                         },
                         child: Container(

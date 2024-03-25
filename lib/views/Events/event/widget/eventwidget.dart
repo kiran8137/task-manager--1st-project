@@ -1,4 +1,6 @@
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:manage_your/model/event/event.dart';
@@ -15,6 +17,7 @@ class Eventwidget extends StatefulWidget {
    this.date, 
    this.time,
    required this.index,
+   this.imagepath,
 
    }
     
@@ -32,6 +35,7 @@ class Eventwidget extends StatefulWidget {
   final DateTime? date;
   final String? time;
    final int index;
+   final String? imagepath;
   //final DateTime? dateTime;
   
    
@@ -68,7 +72,7 @@ bool ischecked = false;
     return  Card(
         child: GestureDetector(
           onTap: (){
-            final  dbevent = Event(eventname: widget.eventname, eventlocation: widget.eventlocation, date: widget.date, time: widget.time); 
+            final  dbevent = Event(eventname: widget.eventname, eventlocation: widget.eventlocation, date: widget.date, time: widget.time , imagepath: widget.imagepath); 
             Navigator.push(context, MaterialPageRoute(builder: (context)=>EventDetailView(event: dbevent, index: widget.index,)));
           },
           child: Container(
@@ -85,7 +89,9 @@ bool ischecked = false;
                 SizedBox(
                    
                    width: double.infinity,
-                  child: Image.asset('assets/notask.png',fit: BoxFit.cover,  ),
+                  child: widget.imagepath==null?
+                  Image.asset('assets/notask.png',fit: BoxFit.cover,) :
+                  Image.file(File(widget.imagepath!),fit:BoxFit.cover)
                   ),
               
                   Opacity(

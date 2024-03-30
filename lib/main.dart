@@ -10,6 +10,8 @@ import 'package:manage_your/model/task/task.dart';
 import 'package:manage_your/model/username_model/username.dart';
  
 import 'package:manage_your/model/userprefs/userprefs.dart';
+import 'package:manage_your/notification/awsmnotif.dart';
+import 'package:manage_your/notification/notifi_service.dart';
  
 import 'package:manage_your/theme/theme.dart';
 import 'package:manage_your/theme/themeprovider.dart';
@@ -30,13 +32,17 @@ import 'package:manage_your/views/tasks/Addtaskview.dart';
 import 'package:manage_your/views/tasks/updatetaskview.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
+//import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
 //import 'package:manage_your/views/tasks/Addtask.dart';
 
 Future<void> main() async {
   
   WidgetsFlutterBinding.ensureInitialized();
+  await NotificationService.initializeNofication();
+ // NotificationService().initNotification();
   await Hive.initFlutter();
-  Directory directory = await getApplicationDocumentsDirectory();
+ // Directory directory = await getApplicationDocumentsDirectory();
 
 
   if(!Hive.isAdapterRegistered(TasksAdapter().typeId)){
@@ -70,18 +76,21 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
+
+  static GlobalKey<NavigatorState> navigatorkey = GlobalKey<NavigatorState>();
   const MyApp({super.key});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    
     return   const MaterialApp(
        //darkTheme: Provider.of<ThemeProvider>(context).themeData,
      // theme: 
       debugShowCheckedModeBanner: false,
       home: 
-      Homeview(),
-      //SplashScreen()
+      //Homeview(),
+      SplashScreen()
       //OnboardingScreen1()
       //onboardingScreen2()
       //MainOnboarding(),

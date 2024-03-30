@@ -1,13 +1,10 @@
 import 'dart:io';
-import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:manage_your/data/category/categoryfunctions.dart';
 import 'package:manage_your/data/event/eventfucntions.dart';
-import 'package:manage_your/data/task/taskfunctions.dart';
 import 'package:manage_your/model/event/event.dart';
-import 'package:manage_your/model/task/task.dart';
 import 'package:manage_your/utils/apps_colors.dart';
 import 'package:manage_your/views/home/homeview.dart';
 
@@ -39,7 +36,9 @@ class _EventDetailViewState extends State<EventDetailView> {
 
   String? formattedTime;
 
-  String? defaultcategory;
+  String? recievedimage;
+  XFile? _newpickedimage;
+  final picker = ImagePicker();
 
   @override
   void initState() {
@@ -48,9 +47,22 @@ class _EventDetailViewState extends State<EventDetailView> {
     eventlocationcontroller = TextEditingController(text: widget.event.eventlocation);
     recieveddate = DateFormat('dd-MM-yyyy').format(widget.event.date!);
     recievedtime = widget.event.time;
+    recievedimage = widget.event.imagepath;
 
     super.initState();
   }
+
+  getimage() async{
+  final image = await  picker.pickImage(source: ImageSource.gallery);
+
+  setState(() {
+    _newpickedimage = image;
+    if(_newpickedimage!=null){
+      recievedimage = _newpickedimage!.path;
+    }
+    
+  });
+ }
 
  
 
@@ -119,7 +131,7 @@ class _EventDetailViewState extends State<EventDetailView> {
                                 child: const Text("Cancel")),
                             TextButton(
                               onPressed: () {
-                                //  remove(widget.index);
+                                  removeevent(widget.index);
                                 Navigator.of(context).pop();
                                 Navigator.push(
                                     context,
@@ -146,7 +158,8 @@ class _EventDetailViewState extends State<EventDetailView> {
               eventlocationController: eventlocationcontroller,
               date: newPickedDate ?? widget.event.date, 
               time: formattedTime ?? recievedtime,
-              index: widget.index
+              index: widget.index ,
+              imagepath: _newpickedimage?.path ?? widget.event.imagepath
             
             );
             Navigator.of(context).pop();
@@ -188,12 +201,26 @@ class _EventDetailViewState extends State<EventDetailView> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
+
+                SizedBox(
                   height: 250,
                   width: double.infinity,
-                  color: Colors.red,
-                  child: Image.file(File(widget.event.imagepath!),fit:BoxFit.cover),
-                ),
+                 // color: Colors.red,
+
+
+                  child:
+                   
+                   GestureDetector(
+                    onTap: (){
+                      if(iseditSelected){
+                        getimage();
+                      }
+                     // getimage();
+                    },
+                    child: Image.file(File(recievedimage!),fit:BoxFit.cover),),),
+                
+               // Image.file(File(widget.event.imagepath!),fit:BoxFit.cover),),
+                
                 const SizedBox(
                   height: 5,
                 ),
@@ -201,10 +228,28 @@ class _EventDetailViewState extends State<EventDetailView> {
                 const SizedBox(
                   height: 5,
                 ),
-                 Text(
+                
+                 AnimatedContainer(
+                    //height: 110,
+                    duration: const Duration(milliseconds: 600),
+                    margin:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    decoration: BoxDecoration(
+                      //color:  Colors.red,
+                      borderRadius: BorderRadius.circular(10),
+                      
+                    ),
+                    child: iseditSelected ?
+                    TextFormField(
+                      controller: eventnamecontroller,
+                       style: const TextStyle(color: Colors.white),
+                    ):
+                    Text(
                    widget.event.eventname,
-                  style: TextStyle(fontSize: 25, color: Colors.white),
+                  style: const TextStyle(fontSize: 25, color: Colors.white),
                 ),
+                 ),
+                 
                 const SizedBox(
                   height: 30,
                 ),
@@ -263,7 +308,7 @@ class _EventDetailViewState extends State<EventDetailView> {
                               child: Text(
                             recieveddate!,
                             //DateFormat('dd-MM-yyyy').format(widget.task.date!),
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.white, fontSize: 16),
                           ))),
                     ],
@@ -355,13 +400,20 @@ class _EventDetailViewState extends State<EventDetailView> {
                  Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
+                    const Text(
                       "Location",
                       style: TextStyle(color: Colors.white, fontSize: 16),
                     ),
-                    Text(widget.event.eventlocation,
-                        style: TextStyle(
-                            color: Colors.white, fontSize: 16))
+
+                       
+                       Text(
+                         
+                         
+                         widget.event.eventlocation ,
+                         
+                           style: const TextStyle(
+                               color: Colors.white, fontSize: 16))
+                    
                   ],
                 ),
               ],

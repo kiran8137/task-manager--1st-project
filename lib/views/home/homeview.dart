@@ -1,5 +1,3 @@
-import 'dart:ffi';
-import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +13,7 @@ import 'package:manage_your/data/task/taskfunctions.dart';
 import 'package:manage_your/data/userprofile/userprofile.dart';
 import 'package:manage_your/model/event/event.dart';
 import 'package:manage_your/model/task/task.dart';
-import 'package:manage_your/utils/apps_colors.dart';
+import 'package:manage_your/utils/screensize.dart';
 import 'package:manage_your/views/Events/event/Addevent.dart';
 import 'package:manage_your/views/Events/event/widget/eventwidget.dart';
 import 'package:manage_your/views/home/components/appbar.dart';
@@ -66,255 +64,257 @@ class _HomeviewState extends State<Homeview> {
   Widget build(BuildContext context) {
     getAllTasks();
     getallevents();
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.black,
-        //Theme.of(context).colorScheme.primary,
-      
-        //floating Action button
-        floatingActionButton: AnimationConfiguration.staggeredGrid(
-          position: 0,
-          duration: const Duration(milliseconds: 1000),
-          columnCount: 2,
-          child: SlideAnimation(
-            verticalOffset: 50.0,
-            child: FadeInAnimation(
-              duration: const Duration(milliseconds: 1000),
-              child: InkWell(
-                splashColor: Colors.blue,
-                onTap: () {
-                  print(items);
-                  // displaybottomsheet(context);
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const Addtaskview()));
-                  // print("fab tapped");
-      
-                  //Navigator.pop(context, MaterialPageRoute(builder: (context)=> const addtask()));
-                },
-                child: SpeedDial(
-                  backgroundColor: Colors.blue,
-                  
-                  overlayOpacity: 0.3,
-                  children: [
-                    SpeedDialChild(
-                       child: SizedBox(
-                        height: 30,
-                        width: 30,
-                        child: Image.asset('assets/createtasklogo.png',fit:BoxFit.cover,color: Colors.black,),
-                        ),
-                        label: 'Add Task' ,
-                        onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>Addtaskview()));
-                        }
-                    ),
-                    SpeedDialChild(
-                       child: SizedBox(
-                        height: 30,
-                        width: 30,
-                        child: Image.asset('assets/events.png',fit:BoxFit.cover),
-                        ),
-                        label: 'Add Event' ,
-                        onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>Addeventview()));
-                        }
-                    )
-                  ],
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+    return SafeArea(
+      child: DefaultTabController(
+        length: 2,
+        child: Scaffold(
+          resizeToAvoidBottomInset: false,
+          backgroundColor: Colors.black,
+          //Theme.of(context).colorScheme.primary,
+        
+          //floating Action button
+          floatingActionButton: AnimationConfiguration.staggeredGrid(
+            position: 0,
+            duration: const Duration(milliseconds: 1000),
+            columnCount: 2,
+            child: SlideAnimation(
+              verticalOffset: 50.0,
+              child: FadeInAnimation(
+                duration: const Duration(milliseconds: 1000),
+                child: InkWell(
+                  splashColor: Colors.blue,
+                  onTap: () {
+                    print(items);
+                    // displaybottomsheet(context);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const Addtaskview()));
+                    // print("fab tapped");
+        
+                    //Navigator.pop(context, MaterialPageRoute(builder: (context)=> const addtask()));
+                  },
+                  child: SpeedDial(
+                    backgroundColor: Colors.blue,
+                    
+                    overlayOpacity: 0.3,
                     children: [
-                      Text(
-                        "Add",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      SpeedDialChild(
+                         child: SizedBox(
+                          height: 30,
+                          width: 30,
+                          child: Image.asset('assets/createtasklogo.png',fit:BoxFit.cover,color: Colors.black,),
+                          ),
+                          label: 'Add Task' ,
+                          onTap: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>const Addtaskview()));
+                          }
                       ),
-                      // SizedBox(
-                      //     height: 30,
-                      //     width: 30,
-                      //     child: Image.asset(
-                      //       "assets/createtasklogo.png",
-                      //       fit: BoxFit.contain,
-                      //     ))
+                      SpeedDialChild(
+                         child: SizedBox(
+                          height: 30,
+                          width: 30,
+                          child: Image.asset('assets/events.png',fit:BoxFit.cover),
+                          ),
+                          label: 'Add Event' ,
+                          onTap: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>const Addeventview()));
+                          }
+                      )
                     ],
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Add",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        // SizedBox(
+                        //     height: 30,
+                        //     width: 30,
+                        //     child: Image.asset(
+                        //       "assets/createtasklogo.png",
+                        //       fit: BoxFit.contain,
+                        //     ))
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
           ),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      
-        key: _key,
-      
-        appBar: appbar(
-          _key,
-          context,
-          
-        ),
+          floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         
-      
-      
-        //side menu
-      
-        drawer: Drawer(
-          backgroundColor: const Color.fromARGB(255, 43, 118, 204),
-          child: ListView(
-            children: [
-              SizedBox(height: MediaQuery.of(context).size.height * 0.1),
-              DrawerHeader(
-                padding: const EdgeInsets.all(0),
-                margin: const EdgeInsets.only(left: 8),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // Icon(Icons.close),
-      
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        "Hello , Mr ${widget.username}",
-                        style: const TextStyle(fontSize: 20, color: Colors.white),
-                      ),
-      
-                      const SizedBox(
-                        height: 10,
-                      ),
-      
-                      Container(
-                        padding: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
+          key: _key,
+        
+          appBar: appbar(
+            _key,
+            context,
+            
+          ),
+          
+        
+        
+          //side menu
+        
+          drawer: Drawer(
+            backgroundColor: const Color.fromARGB(255, 43, 118, 204),
+            child: ListView(
+              children: [
+                SizedBox(height: MediaQuery.of(context).size.height * 0.1),
+                DrawerHeader(
+                  padding: const EdgeInsets.all(0),
+                  margin: const EdgeInsets.only(left: 8),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // Icon(Icons.close),
+        
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Text(
+                          "Hello , Mr ${widget.username}",
+                          style: const TextStyle(fontSize: 20, color: Colors.white),
+                        ),
+        
+                        const SizedBox(
+                          height: 10,
+                        ),
+        
+                        Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(15),
+                              border: Border.all(
+                                  color: const Color.fromARGB(145, 57, 91, 155),
+                                  width: 5)),
+                          child: ClipRRect(
                             borderRadius: BorderRadius.circular(15),
-                            border: Border.all(
-                                color: const Color.fromARGB(145, 57, 91, 155),
-                                width: 5)),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(15),
-                          child: Container(
-                            padding: const EdgeInsets.all(10),
-                            height: 50,
-                            width: 50,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15)),
-                            child: Image.asset(
-                              'assets/user.png',
-                              fit: BoxFit.fitHeight,
+                            child: Container(
+                              padding: const EdgeInsets.all(10),
+                              height: 50,
+                              width: 50,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15)),
+                              child: Image.asset(
+                                'assets/user.png',
+                                fit: BoxFit.fitHeight,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              ListTile(
-                leading: GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const Homeview()));
-                  },
-                  child: SizedBox(
-                      height: 25,
-                      width: 25,
-                      child: Image.asset(
-                        "assets/home.png",
-                        color: Colors.white,
-                      )),
-                ),
-                title: GestureDetector(
+                ListTile(
+                  leading: GestureDetector(
                     onTap: () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => const Homeview()));
                     },
-                    child: const Text(
-                      "Home",
-                      style: TextStyle(color: Colors.white),
-                    )),
-              ),
-              ListTile(
-                leading: GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const Homeview()));
-                  },
-                  child: SizedBox(
-                    height: 25,
-                    width: 25,
-                    child: Image.asset(
-                      "assets/setting.png",
-                      color: Colors.white,
-                    ),
+                    child: SizedBox(
+                        height: 25,
+                        width: 25,
+                        child: Image.asset(
+                          "assets/home.png",
+                          color: Colors.white,
+                        )),
                   ),
+                  title: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Homeview()));
+                      },
+                      child: const Text(
+                        "Home",
+                        style: TextStyle(color: Colors.white),
+                      )),
                 ),
-                title: GestureDetector(
+                ListTile(
+                  leading: GestureDetector(
                     onTap: () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const SettingsPage()));
+                              builder: (context) => const Homeview()));
                     },
-                    child: const Text(
-                      "Settings",
-                      style: TextStyle(color: Colors.white),
-                    )),
-              ),
-      
-              ListTile(
-                leading: GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const Homeview()));
-                  },
-                  child: const SizedBox(
-                    height: 25,
-                    width: 25,
-                    child:  Icon(Icons.logout,color: Colors.white,),
+                    child: SizedBox(
+                      height: 25,
+                      width: 25,
+                      child: Image.asset(
+                        "assets/setting.png",
+                        color: Colors.white,
+                      ),
+                    ),
                   ),
+                  title: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const SettingsPage()));
+                      },
+                      child: const Text(
+                        "Settings",
+                        style: TextStyle(color: Colors.white),
+                      )),
                 ),
-                title: GestureDetector(
+        
+                ListTile(
+                  leading: GestureDetector(
                     onTap: () {
-                      deleteuserdetails();
-                      
-                      Navigator.pushAndRemoveUntil(
+                      Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>const  MainOnboarding(),
-                              
-                              ),
-                              (route) => false);
+                              builder: (context) => const Homeview()));
                     },
-                    child: const Text(
-                      "logout",
-                      style: TextStyle(color: Colors.white),
-                    )),
-              ),
-      
-              
-      
-            ],
+                    child: const SizedBox(
+                      height: 25,
+                      width: 25,
+                      child:  Icon(Icons.logout,color: Colors.white,),
+                    ),
+                  ),
+                  title: GestureDetector(
+                      onTap: () {
+                        deleteuserdetails();
+                        
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>const  MainOnboarding(),
+                                
+                                ),
+                                (route) => false);
+                      },
+                      child: const Text(
+                        "logout",
+                        style: TextStyle(color: Colors.white),
+                      )),
+                ),
+        
+                
+        
+              ],
+            ),
           ),
+        
+          //body
+        
+          body: _buildhomebody(),
         ),
-      
-        //body
-      
-        body: _buildhomebody(),
       ),
     );
   }
@@ -366,13 +366,15 @@ class _HomeviewState extends State<Homeview> {
                       CupertinoIcons.delete,
                       color: Colors.white,
                       size: 30,
-                    )),
+                    )
+                    ),
       
       
       
                 Container(
                   height: 50,
-                  width: 380,
+                  width: screenwidth,
+                  // 380,
                   padding: const EdgeInsets.all(8),
                   child: categoryfilter(),
                 ),
@@ -389,38 +391,7 @@ class _HomeviewState extends State<Homeview> {
               height: 6,
             ),
       
-            //searchbar
-      
-            //searchOptionbar(isSearchvisible, searchController),
-      
-            //Tasks
-      
-            //  SizedBox(
-            //       width: double.infinity,
-            //       height: 600,
-            //       child: AnimationLimiter(
-            //         child: ListView.builder(
-            //             itemCount: selectedtask.length,
-            //             itemBuilder: (context, index) {
-            //               final tasks = selectedtask[index];
-            //               return AnimationConfiguration.staggeredList(
-            //                 position: index,
-            //                 duration: const Duration(milliseconds: 1000),
-            //                 child: SlideAnimation(
-            //                   child: FadeInAnimation(
-            //                     child: Taskwidget(
-            //                         tasktitle: tasks.tasktitle,
-            //                         taskdescription: tasks.taskdescription,
-            //                         date: tasks.date,
-            //                         time: tasks.time,
-            //                         category: tasks.category,
-            //                         index: index),
-            //                   ),
-            //                 ),
-            //               );
-            //             }),
-            //       ),
-            //     ),
+            
       
             SizedBox(
                 width: double.infinity,
@@ -516,11 +487,11 @@ class _HomeviewState extends State<Homeview> {
                           )
                         : Stack(children: [
                             Positioned(
-                              top: 110,
-                              left: 95,
+                              top:   MediaQuery.of(context).size.height * 0.15, //110,
+                              left:   MediaQuery.of(context).size.width * 0.25, //100,
                               child: SizedBox(
-                                height: 200,
-                                width: 200,
+                                height: MediaQuery.of(context).size.height * 0.3,// 200,
+                                width: MediaQuery.of(context).size.width * 0.5,//200,
                                 child: Image.asset(
                                   "assets/task.png",
                                   fit: BoxFit.contain,
@@ -528,9 +499,9 @@ class _HomeviewState extends State<Homeview> {
                               ),
                             ),
                             Positioned(
-                                top: 275,
-                                left: 120,
-                                child: Text("Add Your Task ${widget.username}",
+                                top: MediaQuery.of(context).size.height * 0.37,//275,
+                                left: MediaQuery.of(context).size.width * 0.22,//95,
+                                child: Text("Add Your Task or Event ${widget.username}",
                                     style: GoogleFonts.italianno(
                                         textStyle: const TextStyle(
                                             color: Colors.white, fontSize: 25))
@@ -552,12 +523,14 @@ class _HomeviewState extends State<Homeview> {
       ),
 
 
+       
 
       ValueListenableBuilder(
         valueListenable: eventlistNotifier, 
         builder:  (BuildContext context, List<Event> eventlist,
                       Widget? child){
-                        return Padding(
+                        return eventlist.isNotEmpty ?
+                         Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: AnimationLimiter(
                             child: ListView.builder(
@@ -619,8 +592,38 @@ class _HomeviewState extends State<Homeview> {
                                 );
                               })),
                           ),
-                        );
-                      })
+                        ):
+                        Stack(children: [
+                            Positioned(
+                              top: MediaQuery.of(context).size.height * 0.24,//185,
+                              left: MediaQuery.of(context).size.width * 0.26,//100,
+                              child: SizedBox(
+                                height:  MediaQuery.of(context).size.height * 0.3,//200,
+                                width:  MediaQuery.of(context).size.width * 0.5, //200,
+                                child: Image.asset(
+                                  "assets/task.png",
+                                  fit: BoxFit.contain,
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                                top: MediaQuery.of(context).size.height * 0.46,// 348,
+                                left: MediaQuery.of(context).size.width * 0.22,//95,
+                                child: Text("Add Your Task or Event ${widget.username}",
+                                    style: GoogleFonts.italianno(
+                                        textStyle: const TextStyle(
+                                            color: Colors.white, fontSize: 25))
+                                    // TextStyle(
+                                    //   color: Colors.white,
+                                    //   fontSize: 18,
+                                    //   fontStyle: GoogleFonts.aBeeZee
+                                    // ),
+                                    ))
+                          ]
+                          );
+
+                      }
+                      )
        
        
       ]

@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:manage_your/data/category/categoryfunctions.dart';
 import 'package:manage_your/data/task/taskfunctions.dart';
 import 'package:manage_your/model/task/task.dart';
+import 'package:manage_your/notification/awsmnotif.dart';
 import 'package:manage_your/utils/apps_str.dart';
 
 class Addtaskview extends StatefulWidget {
@@ -57,7 +58,9 @@ class _AddtaskviewState extends State<Addtaskview> {
   '2 days before'
 ];
 String subtitle = "5 minutes before ";
+String defaultime = "5";
 
+ String? remindertime; 
 
 //  var items = ['No Category', 'Work', 'personal', 'Wishlist', 'Birthday','CREATE NEW']; //catergory list
 
@@ -98,6 +101,7 @@ String subtitle = "5 minutes before ";
       date: pickeddate ?? DateTime.now(),
       time: formattedTime,
       category: defaultcategory,
+      reminderTime: remindertime ?? defaultime
       // datetime: combinedDateTime,
       
       
@@ -615,8 +619,36 @@ String subtitle = "5 minutes before ";
                     ],
                     onSelected: (String newvalue) {
                       setState(() {
+                       
                         subtitle = newvalue;
                       });
+//                       final timings = [
+//   '5 minutes before',
+//   '10 minutes before',
+//   '15 minutes before',
+//   '30 minutes before',
+//   '1 day before',
+//   '2 days before'
+// ];
+                    
+                      if(newvalue == '5 minutes before'){
+                        remindertime = '5';
+                      }else if(newvalue == '10 minutes before'){
+                        remindertime = '10';
+                      }
+                      else if(newvalue == '15 minutes before'){
+                        remindertime = '15';
+                      }
+                      else if(newvalue == '30 minutes before'){
+                        remindertime = '30';
+                      }
+                      else if(newvalue == '1 day before'){
+                        remindertime = '1';
+                      }
+                      else if(newvalue == '2 day before'){
+                        remindertime = '2';
+                      }
+                        
                     },
                     child: ListTile(
                   leading: const Icon(Icons.edit_notifications_outlined,color: Colors.white,size: 30,),
@@ -681,8 +713,34 @@ String subtitle = "5 minutes before ";
                                   
                                    if (_formKey.currentState!.validate()  ) {
                                     if(defaultcategory!=null && defaultcategory != 'Category'){
-                                    onCreate();
+
+                                       onCreate();
+                                      if(pickeddate!=null && pickedtime!=null){
+                                        int day = pickeddate!.day;
+                                        int month = pickeddate!.month;
+                                        int year = pickeddate!.year;
+                                        int hour = pickedtime!.hour;
+                                        int minute = pickedtime!.minute;
+                                        NotificationService.showNotification(
+                                          title: taskname, 
+                                          body: description ,
+                                          day: day,
+                                          month: month,
+                                          year: year,
+                                          hour: hour,
+                                          minute: minute,
+                                          
+                                            );
+                                      }
+                                      
+                                      
+                                       print(pickedtime);
                                     Navigator.pop(context);
+                                   
+
+                                    //DateTime selectedtime = 
+                                   // DateTime _selectedreminder = DateTime(pickedtime!.hour, pickedtime!.minute).subtract(Duration(minutes: int.parse(remindertime!)));
+                                    
                                     }else{
                                       const snack = SnackBar(
                                       content: Text("Category not selected",

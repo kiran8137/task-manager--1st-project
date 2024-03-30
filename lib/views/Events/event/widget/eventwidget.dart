@@ -4,11 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:manage_your/model/event/event.dart';
-import 'package:manage_your/model/task/task.dart';
-import 'package:manage_your/utils/apps_colors.dart';
 import 'package:manage_your/views/Events/event/eventdetail.dart';
-import 'package:manage_your/views/taskdetail/taskdetail.dart';
-import 'package:manage_your/views/tasks/updatetaskview.dart';
 //import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 class Eventwidget extends StatefulWidget {
    Eventwidget({super.key, 
@@ -26,10 +22,7 @@ class Eventwidget extends StatefulWidget {
           
     
   )
-  {
-    
-  }
-
+;
   final eventname;
   final eventlocation;
   final DateTime? date;
@@ -82,6 +75,7 @@ bool ischecked = false;
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               color: Colors.white,
+              
             ),
               
             child: Stack(
@@ -97,7 +91,7 @@ bool ischecked = false;
                   Opacity(
                     opacity: 0.9,
                     child: Container(
-                      margin: EdgeInsets.only(top: 80),
+                      margin: const EdgeInsets.only(top: 80),
                      height:  double.infinity,
                      width: double.infinity,
                      color: Colors.blue,
@@ -109,23 +103,23 @@ bool ischecked = false;
                         children: [
                           Text(
                            widget.eventname,
-                           style: TextStyle(fontSize: 23, color: Colors.black,fontWeight: FontWeight.bold),
+                           style: const TextStyle(fontSize: 23, color: Colors.black,fontWeight: FontWeight.bold),
                            ),
                            
                            Row(
                            children: [
                        Text(DateFormat("d MMM yyyy").format(widget.date ?? DateTime.now()),
-                       style: TextStyle(fontSize: 17),),
-                       SizedBox(width: 10,),
+                       style: const TextStyle(fontSize: 17),),
+                       const SizedBox(width: 10,),
 
 
                          Text(  widget.time!=null?widget.time!:'',
                                 
-                          style: TextStyle(fontSize: 17),),
+                          style: const TextStyle(fontSize: 17),),
                          ],
                          ),
                            
-                         Text(widget.eventlocation,style: TextStyle(fontSize: 17),)
+                         Text(widget.eventlocation,style: const TextStyle(fontSize: 17),)
                                     
                         ],
                        ),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:manage_your/model/event/event.dart';
 import 'package:manage_your/model/task/task.dart';
 import 'package:manage_your/utils/apps_colors.dart';
 import 'package:manage_your/views/home/widgets/taskwideget.dart';
@@ -10,8 +11,9 @@ import 'package:manage_your/views/tasks/Addtaskview.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class CalenderScreen extends StatefulWidget {
-  const CalenderScreen({super.key});
+  const CalenderScreen({super.key, this.tabindex});
 
+final int? tabindex;
   @override
   State<CalenderScreen> createState() => CalenderScreenState();
 }
@@ -20,22 +22,25 @@ class CalenderScreenState extends State<CalenderScreen> {
   DateTime todaydate = DateTime.now();
 
   final taskdb = Hive.box<Tasks>('task_db');
+  final eventdb = Hive.box<Event>('event_db');
   List<Tasks> selectedtask = [];
+  List<Event> selectedevent = [];
 
 
   DateTime? startdate;
   DateTime? enddate;
 
-
+  
 
   @override
   void initState() {
     // TODO: implement initState
-    _onDaySelected(todaydate , todaydate);
+     _onDaySelectedtask(todaydate , todaydate);
+    // _onDaySelectedevent(todaydate, todaydate);
     super.initState();
   }
 
-  void _onDaySelected(DateTime day, DateTime focusedDay) {
+  void _onDaySelectedtask(DateTime day, DateTime focusedDay) {
     setState(() {
       todaydate = day;
       selectedtask = taskdb.values
@@ -46,6 +51,20 @@ class CalenderScreenState extends State<CalenderScreen> {
           .toList();
     });
   }
+
+  // void _onDaySelectedevent(DateTime day, DateTime focusedDay) {
+  //   setState(() {
+  //     todaydate = day;
+  //     selectedevent = eventdb.values
+  //         .where((event) =>
+  //             event.date?.year == todaydate.year &&
+  //             event.date?.month == todaydate.month &&
+  //             event.date?.day == todaydate.day)
+  //         .toList();
+  //   });
+  // }
+
+
 
 
   // void onRangeSelected(DateTime? start, DateTime? end ,DateTime? focusedDay){
@@ -147,7 +166,11 @@ class CalenderScreenState extends State<CalenderScreen> {
                     focusedDay: todaydate,
                     firstDay: DateTime.utc(2010, 10, 16),
                     lastDay: DateTime.utc(2030, 3, 14),
-                    onDaySelected: _onDaySelected,
+                    onDaySelected:  _onDaySelectedtask,
+                    //  widget.tabindex == 0 ?
+                    //  _onDaySelectedtask :
+                    //  _onDaySelectedevent,
+                     
                     rangeStartDay: startdate,
                     rangeEndDay: enddate,
                    // onRangeSelected: onRangeSelected,
@@ -181,6 +204,7 @@ class CalenderScreenState extends State<CalenderScreen> {
 
               const SizedBox(height: 5),
 
+              //widget.tabindex == 0?
               SizedBox(
                 width: double.infinity,
                 height: 600,
@@ -194,7 +218,8 @@ class CalenderScreenState extends State<CalenderScreen> {
                           duration: const Duration(milliseconds: 1000),
                           child: SlideAnimation(
                             child: FadeInAnimation(
-                              child: Taskwidget(
+                              child: 
+                              Taskwidget(
                                   tasktitle: tasks.tasktitle,
                                   taskdescription: tasks.taskdescription,
                                   date: tasks.date,
@@ -206,7 +231,36 @@ class CalenderScreenState extends State<CalenderScreen> {
                         );
                       }),
                 ),
-              )
+              ) 
+
+              // SizedBox(
+              //   width: double.infinity,
+              //   height: 600,
+              //   child: AnimationLimiter(
+              //     child: ListView.builder(
+              //         itemCount: selectedevent.length,
+              //         itemBuilder: (context, index) {
+              //           final events = selectedevent[index];
+              //           return AnimationConfiguration.staggeredList(
+              //             position: index,
+              //             duration: const Duration(milliseconds: 1000),
+              //             child: SlideAnimation(
+              //               child: FadeInAnimation(
+              //                 child: 
+              //                Eventwidget (
+              //                     eventname: events.eventname,
+              //                     eventlocation: events.eventlocation,
+              //                     date: events.date,
+              //                     time: events.time,
+              //                      imagepath: events.imagepath,
+              //                     index: index),
+              //               ),
+              //             ),
+              //           );
+              //         }),
+              //   ),
+              // ) 
+
 
                
             ],

@@ -1,11 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:manage_your/data/category/categoryfunctions.dart';
 import 'package:manage_your/data/event/eventfucntions.dart';
-import 'package:manage_your/data/task/taskfunctions.dart';
 import 'package:manage_your/model/event/event.dart';
-import 'package:manage_your/model/task/task.dart';
 import 'package:manage_your/utils/apps_str.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -74,7 +71,7 @@ class _AddeventviewState extends State<Addeventview> {
 
 
 
- getimagefromcamera() async{
+ getimage() async{
   final image = await  picker.pickImage(source: ImageSource.gallery);
 
   setState(() {
@@ -135,7 +132,7 @@ class _AddeventviewState extends State<Addeventview> {
                Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Container(
+                  SizedBox(
                     height: 100,
                     width: 185,
                      
@@ -182,7 +179,7 @@ class _AddeventviewState extends State<Addeventview> {
                     ),
                   ),
 
-                  Container(
+                  SizedBox(
                     height: 100,
                     width: 185,
                     
@@ -424,7 +421,7 @@ class _AddeventviewState extends State<Addeventview> {
 
                 GestureDetector(
                   onTap: (){
-                    getimagefromcamera();
+                    getimage();
                   },
                   child: Card(
                   color: const Color.fromARGB(255, 220, 219, 219),
@@ -445,14 +442,14 @@ class _AddeventviewState extends State<Addeventview> {
                                  ),
                 ),
 
-               Text("Tap to add an image",
+               const Text("Tap to add an image",
                style: TextStyle(
                 fontSize: 15,
                 color: Colors.white
                ),
                ),
 
-              SizedBox(height: 140,),
+              const SizedBox(height: 140,),
 
                Padding(
                   padding: const EdgeInsets.only(bottom: 20),
@@ -508,8 +505,8 @@ class _AddeventviewState extends State<Addeventview> {
                             border: Border.all(color: Colors.blue),
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          child:  Center(
-                              child: const Text(
+                          child:  const Center(
+                              child: Text(
                               "Create",
                                style: TextStyle(color: Colors.white),
                                                             )),

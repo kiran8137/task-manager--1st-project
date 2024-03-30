@@ -59,57 +59,57 @@ String subtitle = "5 minutes before ";
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          GestureDetector(
-            onTap: ()=>
-            showDialog(context: context, 
-            builder: (context)=>
+          // GestureDetector(
+          //   onTap: ()=>
+          //   showDialog(context: context, 
+          //   builder: (context)=>
             
-            AlertDialog(
+          //   AlertDialog(
               
-               content: GestureDetector(
-                onTap: (){
-                  //Provider.of<ThemeProvider>(context , listen: false).toggleTheme();
+          //      content: GestureDetector(
+          //       onTap: (){
+          //         //Provider.of<ThemeProvider>(context , listen: false).toggleTheme();
                   
-                },
-                 child: Container(
-                      decoration:BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                         color: Colors.white,
-                      ) ,
-                      height: 60,
-                      width: 90,
-                      child:  const Center(
-                        child:
-                       Text("Day",
-                      style:  TextStyle(
-                        fontSize: 20,
-                        color: Colors.black
-                      )
-                      ),
-                      ),
+          //       },
+          //        child: Container(
+          //             decoration:BoxDecoration(
+          //               borderRadius: BorderRadius.circular(10),
+          //                color: Colors.white,
+          //             ) ,
+          //             height: 60,
+          //             width: 90,
+          //             child:  const Center(
+          //               child:
+          //              Text("Day",
+          //             style:  TextStyle(
+          //               fontSize: 20,
+          //               color: Colors.black
+          //             )
+          //             ),
+          //             ),
                      
                        
-                    ),
-               ),
-            )
-            // Container(
-            //   // height: 100,
-            //   // width: 200,
-            //   color: Colors.red,
-            // )
-            ),
-            child: Container(
+          //           ),
+          //      ),
+          //   )
+          //   // Container(
+          //   //   // height: 100,
+          //   //   // width: 200,
+          //   //   color: Colors.red,
+          //   // )
+          //   ),
+          //   child: Container(
               
-              margin: const EdgeInsets.only(top: 20,left: 10),
-              height: 35,
-              width: 100,
-              decoration: BoxDecoration(
-                borderRadius:BorderRadius.circular(20), 
-                color:Appcolors.secondarycolor),
-              child: const Center(child: Text("Theme",
-              style: TextStyle(fontSize: 17,color: Colors.black))),
-            ),
-          ),
+          //     margin: const EdgeInsets.only(top: 20,left: 10),
+          //     height: 35,
+          //     width: 100,
+          //     decoration: BoxDecoration(
+          //       borderRadius:BorderRadius.circular(20), 
+          //       color:Appcolors.secondarycolor),
+          //     child: const Center(child: Text("Theme",
+          //     style: TextStyle(fontSize: 17,color: Colors.black))),
+          //   ),
+          // ),
       
           const SizedBox(height: 20,),
       

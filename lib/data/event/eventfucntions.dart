@@ -36,10 +36,10 @@ void removeevent(index)async{
  }
 
 
- Future<void> updateEvent({TextEditingController? eventnameController , TextEditingController? eventlocationController , int? index ,   DateTime? date , String? time}) async {
+ Future<void> updateEvent({TextEditingController? eventnameController , TextEditingController? eventlocationController , int? index ,   DateTime? date , String? time , String? imagepath}) async {
  
     final tasksDB =Hive.box<Event>('event_db');
-     Event newTask = Event(eventname: eventnameController!.text, eventlocation: eventlocationController!.text, date: date  , time: time);
+     Event newTask = Event(eventname: eventnameController!.text, eventlocation: eventlocationController!.text, date: date  , time: time , imagepath: imagepath);
      await tasksDB.putAt(index!, newTask);
      getallevents();
 

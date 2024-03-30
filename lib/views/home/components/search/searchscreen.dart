@@ -122,7 +122,7 @@ else{
             },
               
               indicatorColor: Colors.blue,
-              tabs: [
+              tabs: const [
                 Tab(
                   iconMargin: EdgeInsets.all(0),
                   //icon:  Icon(Icons.home),
@@ -222,14 +222,15 @@ else{
         //body
         body:  
 
-        _tabbarindex==0?
+        _tabbarindex==0 && tasksearchResult.isNotEmpty?
         AnimationLimiter(
             child: ListView.builder(
               itemCount: tasksearchResult.length,
               itemBuilder: (context , index){
                 
                 final task = tasksearchResult[index];
-                return   AnimationConfiguration.staggeredList(
+                return  
+                 AnimationConfiguration.staggeredList(
                         position: index,
                         duration: const Duration(milliseconds: 1000),
                          child: SlideAnimation(
@@ -241,6 +242,7 @@ else{
                                date: task.date,
                                time: task.time,
                                category : task.category,
+                               
                                index : index
                                 
                                
@@ -253,9 +255,14 @@ else{
                        );
               }
               ),
-          ):
+                
+          )
+         
+          :
+
+          
            
-            _tabbarindex==1 ?
+            _tabbarindex==1 && eventsearchResult.isNotEmpty ?
             
 
             
@@ -276,7 +283,7 @@ else{
                                eventlocation: task.eventlocation,
                                date: task.date,
                                time: task.time,
-                               
+                               imagepath: task.imagepath,
                                index : index
                                 
                                

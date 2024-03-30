@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:manage_your/model/task/task.dart';
+import 'package:manage_your/notification/awsmnotif.dart';
+import 'package:manage_your/notification/notifi_service.dart';
 import 'package:manage_your/utils/apps_colors.dart';
 import 'package:manage_your/views/taskdetail/taskdetail.dart';
 import 'package:manage_your/views/tasks/updatetaskview.dart';
-//import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 class Taskwidget extends StatefulWidget {
-   Taskwidget({
+    Taskwidget({
     super.key, 
     this.tasktitle, 
     this.taskdescription,
@@ -66,8 +67,10 @@ bool ischecked = false;
       child:  ListTile(
         onTap: () async{
           // NotificationService().showNotification(
-          //   title: 'sample testing' , body: 'it works'
+          //   titl
+          //e: 'sample testing' , body: 'it works'
           // );
+          NotificationService.showNotification(title: "testing notification", body: "worked");
            final dbtask= Tasks(tasktitle: widget.tasktitle, taskdescription: widget.taskdescription, category: widget.category , date: widget.date, time: widget.time  );
           Navigator.push(context, MaterialPageRoute(builder: (context)=> TaskDetailView(task:dbtask , index: widget.index,)));
         },

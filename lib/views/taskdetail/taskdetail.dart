@@ -8,13 +8,13 @@ import 'package:manage_your/views/home/homeview.dart';
 
 class TaskDetailView extends StatefulWidget {
   const TaskDetailView({super.key, 
-  required this.task,
-  required this.index,
+   this.task,
+   this.index,
 
   });
 
-final Tasks task;
-final int index;
+final Tasks? task;
+final int? index;
   // final String? tasktitle;
   // final String? taskdescription;
   // final DateTime? duedate;
@@ -45,11 +45,11 @@ String? defaultcategory;
   @override
   void initState() {
      
- titlecontroller = TextEditingController(text: widget.task.tasktitle);
-descriptioncontroller = TextEditingController(text: widget.task.taskdescription);
+ titlecontroller = TextEditingController(text: widget.task!.tasktitle);
+descriptioncontroller = TextEditingController(text: widget.task!.taskdescription);
 //dropdownvalue = widget.task.category;
-  recieveddate = DateFormat('dd-MM-yyyy').format(widget.task.date!);
-  recievedtime = widget.task.time;
+  recieveddate = DateFormat('dd-MM-yyyy').format(widget.task!.date!);
+  recievedtime = widget.task!.time;
   //"${widget.task.time?.hourOfPeriod}:${widget.task.time?.minute}";
 
 // if(items.contains(widget.task.category)){
@@ -58,7 +58,7 @@ descriptioncontroller = TextEditingController(text: widget.task.taskdescription)
 
 
 
- defaultcategory = widget.task.category;
+ defaultcategory = widget.task!.category;
     super.initState();
   }
 
@@ -166,7 +166,7 @@ late bool iseditSelected = false;
         child:  GestureDetector(
       onTap: (){
         
-        updateTask(titleController: titlecontroller , descriptionController: descriptioncontroller , index: widget.index , category: defaultcategory ,date : newPickedDate ?? widget.task.date, time: formattedTime ?? recievedtime  );
+        updateTask(titleController: titlecontroller , descriptionController: descriptioncontroller , index: widget.index , category: defaultcategory ,date : newPickedDate ?? widget.task!.date, time: formattedTime ?? recievedtime  );
         Navigator.of(context).pop();
         setState(() {
           iseditSelected = !iseditSelected;
@@ -344,7 +344,7 @@ late bool iseditSelected = false;
                        ),
                      ],
                    ):
-                   Text(widget.task.category!,
+                   Text(widget.task!.category!,
                    style: const TextStyle(color: Colors.white,fontSize: 17.5),
                    ),
 
@@ -369,7 +369,7 @@ late bool iseditSelected = false;
                       controller: titlecontroller,
                        style: const TextStyle(color: Colors.white),
                     ):
-                     Text(widget.task.tasktitle,
+                     Text(widget.task!.tasktitle,
                     style: const TextStyle(fontSize: 20,color: Colors.grey),),
                   ),
 
@@ -397,7 +397,7 @@ late bool iseditSelected = false;
                       controller: descriptioncontroller,
                       style: const TextStyle(color: Colors.white),
                     ):
-                    Text(widget.task.taskdescription,
+                    Text(widget.task!.taskdescription,
                     style: const TextStyle(fontSize: 20,color: Colors.white),),
                   ),
 
@@ -418,7 +418,7 @@ late bool iseditSelected = false;
                           newPickedDate = await showDatePicker(
                             
                             context: context,
-                            initialDate: widget.task.date,
+                            initialDate: widget.task!.date,
                             firstDate: DateTime(2000), 
                             lastDate: DateTime(2100),
                             );

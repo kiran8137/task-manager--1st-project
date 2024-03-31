@@ -56,7 +56,7 @@ bool ischecked = false;
     
     //String foramtteddate = DateFormat('dd-mm-yyyy').format(widget.dateTime!);
     return AnimatedContainer(
-      height: 110,
+     // height: 110,
       duration: const Duration(milliseconds: 600),
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
@@ -101,11 +101,11 @@ bool ischecked = false;
                      index : widget.index
                   )));
                 },
-                child: const Text("Edit",
+                child:   Text("Edit",
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w400,
-                  fontSize: 15
+                  fontSize: MediaQuery.of(context).size.width * 0.04,//15
                 ),),
               ),
             ),
@@ -143,8 +143,8 @@ bool ischecked = false;
         
             Container(
              // color: Colors.red,
-              height: 30,
-              width: 370,
+              height:  MediaQuery.of(context).size.width * 0.08,//30,
+              width: MediaQuery.of(context).size.width * 0.92,//370,
               margin: const EdgeInsets.only(left: 0),
               child:  Row(
                 children: [
@@ -154,20 +154,20 @@ bool ischecked = false;
                     Text(
                       DateFormat("d MMM yyyy").format(widget.date ?? DateTime.now()),
                       
-                  style: const TextStyle(color: Colors.white,
-                 // fontWeight: FontWeight.w400,
-                 fontSize : 13,
-                  
-                  ),
-                //       widget.time!=null?
-                //       widget.time!:'',
+                                      style:  TextStyle(color: Colors.white,
+                                     // fontWeight: FontWeight.w400,
+                                     fontSize : MediaQuery.of(context).size.width*0.03//13,
+                                      
+                                      ),
+                                    //       widget.time!=null?
+                                    //       widget.time!:'',
                       
                       
-                //   style:  const TextStyle(color: Colors.white,
-                //  // fontWeight: FontWeight.w500,
-                //   fontSize: 13
-                //   ),
-                  ),
+                                    //   style:  const TextStyle(color: Colors.white,
+                                    //  // fontWeight: FontWeight.w500,
+                                    //   fontSize: 13
+                                    //   ),
+                                      ),
                       
                       const SizedBox(width: 10),
                   //date
@@ -177,9 +177,9 @@ bool ischecked = false;
                       widget.time!:'',
                       
                       
-                  style:  const TextStyle(color: Colors.white,
+                  style:   TextStyle(color: Colors.white,
                  // fontWeight: FontWeight.w500,
-                  fontSize: 13
+                  fontSize: MediaQuery.of(context).size.width*0.03//13
                   ),
                 //       DateFormat("dd-MM").format(widget.date ?? DateTime.now()),
                       
@@ -191,16 +191,16 @@ bool ischecked = false;
                   ),
 
                   widget.time!=null?
-                   const SizedBox(
+                     SizedBox(
                     //width: 215,
                     
                     //width: 189,
-                    width : 170
+                    width : MediaQuery.of(context).size.width * 0.45//170
                     ):
-                  const SizedBox(
+                    SizedBox(
                     //width: 215,
                     
-                    width: 226,
+                    width: MediaQuery.of(context).size.width * 0.5//226,
                     //width : 226
                     ),
             

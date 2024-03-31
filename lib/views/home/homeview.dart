@@ -74,6 +74,7 @@ class _HomeviewState extends State<Homeview> {
         
           //floating Action button
           floatingActionButton: AnimationConfiguration.staggeredGrid(
+            
             position: 0,
             duration: const Duration(milliseconds: 1000),
             columnCount: 2,
@@ -101,7 +102,7 @@ class _HomeviewState extends State<Homeview> {
                     children: [
                       SpeedDialChild(
                          child: SizedBox(
-                          height: 30,
+                          height:  30,
                           width: 30,
                           child: Image.asset('assets/createtasklogo.png',fit:BoxFit.cover,color: Colors.black,),
                           ),
@@ -122,31 +123,21 @@ class _HomeviewState extends State<Homeview> {
                           }
                       )
                     ],
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Add",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        // SizedBox(
-                        //     height: 30,
-                        //     width: 30,
-                        //     child: Image.asset(
-                        //       "assets/createtasklogo.png",
-                        //       fit: BoxFit.contain,
-                        //     ))
-                      ],
+                    child:   Text(
+                      "Add",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: MediaQuery.of(context).size.width * 0.04,//18,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
               ),
             ),
+            
           ),
+          
           floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         
           key: _key,
@@ -176,16 +167,18 @@ class _HomeviewState extends State<Homeview> {
                       children: [
                         // Icon(Icons.close),
         
-                        const SizedBox(
-                          height: 5,
+                          SizedBox(
+                          height:  MediaQuery.of(context).size.height * 0.01,//5,
                         ),
                         Text(
                           "Hello , Mr ${widget.username}",
-                          style: const TextStyle(fontSize: 20, color: Colors.white),
+                          style:   TextStyle(
+                            fontSize:  MediaQuery.of(context).size.width * 0.05,//20, 
+                            color: Colors.white),
                         ),
         
-                        const SizedBox(
-                          height: 10,
+                          SizedBox(
+                          height:  MediaQuery.of(context).size.width * 0.01,//10,
                         ),
         
                         Container(
@@ -199,9 +192,9 @@ class _HomeviewState extends State<Homeview> {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(15),
                             child: Container(
-                              padding: const EdgeInsets.all(10),
-                              height: 50,
-                              width: 50,
+                              padding:   EdgeInsets.all(10),
+                              height: MediaQuery.of(context).size.height * 0.06,//50,
+                              width: MediaQuery.of(context).size.height * 0.06,//50,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15)),
                               child: Image.asset(
@@ -330,7 +323,10 @@ class _HomeviewState extends State<Homeview> {
             //   // Theme.of(context).colorScheme.secondary,
             //   thickness: 0.8,
             // ),
-            const SizedBox(height: 5,),
+            //  SizedBox(
+            //  // height: 5,
+            // height: MediaQuery.of(context).size.height * -0.002,
+            //   ),
       
             Row(
               children: [
@@ -362,20 +358,20 @@ class _HomeviewState extends State<Homeview> {
                                 ],
                               ));
                     },
-                    child: const Icon(
+                    child:   Icon(
                       CupertinoIcons.delete,
                       color: Colors.white,
-                      size: 30,
+                      size: MediaQuery.of(context).size.width * 0.07//30,
                     )
                     ),
       
       
       
                 Container(
-                  height: 50,
-                  width: screenwidth,
+                  height: MediaQuery.of(context).size.height * 0.05,//50,
+                  width: MediaQuery.of(context).size.width*0.9,
                   // 380,
-                  padding: const EdgeInsets.all(8),
+                  padding: EdgeInsets.all(0.8),
                   child: categoryfilter(),
                 ),
       
@@ -383,19 +379,17 @@ class _HomeviewState extends State<Homeview> {
               ],
             ),
       
-            const SizedBox(
-              height: 6,
+              SizedBox(
+              height: MediaQuery.of(context).size.height * 0.02,//12,
             ),
       
-            const SizedBox(
-              height: 6,
-            ),
+             
       
             
       
             SizedBox(
                 width: double.infinity,
-                height: 600,
+                height:  MediaQuery.of(context).size.height * 0.70,//600,
                 child: ValueListenableBuilder(
                   valueListenable: tasklistNotifier,
                   builder: (BuildContext context, List<Tasks> tasklist,
@@ -637,7 +631,10 @@ class _HomeviewState extends State<Homeview> {
           //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: categoryitems
               .map((category) => Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    padding:  EdgeInsets.symmetric(
+                      horizontal: 10
+                      //horizontal: MediaQuery.of(context).size.width*0.05
+                      ),
                     child: FilterChip(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20)),

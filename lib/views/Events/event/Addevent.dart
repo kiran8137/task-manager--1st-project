@@ -109,48 +109,48 @@ class _AddeventviewState extends State<Addeventview> {
                  Container(
                   margin: const EdgeInsets.only(top: 40),
                   width: MediaQuery.sizeOf(context).width * 80 / 100,
-                  height: 50,
+                  height:  MediaQuery.of(context).size.height * 0.07,//50,
                   //color: Colors.red,
                   decoration: const BoxDecoration(
                       border: Border(bottom: BorderSide(color: Colors.white))),
-                  child: const Center(
+                  child:   Center(
                     child: Text(
                       'New Event',
                       style: TextStyle(
-                          fontSize: 20,
+                          fontSize: MediaQuery.of(context).size.width * 0.05,//20,
                           color: Colors.white,
                           fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
 
-                const SizedBox(
+                  SizedBox(
                   width: double.infinity,
-                  height: 50,
+                  height: MediaQuery.of(context).size.height * 0.05//50,
                 ),
 
                Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   SizedBox(
-                    height: 100,
-                    width: 185,
+                    height: MediaQuery.of(context).size.height * 0.15,//100,
+                    width: MediaQuery.of(context).size.width * 0.45,//185,
                      
                     child:  Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                      const  Text(
+                         Text(
                     'Event Name',
                     style: TextStyle(
                         color: Colors.white,
-                        fontSize: 17,
+                        fontSize: MediaQuery.of(context).size.width * 0.04,//17,
                         fontWeight: FontWeight.w400),
                   ),
                      Container(
                  // padding: const EdgeInsets.all(10),
                    // margin: EdgeInsets.only(left: 10, ),
-                  width: 185,
-                  height: 70,
+                  width: MediaQuery.of(context).size.width * 0.45,//185,
+                  height: MediaQuery.of(context).size.height * 0.080,//70,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: Colors.white,
@@ -180,25 +180,25 @@ class _AddeventviewState extends State<Addeventview> {
                   ),
 
                   SizedBox(
-                    height: 100,
-                    width: 185,
+                    height: MediaQuery.of(context).size.height * 0.15,//100,
+                    width: MediaQuery.of(context).size.width * 0.45,//185,
                     
                     child: Column(
                        crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
+                          Text(
                    'Event Location',
                     style: TextStyle(
                         color: Colors.white,
-                        fontSize: 17,
+                        fontSize: MediaQuery.of(context).size.width * 0.04,//17,
                         fontWeight: FontWeight.w400),
                   ),
 
                   Container(
                  // padding: const EdgeInsets.all(10),
                    // margin: EdgeInsets.only(left: 10, ),
-                  width: 185,
-                  height: 70,
+                  width: MediaQuery.of(context).size.width * 0.45,//185,
+                  height: MediaQuery.of(context).size.height * 0.079,//70,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: Colors.white,
@@ -249,11 +249,11 @@ class _AddeventviewState extends State<Addeventview> {
                     
                           // selecting the date
                     
-                          child: const Text(
+                          child:   Text(
                             AppStrings.date,
                             style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 17,
+                                fontSize: MediaQuery.of(context).size.width * 0.04,//17,
                                 fontWeight: FontWeight.w400),
                           ),
                         ),
@@ -264,7 +264,7 @@ class _AddeventviewState extends State<Addeventview> {
                          // padding: const EdgeInsets.all(8),
                           margin: const EdgeInsets.only(left: 3),
                           width: MediaQuery.of(context).size.width * 40 / 100,
-                          height: 43,
+                          height: MediaQuery.of(context).size.height * 0.05,//43,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             color: Colors.white,
@@ -336,11 +336,11 @@ class _AddeventviewState extends State<Addeventview> {
                     
                           //selecting the time
                     
-                          child: const Text(
+                          child:   Text(
                             AppStrings.time,
                             style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 17,
+                                fontSize:  MediaQuery.of(context).size.width * 0.04,//17,
                                 fontWeight: FontWeight.w400),
                           ),
                         ),
@@ -351,7 +351,7 @@ class _AddeventviewState extends State<Addeventview> {
                           //padding: const EdgeInsets.all(8),
                           margin: const EdgeInsets.only(left: 0),
                           width: MediaQuery.of(context).size.width * 40 / 100,
-                          height: 43,
+                          height: MediaQuery.of(context).size.height * 0.05,//43,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             color: Colors.white,
@@ -426,12 +426,12 @@ class _AddeventviewState extends State<Addeventview> {
                   child: Card(
                   color: const Color.fromARGB(255, 220, 219, 219),
                   child: SizedBox(
-                    height: 230,
+                    height: MediaQuery.of(context).size.height * 0.3,//230,
                   
                     width: 350,
                     child: SizedBox(
-                      width: 10,
-                      height: 10,
+                      width: MediaQuery.of(context).size.width * 0.02,//10,
+                      height: MediaQuery.of(context).size.height * 0.02,//10,
                       child: 
                       _image==null ?
                        Image.asset('assets/gallery.png'):
@@ -442,14 +442,16 @@ class _AddeventviewState extends State<Addeventview> {
                                  ),
                 ),
 
-               const Text("Tap to add an image",
+                 Text("Tap to add an image",
                style: TextStyle(
-                fontSize: 15,
+                fontSize: MediaQuery.of(context).size.width * 0.035,//15,
                 color: Colors.white
                ),
                ),
 
-              const SizedBox(height: 140,),
+                SizedBox(
+                height: MediaQuery.of(context).size.height * 0.14,//140,
+                ),
 
                Padding(
                   padding: const EdgeInsets.only(bottom: 20),
@@ -462,8 +464,8 @@ class _AddeventviewState extends State<Addeventview> {
                           Navigator.pop(context);
                         },
                         child: Container(
-                          height: 40,
-                          width: 130,
+                           height: MediaQuery.of(context).size.width * 0.1,//40,
+                          width:  MediaQuery.of(context).size.width * 0.32,//130
                           decoration: BoxDecoration(
                             color: const Color.fromARGB(255, 9, 8, 79),
                             border: Border.all(color: Colors.blue),
@@ -498,8 +500,8 @@ class _AddeventviewState extends State<Addeventview> {
                          // print("create");
                         },
                         child: Container(
-                          height: 40,
-                          width: 130,
+                           height: MediaQuery.of(context).size.width * 0.1,//40,
+                          width:  MediaQuery.of(context).size.width * 0.32,//130
                           decoration: BoxDecoration(
                             color: Colors.blue,
                             border: Border.all(color: Colors.blue),

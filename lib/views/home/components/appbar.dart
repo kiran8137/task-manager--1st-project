@@ -20,7 +20,10 @@ PreferredSize appbar(GlobalKey<ScaffoldState>key, BuildContext context){
         child: Column(
           
           children: [
-            const SizedBox(height: 30,),
+             SizedBox(
+              //height: 30,
+            height:  MediaQuery.of(context).size.height * 0.02,
+              ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -50,8 +53,8 @@ PreferredSize appbar(GlobalKey<ScaffoldState>key, BuildContext context){
                   //   //color:Theme.of(context).iconTheme.color,
                   //  )
                    SizedBox(
-                        height: 18,
-                        width: 18,
+                        height: MediaQuery.of(context).size.height * 0.025,// 18,
+                        width:  MediaQuery.of(context).size.width * 0.04,//18,
                         child: Image.asset("assets/menu.png",
                         color: Colors.white
                         // Theme.of(context).colorScheme.onSurface),
@@ -73,8 +76,8 @@ PreferredSize appbar(GlobalKey<ScaffoldState>key, BuildContext context){
                   //   size: 17,
                   //  )
                      SizedBox(
-                      height: 18,
-                      width: 18,
+                      height: MediaQuery.of(context).size.height * 0.025,//18,
+                      width: MediaQuery.of(context).size.width * 0.04,//18,
                       child: Image.asset("assets/home.png",
                       color: Colors.white,),
                     )

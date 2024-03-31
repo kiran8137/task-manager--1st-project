@@ -78,8 +78,8 @@ class ProfileScreen extends StatelessWidget {
               left: 90,
               child: Container(
                 
-                height: 70,
-                width: 230,
+                height: MediaQuery.of(context).size.height * 0.07,//70,
+                width: MediaQuery.of(context).size.width * 0.55,//230,
                 decoration: BoxDecoration(
                     color: const Color.fromARGB(135, 158, 158, 158),
                     borderRadius: BorderRadius.circular(10)),
@@ -121,8 +121,8 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
             Positioned(
-                bottom: 200,
-                left: 100,
+                bottom: MediaQuery.of(context).size.height * 0.2,//200,
+                left: MediaQuery.of(context).size.width * 0.3,//100,
                 child: GestureDetector(
                   onTap: () async{
                     if(_formkey.currentState!.validate()){
@@ -145,8 +145,8 @@ class ProfileScreen extends StatelessWidget {
                     //when submit navigate to home page
                   },
                   child: Container(
-                    height: 40,
-                    width: 180,
+                    height: MediaQuery.of(context).size.height * 0.05,//40,
+                    width: MediaQuery.of(context).size.width * 0.4,//180,
                     decoration: BoxDecoration(
                         color: const Color.fromARGB(255, 3, 4, 40),
                         borderRadius: BorderRadius.circular(20)),

@@ -122,22 +122,25 @@ String subtitle = "5 minutes before ";
               Navigator.push(context,MaterialPageRoute(builder: (context)=> const PrivacyPolicy()));
               //print("privacy and policy");
             },
-             child:  const ListTile(
+             child:    ListTile(
               leading: Icon(Icons.privacy_tip_outlined,
               color:  Colors.white,
-              size: 29,),
+              size: MediaQuery.of(context).size.width * 0.07,//29
+              ),
               title: Text("Privacy and Policy",
                   style:  
                   TextStyle(
                     color: Colors.white,
-                    fontSize: 17
+                    fontSize: MediaQuery.of(context).size.width * 0.045,//17
                   ),
                   )
               ),
              
            ),
       
-           const SizedBox(height: 10,),
+             SizedBox(
+            height: MediaQuery.of(context).size.height * 0.01,//10,
+            ),
       
       
           //about us
@@ -147,15 +150,16 @@ String subtitle = "5 minutes before ";
               Navigator.push(context,MaterialPageRoute(builder: (context)=> const AboutUs()));
               ///print("About Us");
             },
-             child:  const ListTile(
+             child:    ListTile(
               leading: Icon(Icons.info_outline,
               color:  Colors.white,
-              size: 29,),
+              size:  MediaQuery.of(context).size.width * 0.07,//29,
+              ),
               title: Text("About Us",
                   style:  
                   TextStyle(
                     color: Colors.white,
-                    fontSize: 17
+                    fontSize: MediaQuery.of(context).size.width * 0.045,//17
                   ),
                   ),
             
@@ -183,7 +187,9 @@ String subtitle = "5 minutes before ";
             //  ),
            ),
       
-           const SizedBox(height: 10,),
+             SizedBox(
+            height: MediaQuery.of(context).size.height * 0.01,//10,,
+            ),
       
            GestureDetector(
             onTap: () {
@@ -235,15 +241,15 @@ String subtitle = "5 minutes before ";
             //     });
             //   },
                child:  ListTile(
-                leading:  const Icon(Icons.edit_notifications_outlined,
+                leading:    Icon(Icons.edit_notifications_outlined,
                 color:  Colors.white,
-                size: 29,
+                size: MediaQuery.of(context).size.width * 0.07//29,
                 ),
-                title:   const Text("Task reminder default",
+                title:     Text("Task reminder default",
                     style: 
                      TextStyle(
                       color: Colors.white,
-                      fontSize: 17
+                      fontSize: MediaQuery.of(context).size.width * 0.045,//17
                     ),
                     ),
                     subtitle:Text(subtitle,

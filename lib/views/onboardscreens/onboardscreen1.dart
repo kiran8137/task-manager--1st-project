@@ -19,8 +19,8 @@ class OnboardingScreen1 extends StatelessWidget {
             child:  Stack(
               children: [
                 Positioned(
-                  right: 30,
-                  top: 50,
+                  right: MediaQuery.of(context).size.width * 0.06,//30,
+                  top: MediaQuery.of(context).size.height * 0.05,//50,
                   child:  SizedBox(
                     width: 50,
                     child: Row(

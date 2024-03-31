@@ -129,45 +129,50 @@ String defaultime = "5";
             child: Column(
               children: [
                 Container(
-                  margin: const EdgeInsets.only(top: 40),
+                  margin:  EdgeInsets.only(
+                    //top: 40
+                    top: MediaQuery.of(context).size.height * 0.04
+                    ),
                   width: MediaQuery.sizeOf(context).width * 80 / 100,
                   height: 50,
                   //color: Colors.red,
                   decoration: const BoxDecoration(
                       border: Border(bottom: BorderSide(color: Colors.white))),
-                  child: const Center(
+                  child:  Center(
                     child: Text(
                       AppStrings.newtask,
                       style: TextStyle(
-                          fontSize: 20,
+                          fontSize:  MediaQuery.of(context).size.width * 0.05,//20,
                           color: Colors.white,
                           fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
-                const SizedBox(
-                  width: double.infinity,
-                  height: 50,
+                 SizedBox(
+                  width: MediaQuery.of(context).size.width, 
+                  height: MediaQuery.of(context).size.height * 0.050,
+                  // width: double.infinity,
+                  // height: 50,
                 ),
                 Container(
                   ///
-                  margin: const EdgeInsets.only(left: 0, right: 280),
-                  child: const Text(
+                  margin:  EdgeInsets.only(left: 0, right: MediaQuery.of(context).size.width*0.67),
+                  child:  Text(
                     AppStrings.tasktitle,
                     style: TextStyle(
                         color: Colors.white,
-                        fontSize: 17,
+                        fontSize: MediaQuery.of(context).size.width * 0.04,//17,
                         fontWeight: FontWeight.w400),
                   ),
                 ),
-                const SizedBox(
-                  height: 7,
+                  SizedBox(
+                  height:  MediaQuery.of(context).size.height * 0.01//7,
                 ),
                 Container(
                  // padding: const EdgeInsets.all(10),
                    // margin: EdgeInsets.only(left: 10, ),
                   width: MediaQuery.of(context).size.width - 40,
-                  height: 70,
+                  height: MediaQuery.of(context).size.height * 0.09,//70,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: Colors.white,
@@ -192,28 +197,34 @@ String defaultime = "5";
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 20,
+                  SizedBox(
+                  height: 
+                  MediaQuery.of(context).size.height * 0.02,
+                  //20,
                 ),
                 Container(
                   //////
-                  margin: const EdgeInsets.only(left: 0, right: 265),
-                  child: const Text(
+                  margin:  EdgeInsets.only(left: 0, 
+                  right: MediaQuery.of(context).size.width*0.63
+                  //right: 265
+                  ),
+                  child:   Text(
                     AppStrings.descriptioninput,
                     style: TextStyle(
                         color: Colors.white,
-                        fontSize: 17,
+                        fontSize: MediaQuery.of(context).size.width * 0.04,//17,
                         fontWeight: FontWeight.w400),
                   ),
                 ),
-                const SizedBox(
-                  height: 7,
+                 SizedBox(
+                  //height: 7,
+                  height: MediaQuery.of(context).size.height*0.01,
                 ),
                 Container(
                   padding: const EdgeInsets.all(8),
                   //margin: EdgeInsets.only(left: 0,right: 75),
                   width: MediaQuery.of(context).size.width - 40,
-                  height: 70,
+                  height:  MediaQuery.of(context).size.height * 0.09,//70,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: Colors.white,
@@ -230,8 +241,9 @@ String defaultime = "5";
                         border: InputBorder.none, hintText: 'Add description...'),
                   ),
                 ),
-                const SizedBox(
-                  height: 20,
+                 SizedBox(
+                  //height: 20,
+                  height: MediaQuery.of(context).size.height*0.03,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -253,24 +265,24 @@ String defaultime = "5";
                     
                           // selecting the date
                     
-                          child: const Text(
+                          child:   Text(
                             AppStrings.date,
                             style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 17,
+                                fontSize: MediaQuery.of(context).size.width * 0.04,//17,
                                 fontWeight: FontWeight.w400),
                           ),
                         ),
                     
-                        const SizedBox(
-                          height: 7,
+                          SizedBox(
+                          height: MediaQuery.of(context).size.height*0.01//7,
                         ),
                     
                         Container(
                          // padding: const EdgeInsets.all(8),
                           margin: const EdgeInsets.only(left: 3),
                           width: MediaQuery.of(context).size.width * 40 / 100,
-                          height: 43,
+                          height: MediaQuery.of(context).size.height * 0.05,//43,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             color: Colors.white,
@@ -341,24 +353,24 @@ String defaultime = "5";
                     
                           //selecting the time
                     
-                          child: const Text(
+                          child:   Text(
                             AppStrings.time,
                             style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 17,
+                                fontSize: MediaQuery.of(context).size.width * 0.04,//17,
                                 fontWeight: FontWeight.w400),
                           ),
                         ),
                     
-                        const SizedBox(
-                          height: 7,
+                          SizedBox(
+                          height: MediaQuery.of(context).size.height*0.01//7,
                         ),
                     
                         Container(
                           //padding: const EdgeInsets.all(8),
                           margin: const EdgeInsets.only(left: 0),
                           width: MediaQuery.of(context).size.width * 40 / 100,
-                          height: 43,
+                          height: MediaQuery.of(context).size.height * 0.05,//43,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             color: Colors.white,
@@ -425,8 +437,8 @@ String defaultime = "5";
                     
                   ],
                 ),
-                const SizedBox(
-                  height: 10,
+                  SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.012//10,
                 ),
 
                  
@@ -434,17 +446,19 @@ String defaultime = "5";
                 
                 Row(
                   children: [
-                    const SizedBox(
-                      width: 24,
+                      SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.06//24,
                     ),
 
                     SizedBox(
                       child: Text(defaultcategory!,
-                      style: const TextStyle(color: Colors.white,fontSize: 20),),
+                      style:  TextStyle(color: Colors.white,
+                      fontSize: MediaQuery.of(context).size.width * 0.05,//20
+                      ),),
                     ),
 
-                    const SizedBox(
-                      width: 10,
+                      SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.03//10,
                     ),
                     
                 
@@ -581,8 +595,8 @@ String defaultime = "5";
                 // ),
                     
                     
-                const SizedBox(
-                  width: 24,
+                  SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.06//24,
                 ),
                     
                 
@@ -651,11 +665,14 @@ String defaultime = "5";
                         
                     },
                     child: ListTile(
-                  leading: const Icon(Icons.edit_notifications_outlined,color: Colors.white,size: 30,),
-                  title:  const Text("Reminder At",
+                  leading: const Icon(Icons.edit_notifications_outlined,
+                  color: Colors.white,
+                  size: 30,
+                  ),
+                  title:   Text("Reminder At",
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 17
+                        fontSize: MediaQuery.of(context).size.width * 0.04,//17
                       ),
                       ),
                       subtitle:Text(subtitle,
@@ -666,7 +683,7 @@ String defaultime = "5";
                    ),
                 ),
                  SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.15,
+                  height: MediaQuery.of(context).size.height * 0.16,
                   // 118,
                 ),
                 Padding(
@@ -680,8 +697,8 @@ String defaultime = "5";
                           Navigator.pop(context);
                         },
                         child: Container(
-                          height: 40,
-                          width: 130,
+                          height: MediaQuery.of(context).size.width * 0.1,//40,
+                          width:  MediaQuery.of(context).size.width * 0.32,//130,
                           decoration: BoxDecoration(
                             color: const Color.fromARGB(255, 9, 8, 79),
                             border: Border.all(color: Colors.blue),
@@ -699,8 +716,8 @@ String defaultime = "5";
                          // print("create");
                         },
                         child: Container(
-                          height: 40,
-                          width: 130,
+                          height: MediaQuery.of(context).size.width * 0.1,//40,
+                          width:  MediaQuery.of(context).size.width * 0.32,//130,
                           decoration: BoxDecoration(
                             color: Colors.blue,
                             border: Border.all(color: Colors.blue),

@@ -170,19 +170,19 @@ class _EventDetailViewState extends State<EventDetailView> {
           child: Container(
             //width: 600,
             width: MediaQuery.sizeOf(context).width * 50 / 100,
-            height: 40,
+            height: MediaQuery.of(context).size.height * 0.05,//40,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               color: Appcolors.buttonColor,
             ),
-            child: const Row(
+            child:   Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   "Save",
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 17,
+                    fontSize: MediaQuery.of(context).size.width * 0.04,//17,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -203,7 +203,7 @@ class _EventDetailViewState extends State<EventDetailView> {
               children: [
 
                 SizedBox(
-                  height: 250,
+                  height: MediaQuery.of(context).size.height * 0.28,//250,
                   width: double.infinity,
                  // color: Colors.red,
 
@@ -221,12 +221,12 @@ class _EventDetailViewState extends State<EventDetailView> {
                 
                // Image.file(File(widget.event.imagepath!),fit:BoxFit.cover),),
                 
-                const SizedBox(
-                  height: 5,
+                  SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.005,//5,
                 ),
                 const Divider(color: Color.fromARGB(153, 158, 158, 158)),
-                const SizedBox(
-                  height: 5,
+                  SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.005,//5,
                 ),
                 
                  AnimatedContainer(
@@ -246,12 +246,14 @@ class _EventDetailViewState extends State<EventDetailView> {
                     ):
                     Text(
                    widget.event.eventname,
-                  style: const TextStyle(fontSize: 25, color: Colors.white),
+                  style:   TextStyle(
+                    fontSize: MediaQuery.of(context).size.width * 0.04,//25,
+                     color: Colors.white),
                 ),
                  ),
                  
-                const SizedBox(
-                  height: 30,
+                  SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.03,//30,
                 ),
                 GestureDetector(
                   onTap: () async {
@@ -298,8 +300,8 @@ class _EventDetailViewState extends State<EventDetailView> {
                         width: 247,
                       ),
                       Container(
-                          height: 30,
-                          width: 100,
+                         height: MediaQuery.of(context).size.width * 0.06,//30,
+                        width: MediaQuery.of(context).size.width * 0.24,//100,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5),
                             color: const Color.fromARGB(255, 48, 47, 47),
@@ -308,14 +310,18 @@ class _EventDetailViewState extends State<EventDetailView> {
                               child: Text(
                             recieveddate!,
                             //DateFormat('dd-MM-yyyy').format(widget.task.date!),
-                            style: const TextStyle(
-                                color: Colors.white, fontSize: 16),
+                            style:   TextStyle(
+                                color: Colors.white, 
+                                fontSize: MediaQuery.of(context).size.width * 0.04,//16
+                                ),
                           ))),
                     ],
                   ),
                 ),
                 const Divider(color: Color.fromARGB(53, 158, 158, 158)),
-                const SizedBox(height: 5),
+                  SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.005,//5
+                  ),
                 GestureDetector(
                   onTap: () async {
                     if (iseditSelected) {
@@ -373,13 +379,15 @@ class _EventDetailViewState extends State<EventDetailView> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text(
+                        Text(
                         "Time",
-                        style: TextStyle(color: Colors.white, fontSize: 16),
+                        style: TextStyle(color: Colors.white, 
+                        fontSize: MediaQuery.of(context).size.width * 0.04,//16
+                        ),
                       ),
                       Container(
-                        height: 30,
-                        width: 100,
+                        height: MediaQuery.of(context).size.width * 0.06,//30,
+                        width: MediaQuery.of(context).size.width * 0.2,//100,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
                           color: const Color.fromARGB(255, 48, 47, 47),
@@ -387,8 +395,11 @@ class _EventDetailViewState extends State<EventDetailView> {
                         child: Center(
                           child: Text(
                               recievedtime != null ? recievedtime! : 'No',
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 16)),
+                              style:   TextStyle(
+                                  color: Colors.white,
+                                   fontSize: MediaQuery.of(context).size.width * 0.04,//16
+                                   )
+                                   ),
                         ),
                       )
                     ],
@@ -396,13 +407,17 @@ class _EventDetailViewState extends State<EventDetailView> {
                 ),
                 const Divider(color: Color.fromARGB(53, 158, 158, 158)),
 
-                 const SizedBox(height: 5),
+                   SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.005,//5
+                  ),
                  Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
+                      Text(
                       "Location",
-                      style: TextStyle(color: Colors.white, fontSize: 16),
+                      style: TextStyle(color: Colors.white,
+                       fontSize: MediaQuery.of(context).size.width * 0.04,//16
+                       ),
                     ),
 
                        
@@ -411,8 +426,11 @@ class _EventDetailViewState extends State<EventDetailView> {
                          
                          widget.event.eventlocation ,
                          
-                           style: const TextStyle(
-                               color: Colors.white, fontSize: 16))
+                           style:   TextStyle(
+                               color: Colors.white,
+                                fontSize: MediaQuery.of(context).size.width * 0.04,//16
+                                )
+                                )
                     
                   ],
                 ),

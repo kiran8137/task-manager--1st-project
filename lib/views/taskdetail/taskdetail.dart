@@ -176,20 +176,20 @@ late bool iseditSelected = false;
         
            //width: 600,
           width: MediaQuery.sizeOf(context).width * 50 / 100,
-          height: 40,
+          height: MediaQuery.of(context).size.height * 0.05,//40,
           decoration: BoxDecoration(
              
             borderRadius: BorderRadius.circular(10),
             color: Appcolors.buttonColor,
           ),
-          child: const Row(
+          child:   Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 "Save",
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 17,
+                  fontSize: MediaQuery.of(context).size.width * 0.04,//17,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -207,7 +207,9 @@ late bool iseditSelected = false;
             height: double.infinity,
             width: double.infinity,
             child: Padding(
-              padding: const EdgeInsets.all(15.0),
+              padding:   EdgeInsets.all(
+                MediaQuery.of(context).size.width * 0.05//15.0
+                ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -221,7 +223,10 @@ late bool iseditSelected = false;
 
                       SizedBox(
                       child: Text(defaultcategory!,
-                      style: const TextStyle(color: Colors.white,fontSize: 20),),
+                      style:   TextStyle(
+                        color: Colors.white,
+                      fontSize: MediaQuery.of(context).size.width * 0.05//20
+                      ),),
                     ),
 
                        DropdownButton(
@@ -345,14 +350,20 @@ late bool iseditSelected = false;
                      ],
                    ):
                    Text(widget.task!.category!,
-                   style: const TextStyle(color: Colors.white,fontSize: 17.5),
+                   style:   TextStyle(
+                    color: Colors.white,
+                    fontSize: MediaQuery.of(context).size.width * 0.05//17.5
+                    ),
                    ),
 
                    SizedBox(height:  MediaQuery.of(context).size.height*0.02 ),
                       
-                  const Text(
+                    Text(
                     "Task Title",
-                    style: TextStyle(color: Colors.white, fontSize: 20),
+                    style: TextStyle(
+                      color: Colors.white, 
+                      fontSize: MediaQuery.of(context).size.width * 0.05//20
+                      ),
                   ),
                   AnimatedContainer(
                     //height: 110,
@@ -370,7 +381,9 @@ late bool iseditSelected = false;
                        style: const TextStyle(color: Colors.white),
                     ):
                      Text(widget.task!.tasktitle,
-                    style: const TextStyle(fontSize: 20,color: Colors.grey),),
+                    style:   TextStyle(
+                      fontSize: MediaQuery.of(context).size.width * 0.05,//20,
+                      color: Colors.grey),),
                   ),
 
                 SizedBox(
@@ -378,9 +391,11 @@ late bool iseditSelected = false;
                 ),
 
 
-                  const Text(
+                    Text(
                     "Task description",
-                    style: TextStyle(color: Colors.white, fontSize: 20),
+                    style: TextStyle(color: Colors.white,
+                     fontSize: MediaQuery.of(context).size.width * 0.05//20
+                     ),
                   ),
                   AnimatedContainer(
                     //height: 110,
@@ -398,14 +413,20 @@ late bool iseditSelected = false;
                       style: const TextStyle(color: Colors.white),
                     ):
                     Text(widget.task!.taskdescription,
-                    style: const TextStyle(fontSize: 20,color: Colors.white),),
+                    style:   TextStyle(
+                      fontSize: MediaQuery.of(context).size.width * 0.05,//20,
+                      color: Colors.white),),
                   ),
 
-                  const SizedBox(height: 5,),
+                    SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.01//5
+                    ),
 
                     const Divider(color: Color.fromARGB(153, 158, 158, 158)),
 
-                    const SizedBox(height: 10,),
+                      SizedBox(
+                      height:  MediaQuery.of(context).size.height * 0.01//10
+                      ),
 
                     GestureDetector(
                      
@@ -452,11 +473,13 @@ late bool iseditSelected = false;
                         const Text("Due Date",style: TextStyle(color: Colors.white,fontSize: 16),),
 
                         
-                        const SizedBox(width: 214,),
+                          SizedBox(
+                          width:  MediaQuery.of(context).size.width * 0.43,//214
+                          ),
                         
                         Container(
-                          height: 30,
-                          width: 100,
+                          height: MediaQuery.of(context).size.height * 0.03,//30,
+                          width: MediaQuery.of(context).size.width * 0.28,//100,
                           
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5),
@@ -542,12 +565,18 @@ late bool iseditSelected = false;
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                       const  Text("Time",style: TextStyle(color: Colors.white,fontSize: 16),),
+                          Text("Time",style: TextStyle(color: Colors.white,
+                       fontSize: MediaQuery.of(context).size.width * 0.04,//16
+                       ),),
+
+                         SizedBox(
+                          width:  MediaQuery.of(context).size.width * 0.43,//214
+                          ),
                                              
                          Container(
                         
-                         height: 30,
-                          width: 100,
+                        height: MediaQuery.of(context).size.height * 0.03,//30,
+                          width: MediaQuery.of(context).size.width * 0.2,//100,
                           
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5),
@@ -560,7 +589,9 @@ late bool iseditSelected = false;
                             recievedtime!=null?
                              recievedtime!:'No' ,
                         
-                            style: const TextStyle(color: Colors.white,fontSize: 16)
+                            style:   TextStyle(color: Colors.white,
+                            fontSize: MediaQuery.of(context).size.width * 0.04,//16
+                            )
                             ),
                          ),
                          )

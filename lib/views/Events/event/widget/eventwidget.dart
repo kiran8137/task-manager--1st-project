@@ -69,7 +69,7 @@ bool ischecked = false;
             Navigator.push(context, MaterialPageRoute(builder: (context)=>EventDetailView(event: dbevent, index: widget.index,)));
           },
           child: Container(
-             height: 170,
+             height:  MediaQuery.of(context).size.height * 0.26,//170,
             width: double.infinity,
             
             decoration: BoxDecoration(
@@ -103,23 +103,34 @@ bool ischecked = false;
                         children: [
                           Text(
                            widget.eventname,
-                           style: const TextStyle(fontSize: 23, color: Colors.black,fontWeight: FontWeight.bold),
+                           style:   TextStyle(
+                            fontSize: MediaQuery.of(context).size.width * 0.06, //23,
+                             color: Colors.black,fontWeight: FontWeight.bold),
                            ),
                            
                            Row(
                            children: [
                        Text(DateFormat("d MMM yyyy").format(widget.date ?? DateTime.now()),
-                       style: const TextStyle(fontSize: 17),),
-                       const SizedBox(width: 10,),
+                       style:   TextStyle(
+                        fontSize: MediaQuery.of(context).size.width * 0.04, //17
+                        ),),
+                         SizedBox(
+                        width:  MediaQuery.of(context).size.width * 0.02,//10
+                        ),
 
 
                          Text(  widget.time!=null?widget.time!:'',
                                 
-                          style: const TextStyle(fontSize: 17),),
+                          style:   TextStyle(
+                            fontSize: MediaQuery.of(context).size.width * 0.04, //17
+                            ),),
                          ],
                          ),
                            
-                         Text(widget.eventlocation,style: const TextStyle(fontSize: 17),)
+                         Text(widget.eventlocation,style:  
+                          TextStyle(
+                          fontSize: MediaQuery.of(context).size.width * 0.04,//17
+                          ),)
                                     
                         ],
                        ),

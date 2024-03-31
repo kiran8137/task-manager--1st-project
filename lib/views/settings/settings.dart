@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:manage_your/utils/apps_colors.dart';
 import 'package:manage_your/views/settings/AboutUs/aboutus.dart';
 import 'package:manage_your/views/settings/privacy_policy/privacy_policy.dart';
+import 'package:manage_your/views/settings/terms_and_condition/terms_conditions.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -278,6 +279,61 @@ String subtitle = "5 minutes before ";
             //     ]
             //     ),
             //  ),
+
+            SizedBox(
+            height: MediaQuery.of(context).size.height * 0.01,//10,
+            ),
+      
+      
+          //about us
+            GestureDetector(
+            onTap: () {
+      
+              Navigator.push(context,MaterialPageRoute(builder: (context)=> const TermsConditonview()));
+              ///print("About Us");
+            },
+             child:    ListTile(
+              leading: 
+              
+              Icon(Icons.info,
+              color:  Colors.white,
+              size:  MediaQuery.of(context).size.width * 0.07,//29,
+              ),
+              title: Text("Terms and conditions",
+                  style:  
+                  TextStyle(
+                    color: Colors.white,
+                    fontSize: MediaQuery.of(context).size.width * 0.045,//17
+                  ),
+                  ),
+            
+            
+            
+             )
+            //   Container(
+            //   margin: const EdgeInsets.only(left: 10),
+            //   height: 50,
+            //   width: 170,
+            //   child: const Row(
+            //     //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //     children: [
+            //       Icon(Icons.info_outline,color: Colors.white,size: 30,),
+            //       SizedBox(width: 5),
+           
+            //       Text("About Us",
+            //       style: TextStyle(
+            //         color: Colors.white,
+            //         fontSize: 17
+            //       ),
+            //       ),
+            //     ]
+            //     ),
+            //  ),
+           ),
+      
+             SizedBox(
+            height: MediaQuery.of(context).size.height * 0.01,//10,,
+            ),
         ]
              ),
              );

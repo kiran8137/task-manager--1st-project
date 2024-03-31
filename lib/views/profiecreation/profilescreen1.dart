@@ -78,7 +78,7 @@ class ProfileScreen extends StatelessWidget {
               left: 90,
               child: Container(
                 
-                height: MediaQuery.of(context).size.height * 0.07,//70,
+                height: MediaQuery.of(context).size.height * 0.10,//70,
                 width: MediaQuery.of(context).size.width * 0.55,//230,
                 decoration: BoxDecoration(
                     color: const Color.fromARGB(135, 158, 158, 158),

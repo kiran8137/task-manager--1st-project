@@ -30,7 +30,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  intl: ^0.17.0
+  intl: ^0.19.0
   
 
   # The following adds the Cupertino Icons font to your application.
@@ -89,7 +89,7 @@ dependencies:
 
   
   #flutter_local_notifications: ^15.1.2
-  awesome_notifications: ^0.7.4+1
+  awesome_notifications: ^0.9.3+1
   
   
   
@@ -109,7 +109,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -26,7 +26,7 @@ void initState() {
    final usernamebox = await Hive.openBox<Username>('username_db');
 
    final isusername =  usernamebox.get('1');
-   print(isusername?.name);   
+   //print(isusername?.name);   
 
    if(isusername?.nameentered == true){
      await Future.delayed(const Duration(milliseconds: 1500),(){});

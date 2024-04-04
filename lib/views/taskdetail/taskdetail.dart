@@ -292,7 +292,7 @@ late bool iseditSelected = false;
                                     setState(() {
                                       defaultcategory = newCategory;
                                     });
-                                    print("already added");
+                                   // print("already added");
                                      showDialog(
                                       context: context, builder: (ctx)=>
                                       const AlertDialog(

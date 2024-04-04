@@ -28,7 +28,7 @@ Event({
   this.imagepath
 }){
 
-  print("......eventname:$eventname eventlocation:$eventlocation date:$date time:$time  ");
+ // print("......eventname:$eventname eventlocation:$eventlocation date:$date time:$time  ");
 }
 
   

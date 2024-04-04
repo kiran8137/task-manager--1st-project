@@ -339,7 +339,7 @@ class _EventDetailViewState extends State<EventDetailView> {
                             DateFormat('h:mm a').format(parsedTime!);
                         recievedtime = formattedTime!;
                       } else {
-                        print("user didn't update it");
+                      //  print("user didn't update it");
                       }
 
                       //      newPickedTime= await showTimePicker(

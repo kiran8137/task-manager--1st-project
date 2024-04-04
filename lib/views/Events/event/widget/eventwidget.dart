@@ -7,7 +7,7 @@ import 'package:manage_your/model/event/event.dart';
 import 'package:manage_your/views/Events/event/eventdetail.dart';
 //import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 class Eventwidget extends StatefulWidget {
-   Eventwidget({super.key, 
+   const Eventwidget({super.key, 
    this.eventname, 
    this.eventlocation, 
    this.date, 
@@ -69,7 +69,7 @@ bool ischecked = false;
             Navigator.push(context, MaterialPageRoute(builder: (context)=>EventDetailView(event: dbevent, index: widget.index,)));
           },
           child: Container(
-             height:  MediaQuery.of(context).size.height * 0.26,//170,
+             height:  MediaQuery.of(context).size.height * 0.24,//170,
             width: double.infinity,
             
             decoration: BoxDecoration(

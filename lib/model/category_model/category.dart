@@ -14,7 +14,7 @@ part 'category.g.dart';
 
 Category({required this.name}){
   id = const Uuid().v4();
-  print("name: $name");
+  //print("name: $name");
 }
   
  }

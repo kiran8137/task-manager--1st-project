@@ -74,7 +74,7 @@ class PrivacyPolicy extends StatelessWidget {
                     height: MediaQuery.of(context).size.height * 0.01,//10
                     ),
                     Text(
-                    "Name: We collect your name solely for the purpose of personalizing your experience within the App."
+                    "Name: We collect your name solely for the purpose of personalizing your experience within the App and collecting images for event sections"
                      "This information is stored locally on your device and is not transmitted to any external servers.",
                     style:  
                      TextStyle(color: Colors.white,
@@ -190,7 +190,7 @@ class PrivacyPolicy extends StatelessWidget {
                     height: MediaQuery.of(context).size.height * 0.01,//10
                     ),
                     Text(
-                     "If you have any questions or concerns about this Privacy Policy or the App's privacy practices, please contact us at [kirankpalakkad@gmail.com].",
+                     "If you have any questions or concerns about this Privacy Policy or the App's privacy practices, please contact us at [kirankannan9895@gmail.com].",
                     style: 
                      TextStyle(color: Colors.white, 
                      fontSize: MediaQuery.of(context).size.width * 0.048,//18

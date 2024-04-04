@@ -117,7 +117,7 @@ else{
             onTap: (index){
               setState(() {
                 _tabbarindex = index;
-                print(_tabbarindex);
+              //  print(_tabbarindex);
               });
             },
               

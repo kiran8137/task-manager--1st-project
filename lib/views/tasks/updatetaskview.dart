@@ -369,7 +369,7 @@ String subtitle = "5 minutes before ";
                                   
 
                                }else{
-                                print("user didn't update it");
+                               // print("user didn't update it");
                                }
                             //  newPickedTime = await showTimePicker(
                             //   context: context,
@@ -479,7 +479,7 @@ String subtitle = "5 minutes before ";
                                     setState(() {
                                       defaultcategory = newCategory;
                                     });
-                                    print("already added");
+                                   // print("already added");
                                      showDialog(
                                       context: context, builder: (ctx)=>
                                       const AlertDialog(

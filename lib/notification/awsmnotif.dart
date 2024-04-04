@@ -2,7 +2,6 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:manage_your/main.dart';
-import 'package:manage_your/views/home/homeview.dart';
 import 'package:manage_your/views/taskdetail/taskdetail.dart';
 
 class NotificationService{
@@ -51,27 +50,27 @@ class NotificationService{
 
   static Future<void> onNotificationCreatedMethod(
     ReceivedNotification receivedNotification)async{
-      print('onNotificationCreatedMethod');
+      //print('onNotificationCreatedMethod');
   }
 
   static Future<void> onNotificationDisplayedMethod(
     ReceivedNotification receivedNotification)async {
-      print("onNotificationDisplayedMethod");
+      //print("onNotificationDisplayedMethod");
   }
 
   static Future<void> onDismissActionReceivedMethod(
     ReceivedAction receivedAction)async {
-      print('onDismissActionReceivedMethod');
+     // print('onDismissActionReceivedMethod');
   }
 
   static Future<void> onActionReceivedMethod(
     ReceivedAction receivedAction) async{
-      print('onActionReceivedMethod');
+      //print('onActionReceivedMethod');
       final payload = receivedAction.payload ?? {};
       if(payload["navigate"] == true){
         
         MyApp.navigatorkey.currentState?.push(
-          MaterialPageRoute(builder: (_)=>TaskDetailView())
+          MaterialPageRoute(builder: (_)=>const TaskDetailView())
         );
       }
   }
@@ -84,6 +83,7 @@ class NotificationService{
     int? year ,
     int? hour  ,
     int? minute , 
+     
 
     required final String title,
     required final String body,
@@ -104,11 +104,11 @@ class NotificationService{
   async {
     
 
-    assert(!scheduled || (scheduled && interval !=null ));
+   // assert(!scheduled || (scheduled && interval !=null ));
 
     await AwesomeNotifications().createNotification(
       content: NotificationContent(
-        id: -1,
+        id: 1,
          
         channelKey: 'scheduled',
         title: title,
@@ -122,12 +122,23 @@ class NotificationService{
         ),
         actionButtons: actionbutton,
         schedule: 
+        // NotificationInterval(
+        //   interval: 24,
+           
+          
+        //   )
         NotificationCalendar(
-          day: 30,
-          month: 03,
-          year: 2024,
-          hour: 11,
-          minute: 41, 
+          // day: day,
+          // month: month,
+          // year: year,
+          // hour: hour,
+          // minute: minute, 
+           
+          hour: 16,
+          minute: 52,
+           
+           
+          allowWhileIdle: true
         )
         // scheduled?NotificationInterval(
         //   interval: interval,
@@ -136,4 +147,6 @@ class NotificationService{
         //   ):null
         );
   }
+
+  
 }

@@ -42,7 +42,7 @@ Future<void> main() async {
   await NotificationService.initializeNofication();
  // NotificationService().initNotification();
   await Hive.initFlutter();
-  Directory directory = await getApplicationDocumentsDirectory();
+ // Directory directory = await getApplicationDocumentsDirectory();
 
 
   if(!Hive.isAdapterRegistered(TasksAdapter().typeId)){
@@ -90,8 +90,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: 
       //Homeview(),
-      //SplashScreen()
-      OnboardingScreen1()
+      SplashScreen()
+      //OnboardingScreen1()
       //onboardingScreen2()
       //MainOnboarding(),
      // ProfileScreen()

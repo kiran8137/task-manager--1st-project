@@ -90,6 +90,11 @@ dependencies:
   
   #flutter_local_notifications: ^15.1.2
   awesome_notifications: ^0.7.4+1
+   
+ 
+ 
+  
+
   
   
   
@@ -103,7 +108,13 @@ dev_dependencies:
     sdk: flutter
   build_runner: ^2.4.8
   hive_generator: ^2.0.1
+  flutter_launcher_icons: ^0.13.1
+ 
 
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/appicon.png"
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
@@ -140,8 +151,9 @@ flutter:
    - assets/events.png
    - assets/add image.png
    - assets/add-image.png
-   - assets/gallery.png 
-   - asssets/terms-and-conditions.png
+   - assets/gallery.png
+   - assets/appicon.png  
+  
 
 
 

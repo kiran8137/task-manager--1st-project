@@ -18,8 +18,8 @@ bool? nameentered;
 final String id = '1';
 
 Username({required this.name , this.nameentered}){
-  print(name);
-  print(nameentered);
+  //print(name);
+  //print(nameentered);
 }
 
 

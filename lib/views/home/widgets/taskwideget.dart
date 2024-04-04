@@ -70,7 +70,7 @@ bool ischecked = false;
           //   titl
           //e: 'sample testing' , body: 'it works'
           // );
-          NotificationService.showNotification(title: "testing notification", body: "worked");
+         // NotificationService.showNotification(title: "testing notification", body: "worked");
            final dbtask= Tasks(tasktitle: widget.tasktitle, taskdescription: widget.taskdescription, category: widget.category , date: widget.date, time: widget.time  );
           Navigator.push(context, MaterialPageRoute(builder: (context)=> TaskDetailView(task:dbtask , index: widget.index,)));
         },

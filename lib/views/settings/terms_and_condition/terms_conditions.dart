@@ -93,7 +93,7 @@ class TermsConditonview extends StatelessWidget {
                     height: MediaQuery.of(context).size.height * 0.01,//10
                     ),
                    Text(
-                     "Manage You collects only the user's name for personalization purposes and does not require any sign-in process or access to personal information such as email addresses or social media profiles.",
+                     "Manage You collects only the user's name for personalization purposes and image for event section in the application and does not require any sign-in process or access to personal information such as email addresses or social media profiles.",
                     style:  
                     TextStyle(
                       color: Colors.white, 

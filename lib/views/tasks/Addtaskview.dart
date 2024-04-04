@@ -5,6 +5,7 @@ import 'package:manage_your/data/task/taskfunctions.dart';
 import 'package:manage_your/model/task/task.dart';
 import 'package:manage_your/notification/awsmnotif.dart';
 import 'package:manage_your/utils/apps_str.dart';
+ 
 
 class Addtaskview extends StatefulWidget {
  
@@ -80,6 +81,9 @@ String defaultime = "5";
 
 
 // }
+
+// DateTime scheduledtime = DateTime.now();
+//  tz.TZDateTime scheduleddatetime = tz.TZDateTime.from(scheduledtime, tz.local);
 
 
 
@@ -525,7 +529,7 @@ String defaultime = "5";
                                     setState(() {
                                       defaultcategory = newCategory;
                                     });
-                                    print("already added");
+                                    //print("already added");
                                      showDialog(
                                       context: context, builder: (ctx)=>
                                       const AlertDialog(
@@ -732,26 +736,51 @@ String defaultime = "5";
                                     if(defaultcategory!=null && defaultcategory != 'Category'){
 
                                        onCreate();
-                                      if(pickeddate!=null && pickedtime!=null){
-                                        int day = pickeddate!.day;
-                                        int month = pickeddate!.month;
-                                        int year = pickeddate!.year;
-                                        int hour = pickedtime!.hour;
-                                        int minute = pickedtime!.minute;
-                                        NotificationService.showNotification(
+                                      // if(pickeddate!=null && pickedtime!=null){
+                                      //   int day = pickeddate!.day;
+                                      //   int month = pickeddate!.month;
+                                      //   int year = pickeddate!.year;
+                                      //   int hour = pickedtime!.hour;
+                                      //   int minute = pickedtime!.minute;
+                                      //   NotificationService.showNotification(
+                                      //     title: taskname, 
+                                      //     body: description ,
+                                      //     day: day,
+                                      //     month: month,
+                                      //     year: year,
+                                      //     hour: hour,
+                                      //     minute: minute,
+                                          
+                                      //       );
+                                      // }
+                                      DateTime schedule = DateTime(
+                                        
+                                        pickeddate!.day,
+                                        pickeddate!.month,
+                                        pickeddate!.year,
+                                        pickedtime!.minute,
+                                        pickedtime!.hour,
+                                         
+                                      
+                                      );
+                                        // setState(() {
+                                        //   scheduledtime = schedule;
+                                        // });
+
+                                      NotificationService.showNotification(
                                           title: taskname, 
                                           body: description ,
-                                          day: day,
-                                          month: month,
-                                          year: year,
-                                          hour: hour,
-                                          minute: minute,
+                                          day: pickeddate?.day ?? DateTime.now().day,
+                                          month: pickeddate?.month ?? DateTime.now().month,
+                                          year: pickeddate?.year ?? DateTime.now().year,
+                                          hour: pickedtime!.hour,
+                                          minute: pickedtime!.minute,
+                                          
                                           
                                             );
-                                      }
                                       
                                       
-                                       print(pickedtime);
+                                       //print(pickedtime);
                                     Navigator.pop(context);
                                    
 

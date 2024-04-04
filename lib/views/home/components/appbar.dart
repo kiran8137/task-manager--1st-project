@@ -136,7 +136,7 @@ PreferredSize appbar(GlobalKey<ScaffoldState>key, BuildContext context){
               TabBar(
               onTap: (index){
                 tabindex = index;
-                print(tabindex);
+              //  print(tabindex);
               },
               
               indicatorColor: Colors.blue,

@@ -13,7 +13,7 @@ import 'package:manage_your/data/task/taskfunctions.dart';
 import 'package:manage_your/data/userprofile/userprofile.dart';
 import 'package:manage_your/model/event/event.dart';
 import 'package:manage_your/model/task/task.dart';
-import 'package:manage_your/utils/screensize.dart';
+import 'package:manage_your/notification/awsmnotif.dart';
 import 'package:manage_your/views/Events/event/Addevent.dart';
 import 'package:manage_your/views/Events/event/widget/eventwidget.dart';
 import 'package:manage_your/views/home/components/appbar.dart';
@@ -21,6 +21,8 @@ import 'package:manage_your/views/home/widgets/taskwideget.dart';
 import 'package:manage_your/views/onboardscreens/onboarding_screens_main.dart';
 import 'package:manage_your/views/settings/settings.dart';
 import 'package:manage_your/views/tasks/Addtaskview.dart';
+
+
 
 class Homeview extends StatefulWidget {
   const Homeview({super.key, this.username});
@@ -58,6 +60,16 @@ class _HomeviewState extends State<Homeview> {
 //   });
 //  }
 
+
+
+@override
+  void initState() {
+    // TODO: implement initState
+     NotificationService.showNotification(title: "You Have Task or Event Today", body:  "Don't forget....!");
+     NotificationService.showNotification(title: "Plan Your Day!", body: "Don't forget to add any tasks or events to your schedule today");
+    super.initState();
+  }
+
    
 
   @override
@@ -85,7 +97,7 @@ class _HomeviewState extends State<Homeview> {
                 child: InkWell(
                   splashColor: Colors.blue,
                   onTap: () {
-                    print(items);
+                    //print(items);
                     // displaybottomsheet(context);
                     Navigator.push(
                         context,
@@ -192,7 +204,7 @@ class _HomeviewState extends State<Homeview> {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(15),
                             child: Container(
-                              padding:   EdgeInsets.all(10),
+                              padding:   const EdgeInsets.all(10),
                               height: MediaQuery.of(context).size.height * 0.06,//50,
                               width: MediaQuery.of(context).size.height * 0.06,//50,
                               decoration: BoxDecoration(
@@ -332,7 +344,7 @@ class _HomeviewState extends State<Homeview> {
               children: [
                 GestureDetector(
                     onTap: () {
-                      print("delete every task");
+                    //  print("delete every task");
       
                       tasklistNotifier.value.isEmpty?
                       noTaskWarning(context):
@@ -371,7 +383,7 @@ class _HomeviewState extends State<Homeview> {
                   height: MediaQuery.of(context).size.height * 0.05,//50,
                   width: MediaQuery.of(context).size.width*0.9,
                   // 380,
-                  padding: EdgeInsets.all(0.8),
+                  padding: const EdgeInsets.all(0.8),
                   child: categoryfilter(),
                 ),
       
@@ -631,7 +643,7 @@ class _HomeviewState extends State<Homeview> {
           //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: categoryitems
               .map((category) => Padding(
-                    padding:  EdgeInsets.symmetric(
+                    padding:  const EdgeInsets.symmetric(
                       horizontal: 10
                       //horizontal: MediaQuery.of(context).size.width*0.05
                       ),

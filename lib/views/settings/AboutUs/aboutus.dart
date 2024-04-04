@@ -32,7 +32,7 @@ class AboutUs extends StatelessWidget {
           height: double.infinity,
           width: double.infinity,
           child: Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             child: Text(
                 "This is an app that is developed as part of my project and this will be one of my freatest milstone in my career.This  is an Task manager application MANAGE YOU"
                 "which is very useful to manage your day to day task  and a reminder to remind their events or tasks in future. ",

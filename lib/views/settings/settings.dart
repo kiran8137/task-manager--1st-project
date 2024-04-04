@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:manage_your/utils/apps_colors.dart';
 import 'package:manage_your/views/settings/AboutUs/aboutus.dart';
 import 'package:manage_your/views/settings/privacy_policy/privacy_policy.dart';
 import 'package:manage_your/views/settings/terms_and_condition/terms_conditions.dart';

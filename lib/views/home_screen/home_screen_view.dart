@@ -6,20 +6,22 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
 import 'package:manage_your/alert_dialogs/no_task.dart';
-import 'package:manage_your/data/category/categoryfunctions.dart';
-import 'package:manage_your/data/event/eventfucntions.dart';
-import 'package:manage_your/data/task/taskfunctions.dart';
-import 'package:manage_your/data/userprofile/userprofile.dart';
+ 
 import 'package:manage_your/Hive_model/event_databases_model/event.dart';
  
 import 'package:manage_your/Hive_model/task_database_model/task.dart';
+import 'package:manage_your/controller/category/categoryfunctions.dart';
+import 'package:manage_your/controller/database_controller/event_db_controller.dart';
+import 'package:manage_your/controller/database_controller/task_db_controller.dart';
+import 'package:manage_your/controller/database_controller/user_profile_controller.dart';
 import 'package:manage_your/notification_service/awsmnotif.dart';
 import 'package:manage_your/views/Events/event/event_add_screen.dart';
 import 'package:manage_your/views/Events/event/widget/eventwidget.dart';
 import 'package:manage_your/views/home_screen/components/appbar.dart';
 import 'package:manage_your/views/home_screen/widgets/task_tile_wideget.dart';
 import 'package:manage_your/views/onboard_screens/onboarding_screen_main.dart';
-import 'package:manage_your/views/settings_screen/settings.dart';
+import 'package:manage_your/views/settings_screen/settings_screen_main.dart';
+ 
 import 'package:manage_your/views/task/task_add_screen.dart';
 
 class Homeview extends StatefulWidget {

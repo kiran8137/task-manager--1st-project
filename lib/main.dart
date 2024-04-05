@@ -31,8 +31,8 @@ import 'package:manage_your/views/onboard_screens/onboard_screen_1.dart';
 import 'package:manage_your/views/profile_create_screen/profile_screen.dart';
 import 'package:manage_your/views/settings_screen/aboutus_screen/aboutus_screen.dart';
 import 'package:manage_your/views/settings_screen/privacy_policy_screen/privacy_policy_screen.dart';
-import 'package:manage_your/views/settings_screen/settings.dart';
-import 'package:manage_your/views/splashscreen/splashscreen.dart';
+import 'package:manage_your/views/splash_screen/splash_screen.dart';
+ 
 import 'package:manage_your/views/task/task_detail_screen.dart';
 import 'package:manage_your/views/task/task_add_screen.dart';
 import 'package:manage_your/views/task/task_update_screen.dart';

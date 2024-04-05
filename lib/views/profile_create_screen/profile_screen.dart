@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:manage_your/data/userprofile/userprofile.dart';
+ 
 import 'package:manage_your/Hive_model/username_database_model/username.dart';
+import 'package:manage_your/controller/database_controller/user_profile_controller.dart';
  
  
 import 'package:manage_your/views/home_screen/home_screen_view.dart';

@@ -1,8 +1,9 @@
  import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:manage_your/data/category/categoryfunctions.dart';
-import 'package:manage_your/data/task/taskfunctions.dart';
+ 
 import 'package:manage_your/Hive_model/task_database_model/task.dart';
+import 'package:manage_your/controller/category/categoryfunctions.dart';
+import 'package:manage_your/controller/database_controller/task_db_controller.dart';
 import 'package:manage_your/utils/apps_str.dart';
 
 class UpdateTaskView extends StatefulWidget {

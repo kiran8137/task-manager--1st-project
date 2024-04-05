@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:manage_your/views/settings_screen/aboutus_screen/aboutus_screen.dart';
 import 'package:manage_your/views/settings_screen/privacy_policy_screen/privacy_policy_screen.dart';
-import 'package:manage_your/views/settings_screen/terms_and_condition/terms_conditions.dart';
+import 'package:manage_your/views/settings_screen/terms_condition_screen/terms_condition_screen.dart';
+ 
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});

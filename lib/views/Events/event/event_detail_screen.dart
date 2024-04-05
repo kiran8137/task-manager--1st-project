@@ -3,8 +3,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:manage_your/data/event/eventfucntions.dart';
+ 
 import 'package:manage_your/Hive_model/event_databases_model/event.dart';
+import 'package:manage_your/controller/database_controller/event_db_controller.dart';
  
 import 'package:manage_your/utils/apps_colors.dart';
 import 'package:manage_your/views/home_screen/home_screen_view.dart';

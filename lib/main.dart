@@ -4,32 +4,38 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:manage_your/model/category_model/category.dart';
-import 'package:manage_your/model/event/event.dart';
-import 'package:manage_your/model/task/task.dart';
-import 'package:manage_your/model/username_model/username.dart';
+import 'package:manage_your/Hive_model/category_database_model/category.dart';
+import 'package:manage_your/Hive_model/task_database_model/task.dart';
  
-import 'package:manage_your/model/userprefs/userprefs.dart';
-import 'package:manage_your/notification/awsmnotif.dart';
-import 'package:manage_your/notification/notifi_service.dart';
+ 
+ 
+import 'package:manage_your/Hive_model/event_databases_model/event.dart';
+ 
+import 'package:manage_your/Hive_model/username_database_model/username.dart';
+import 'package:manage_your/Hive_model/userprefs_database_model/userprefs.dart';
+ 
+ 
+ 
+import 'package:manage_your/notification_service/awsmnotif.dart';
+import 'package:manage_your/notification_service/notifi_service.dart';
  
 import 'package:manage_your/theme/theme.dart';
 import 'package:manage_your/theme/themeprovider.dart';
-import 'package:manage_your/views/Events/event/eventdetail.dart';
-import 'package:manage_your/views/Events/event/updateEvent.dart';
-import 'package:manage_your/views/home/components/search/searchscreen.dart';
-import 'package:manage_your/views/home/homeview.dart';
+import 'package:manage_your/views/Events/event/event_detail_screen.dart';
+import 'package:manage_your/views/Events/event/even_update_screen.dart';
+import 'package:manage_your/views/home_screen/components/search_screen/search_screen.dart';
+import 'package:manage_your/views/home_screen/home_screen_view.dart';
 //import 'package:manage_your/views/taskdetail.dart';
-import 'package:manage_your/views/onboardscreens/onboarding_screens_main.dart';
-import 'package:manage_your/views/onboardscreens/onboardscreen1.dart';
-import 'package:manage_your/views/profiecreation/profilescreen1.dart';
-import 'package:manage_your/views/settings/AboutUs/aboutus.dart';
-import 'package:manage_your/views/settings/privacy_policy/privacy_policy.dart';
-import 'package:manage_your/views/settings/settings.dart';
+import 'package:manage_your/views/onboard_screens/onboarding_screen_main.dart';
+import 'package:manage_your/views/onboard_screens/onboard_screen_1.dart';
+import 'package:manage_your/views/profile_create_screen/profile_screen.dart';
+import 'package:manage_your/views/settings_screen/aboutus_screen/aboutus_screen.dart';
+import 'package:manage_your/views/settings_screen/privacy_policy_screen/privacy_policy_screen.dart';
+import 'package:manage_your/views/settings_screen/settings.dart';
 import 'package:manage_your/views/splashscreen/splashscreen.dart';
-import 'package:manage_your/views/taskdetail/taskdetail.dart';
-import 'package:manage_your/views/tasks/Addtaskview.dart';
-import 'package:manage_your/views/tasks/updatetaskview.dart';
+import 'package:manage_your/views/task/task_detail_screen.dart';
+import 'package:manage_your/views/task/task_add_screen.dart';
+import 'package:manage_your/views/task/task_update_screen.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 //import 'package:flutter_local_notifications/flutter_local_notifications.dart';

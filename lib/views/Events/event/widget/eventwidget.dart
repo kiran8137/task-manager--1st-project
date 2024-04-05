@@ -3,8 +3,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:manage_your/model/event/event.dart';
-import 'package:manage_your/views/Events/event/eventdetail.dart';
+ 
+import 'package:manage_your/Hive_model/event_databases_model/event.dart';
+import 'package:manage_your/views/Events/event/event_detail_screen.dart';
 //import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 class Eventwidget extends StatefulWidget {
    const Eventwidget({super.key, 
